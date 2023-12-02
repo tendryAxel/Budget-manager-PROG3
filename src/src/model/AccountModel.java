@@ -1,6 +1,6 @@
 package model;
 
-public class accountModel {
+public class AccountModel {
     int id;
     String name;
     int id_currency;
@@ -29,10 +29,10 @@ public class accountModel {
         this.id_currency = id_currency;
     }
 
-    public accountModel() {
+    public AccountModel() {
     }
 
-    public accountModel(int id, String name, int id_currency) {
+    public AccountModel(int id, String name, int id_currency) {
         this.id = id;
         this.name = name;
         this.id_currency = id_currency;

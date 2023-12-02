@@ -1,10 +1,10 @@
 package model;
 
-public class currencyModel {
+public class CurrencyModel {
     int id;
     String name;
 
-    public currencyModel(int id, String name) {
+    public CurrencyModel(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -25,6 +25,6 @@ public class currencyModel {
         this.name = name;
     }
 
-    public currencyModel() {
+    public CurrencyModel() {
     }
 }
