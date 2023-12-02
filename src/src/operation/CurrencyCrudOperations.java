@@ -18,7 +18,7 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel> {
                     resultSet.getString("name")
             ));
         }
-        return null;
+        return result;
     }
 
     @Override
