@@ -1,13 +1,8 @@
 package model;
 
 public class CurrencyModel {
-    int id;
-    String name;
-
-    public CurrencyModel(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+  private   int id;
+   private String name;
 
     public int getId() {
         return id;
@@ -25,6 +20,11 @@ public class CurrencyModel {
         this.name = name;
     }
 
-    public CurrencyModel() {
+    @Override
+    public String toString() {
+        return "CurrencyModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
