@@ -19,14 +19,22 @@ paths:
         content:
           application/json:
             schema:
-                $ref: "#/components/schemas/Currency"
+              oneOf:
+                - $ref: "#/components/schemas/Currency"
+                - type: array
+                  items:
+                    $ref: "#/components/schemas/Currency"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Currency"
+                oneOf:
+                  - $ref: "#/components/schemas/Currency"
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/Currency"
 components:
   schemas:
     Currency:
