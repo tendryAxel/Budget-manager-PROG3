@@ -23,7 +23,10 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel> {
 
     @Override
     public CurrencyModel save(CurrencyModel toSave) {
-        return null;
+      prepareStatement state = connectionDB.getConnection().prepareStatement("INSERT INTO \"currency\"(name) VALUES(?)");
+      state.setString(1, toSave.getName());
+      state.executeUpdate();
+      return toSave;
     }
 
     @Override
