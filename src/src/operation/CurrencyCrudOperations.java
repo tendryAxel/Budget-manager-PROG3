@@ -31,7 +31,10 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel> {
     }
 
     @Override
-    public List saveAll(List toSave) {
-        return null;
+    public List<CurrencyModel> saveAll(List<CurrencyModel> toSave) throws SQLException {
+        for (CurrencyModel currency : toSave){
+            save(currency);
+        }
+        return toSave;
     }
 }

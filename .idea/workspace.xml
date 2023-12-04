@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="feat : example data in table">
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : save currency functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/operation/CrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/CrudOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" afterDir="false" />
@@ -117,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701534540959</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix : save currency functionality">
+      <created>1701711893451</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701711893451</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -139,6 +146,7 @@
     <MESSAGE value="feat : create account object model" />
     <MESSAGE value="feat : create transaction object model" />
     <MESSAGE value="feat : example data in table" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : example data in table" />
+    <MESSAGE value="fix : save currency functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : save currency functionality" />
   </component>
 </project>
