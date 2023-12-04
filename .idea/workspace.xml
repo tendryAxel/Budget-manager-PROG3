@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="feat : add save all currency functionality">
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : save currency functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/api.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/operation/CrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/CrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +42,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "axel",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "E:/HEI/L2/PROG3/budget-manager-api",
@@ -109,21 +110,7 @@
       <option name="project" value="LOCAL" />
       <updated>1701532807104</updated>
     </task>
-    <task id="LOCAL-00007" summary="feat : example data in table">
-      <created>1701534540959</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1701534540959</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fix : save currency functionality">
-      <created>1701711893451</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1701711893451</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -144,8 +131,6 @@
     <MESSAGE value="feat : create currency object model" />
     <MESSAGE value="feat : create account object model" />
     <MESSAGE value="feat : create transaction object model" />
-    <MESSAGE value="feat : example data in table" />
-    <MESSAGE value="fix : save currency functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : save currency functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : create transaction object model" />
   </component>
 </project>
