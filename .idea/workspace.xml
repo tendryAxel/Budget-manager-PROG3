@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="" />
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="feat : example data in table">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/operation/CrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/CrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="axel" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -106,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701532807104</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat : example data in table">
+      <created>1701534540959</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701534540959</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,6 +138,7 @@
     <MESSAGE value="feat : create currency object model" />
     <MESSAGE value="feat : create account object model" />
     <MESSAGE value="feat : create transaction object model" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : create transaction object model" />
+    <MESSAGE value="feat : example data in table" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : example data in table" />
   </component>
 </project>

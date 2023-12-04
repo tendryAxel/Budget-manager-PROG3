@@ -2,6 +2,7 @@ package operation;
 
 import model.CurrencyModel;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel> {
     }
 
     @Override
-    public CurrencyModel save(CurrencyModel toSave) {
-      prepareStatement state = connectionDB.getConnection().prepareStatement("INSERT INTO \"currency\"(name) VALUES(?)");
+    public CurrencyModel save(CurrencyModel toSave) throws SQLException {
+      PreparedStatement state = connectionDB.getConnection().prepareStatement("INSERT INTO \"currency\"(name) VALUES(?)");
       state.setString(1, toSave.getName());
       state.executeUpdate();
       return toSave;
