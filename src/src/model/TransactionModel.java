@@ -3,19 +3,11 @@ package model;
 import java.sql.Date;
 
 public class TransactionModel {
-    int id;
-    int value;
-    String description;
-    int id_account;
-    Date transaction_date;
-
-    public TransactionModel(int id, int value, String description, int id_account, Date transaction_date) {
-        this.id = id;
-        this.value = value;
-        this.description = description;
-        this.id_account = id_account;
-        this.transaction_date = transaction_date;
-    }
+   private int id;
+   private int value;
+  private   String description;
+   private int id_account;
+    private  Date transaction_date;
 
     public int getId() {
         return id;
@@ -57,6 +49,15 @@ public class TransactionModel {
         this.transaction_date = transaction_date;
     }
 
-    public TransactionModel() {
+
+    @Override
+    public String toString() {
+        return "TransactionModel{" +
+                "id=" + id +
+                ", value=" + value +
+                ", description='" + description + '\'' +
+                ", id_account=" + id_account +
+                ", transaction_date=" + transaction_date +
+                '}';
     }
 }
