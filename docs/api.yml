@@ -4,3 +4,22 @@ info:
   title: Budget manager application
 servers:
   - url: http://localhost
+paths:
+  /currency:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Currency"
+components:
+  schemas:
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
