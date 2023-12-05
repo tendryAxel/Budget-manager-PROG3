@@ -1,9 +1,15 @@
 package model;
 
 public class AccountModel {
-    int id;
-    String name;
-    int id_currency;
+  private   int id;
+   private String name;
+ private    int id_currency;
+
+    public AccountModel(int id, String name, int id_currency) {
+        this.id = id;
+        this.name = name;
+        this.id_currency = id_currency;
+    }
 
     public int getId() {
         return id;
@@ -29,12 +35,12 @@ public class AccountModel {
         this.id_currency = id_currency;
     }
 
-    public AccountModel() {
-    }
-
-    public AccountModel(int id, String name, int id_currency) {
-        this.id = id;
-        this.name = name;
-        this.id_currency = id_currency;
+    @Override
+    public String toString() {
+        return "AccountModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", id_currency=" + id_currency +
+                '}';
     }
 }

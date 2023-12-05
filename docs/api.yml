@@ -3,33 +3,64 @@ info:
   version: 1.0.0
   title: Budget manager application
 servers:
+<<<<<<< HEAD
   - url: http://localhost
 paths:
   /currency:
     get:
+=======
+  - url: http://wallet.com
+tags:
+  - Currency
+  - Transaction
+  - Account
+paths:
+  /currency:
+    get:
+      tags:
+        - Currency
+      summary: Get all currency
+>>>>>>> dab8abe16ea1815508542bb39f1b2f41d0f9930a
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
+<<<<<<< HEAD
                 $ref: "#/components/schemas/Currency"
     post:
+=======
+                type: array
+                items:
+                  $ref: "#/components/schemas/Currencys"
+    put:
+      tags:
+        - Currency
+      description: Create or update Currency type
+      operationId: crupdateCurrency
+      summary: Create or update currency
+>>>>>>> dab8abe16ea1815508542bb39f1b2f41d0f9930a
       requestBody:
         content:
           application/json:
             schema:
+<<<<<<< HEAD
               oneOf:
                 - $ref: "#/components/schemas/Currency"
                 - type: array
                   items:
                     $ref: "#/components/schemas/Currency"
+=======
+              $ref: "#/components/schemas/Currencys"
+>>>>>>> dab8abe16ea1815508542bb39f1b2f41d0f9930a
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
+<<<<<<< HEAD
                 oneOf:
                   - $ref: "#/components/schemas/Currency"
                   - type: array
@@ -38,9 +69,121 @@ paths:
 components:
   schemas:
     Currency:
+=======
+                $ref: "#/components/schemas/Currencys"
+
+  /transaction:
+    get:
+      tags:
+        - Transaction
+      summary: Get all Transaction
+      description: The returned Transaction are ordered by date.
+      operationId: getTransaction
+      responses:
+        200:
+          description: successfully returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transactions'
+    put:
+      summary: Create or update Transaction
+      operationId: crupdateTransaction
+      tags:
+        - Transaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transactions'
+      responses:
+        200:
+          description: The list of created or updated currency
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transactions'
+  /account:
+    get:
+      tags:
+        - Account
+      summary: Get all accounts
+      description: The returned books are ordered by name.
+      operationId: getAccounts
+      responses:
+        200:
+          description: successfully returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accounts'
+
+    put:
+      summary: Create or update accounts
+      operationId: crupdateAccounts
+      tags:
+        - Account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Accounts'
+      responses:
+        200:
+          description: The list of created or updated accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accounts'
+
+components:
+  schemas:
+    Currencys:
+>>>>>>> dab8abe16ea1815508542bb39f1b2f41d0f9930a
       type: object
       properties:
         id:
           type: integer
         name:
+<<<<<<< HEAD
+=======
+          type: string
+
+    Transactions:
+      type: object
+      properties:
+        id:
+          type : string
+        value:
+          type: string
+        description:
+          type : string
+        id_acount:
+          type: string
+        transaction_date :
+          type: string
+          format: date
+
+
+    Accounts:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        id_currency:
+>>>>>>> dab8abe16ea1815508542bb39f1b2f41d0f9930a
           type: string
