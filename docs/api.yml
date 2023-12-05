@@ -22,7 +22,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Currency"
+                  $ref: "#/components/schemas/Currencys"
     put:
       tags:
         - Currency
@@ -33,25 +33,96 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: "#/components/schemas/Currency"
-                - type: array
-                  items:
-                    $ref: "#/components/schemas/Currency"
+              $ref: "#/components/schemas/Currencys"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
+                $ref: "#/components/schemas/Currencys"
+
+  /transaction:
+    get:
+      tags:
+        - Transaction
+      summary: Get all Transaction
+      description: The returned Transaction are ordered by date.
+      operationId: getTransaction
+      responses:
+        200:
+          description: successfully returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transactions'
+    put:
+      summary: Create or update Transaction
+      operationId: crupdateTransaction
+      tags:
+        - Transaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/Currencys"
+                - type: array
+                  items:
+                    $ref: "#/components/schemas/Currencys"
+      responses:
+        200:
+          description: The list of created or updated currency
+          content:
+            application/json:
+              schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Currency"
+                  - $ref: "#/components/schemas/Currencys"
                   - type: array
                     items:
-                      $ref: "#/components/schemas/Currency"
+                      $ref: "#/components/schemas/Currencys"
+  /account:
+    get:
+      tags:
+        - Account
+      summary: Get all accounts
+      description: The returned books are ordered by name.
+      operationId: getAccounts
+      responses:
+        200:
+          description: successfully returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounts'
+
+    put:
+      summary: Create or update accounts
+      operationId: crupdateAccounts
+      tags:
+        - Account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Accounts'
+      responses:
+        200:
+          description: The list of created or updated accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accounts'
+
 components:
   schemas:
-    Currency:
+    Currencys:
       type: object
       properties:
         id:
