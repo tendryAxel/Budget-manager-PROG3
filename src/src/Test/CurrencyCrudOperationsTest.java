@@ -1,7 +1,7 @@
 package Test;
 
 import model.CurrencyModel;
-import operation.CurrencyCrudOperations;
+import repository.CurrencyCrudOperations;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,13 +1,15 @@
-package operation;
+package repository;
 import model.TransactionModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-    public class TransactionCrudOperations implements CrudOperations<TransactionModel>{
+    public class TransactionCrudOperation implements CrudOperations<TransactionModel>{
         @Override
         public List<TransactionModel> findAll() throws SQLException {
             String sql = "SELECT * FROM transaction";
@@ -20,7 +22,7 @@ import java.util.List;
                         resultSet.getInt("value"),
                         resultSet.getString("description"),
                         resultSet.getInt("id_account"),
-                        resultSet.getDate("transaction_date")
+                        resultSet.getTimestamp("transaction_date").toLocalDateTime()
                 ));
             }
 
@@ -37,7 +39,7 @@ import java.util.List;
                     preparedStatement.setInt(2,transactionModel.getValue());
                     preparedStatement.setString(3,transactionModel.getDescription());
                     preparedStatement.setInt(4,transactionModel.getId_account());
-                    preparedStatement.setDate(5,transactionModel.getTransaction_date());
+                    preparedStatement.setTimestamp(5, Timestamp.valueOf(transactionModel.getTransaction_date()));
                 }
             }
             catch (SQLException e){
@@ -54,7 +56,7 @@ import java.util.List;
                 preparedStatement.setInt(2,toSave.getValue());
                 preparedStatement.setString(3,toSave.getDescription());
                 preparedStatement.setInt(4,toSave.getId_account());
-                preparedStatement.setDate(5,toSave.getTransaction_date());
+                preparedStatement.setTimestamp(5, Timestamp.valueOf(toSave.getTransaction_date()));
                 preparedStatement.executeUpdate();
             }
             catch (SQLException e){

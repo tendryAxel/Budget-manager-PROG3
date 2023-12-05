@@ -13,18 +13,22 @@ paths:
     get:
       tags:
         - Currency
+      summary: Get all currency
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Currencys"
-    post:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Currencys"
+    put:
       tags:
         - Currency
       description: Create or update Currency type
       operationId: crupdateCurrency
+      summary: Create or update currency
       requestBody:
         content:
           application/json:
@@ -88,7 +92,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Accounts'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accounts'
 
     put:
       summary: Create or update accounts
