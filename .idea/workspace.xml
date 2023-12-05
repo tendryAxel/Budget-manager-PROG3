@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="feat : create transaction object model">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/api.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Test/AccountCrudOperationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/Test/AccountCrudOperationsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Test/CurrencyCrudOperationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/Test/CurrencyCrudOperationsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Test/TransactionCrudOperationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/Test/TransactionCrudOperationsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/TransactionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/TransactionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/AccountCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/CrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/CrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/TransactionCrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/connectionDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/connectionDB.java" afterDir="false" />
-    </list>
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="feat : create transaction object model" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,19 +35,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/HEI/L2/PROG3/Budget-manager-PROG3-Maharovo",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/HEI/L2/PROG3/Budget-manager-PROG3-Maharovo&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="operation" />
