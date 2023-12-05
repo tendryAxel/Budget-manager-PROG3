@@ -9,6 +9,14 @@ public class TransactionModel {
    private int id_account;
     private  Date transaction_date;
 
+    public TransactionModel(int id, int value, String description, int id_account, Date transaction_date) {
+        this.id = id;
+        this.value = value;
+        this.description = description;
+        this.id_account = id_account;
+        this.transaction_date = transaction_date;
+    }
+
     public int getId() {
         return id;
     }
