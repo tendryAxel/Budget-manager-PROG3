@@ -197,6 +197,32 @@ components:
         balance:
           type: number
 
+    TranfertHistory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+
+    TranfertHistory_id_other:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/TranfertHistory_base"
+      properties:
+        account_debited_id:
+          type: integer
+        account_credited_id:
+          type: integer
+
+    TranfertHistory_other:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/TranfertHistory_base"
+      properties:
+        account_debited_id:
+          $ref: "#/components/schemas/Accounts_other"
+        account_credited_id:
+          $ref: "#/components/schemas/Accounts_other"
+
     Transactions_id_other:
       type: object
       allOf:
@@ -204,9 +230,7 @@ components:
       properties:
         transaction_type_id:
           type: integer
-        account_debited_id:
-          type: integer
-        account_credited_id:
+        account_id:
           type: integer
 
     Accounts_id_other:
@@ -228,11 +252,9 @@ components:
       properties:
         transaction_type:
           type: string
-        account_debited_id:
+        account_id:
           $ref: "#/components/schemas/Accounts_other"
-        account_credited_id:
-          $ref: "#/components/schemas/Accounts_other"
-
+          
     Accounts_other:
       type: object
       allOf:
