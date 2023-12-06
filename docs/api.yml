@@ -160,6 +160,47 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/Accounts_base'
                   - $ref: '#/components/schemas/Accounts_other'
+  /transfer:
+    get:
+      tags:
+        - Transfer
+      summary: Get all transfer
+      description: The returned transfer are ordered by date.
+      operationId: getTransfer
+      responses:
+        200:
+          description: successfully returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranfertHistory_other'
+    put:
+      summary: Create or update Transfer
+      operationId: crupdateTransfer
+      tags:
+        - Transfer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/TranfertHistory_id_other"
+                - type: array
+                  items:
+                    $ref: "#/components/schemas/TranfertHistory_id_other"
+      responses:
+        200:
+          description: The list of created or updated trasfer
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/TranfertHistory_other"
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/TranfertHistory_other"
 
 
 components:
