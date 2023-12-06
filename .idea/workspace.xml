@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="feat : create transaction object model">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/api.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Test/AccountCrudOperationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/Test/AccountCrudOperationsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Test/CurrencyCrudOperationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/Test/CurrencyCrudOperationsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/budget-manager-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/budget-manager-api.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/Test/TransactionCrudOperationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/Test/TransactionCrudOperationsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/TransactionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/TransactionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/AccountCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/CrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/CrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/TransactionCrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/connectionDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/connectionDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/operation/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/AccountCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/operation/TransactionCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/TransactionCrudOperations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,13 +47,14 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "axel",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/HEI/L2/PROG3/Budget-manager-PROG3-Maharovo",
-    "project.structure.last.edited": "Project",
+    "last_opened_file_path": "C:/Users/TENDRY/Downloads/postgresql-42.6.0.jar",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -70,12 +67,29 @@
   </component>
   <component name="RunManager">
     <configuration name="main" type="Application" factoryName="Application">
+      <envs>
+        <env name="PG_URL" value="jdbc:postgresql://localhost/budget_manager" />
+        <env name="PG_USER" value="postgres" />
+        <env name="PG_PASSWORD" value="meme" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="budget-manager-api" />
       <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
         <option name="credential" />
         <option name="region" />
         <option name="useCurrentConnection" value="false" />
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

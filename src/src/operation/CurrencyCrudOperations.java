@@ -1,6 +1,8 @@
 package operation;
 
 import model.CurrencyModel;
+import repository.CrudOperations;
+import repository.connectionDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
