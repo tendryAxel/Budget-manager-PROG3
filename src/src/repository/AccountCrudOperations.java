@@ -11,7 +11,7 @@ import java.util.List;
     public class AccountCrudOperations implements CrudOperations <AccountModel>{
         @Override
         public List<AccountModel> findAll() throws SQLException {
-            String sql = "SELECT * FROM account ";
+            String sql = "SELECT * FROM \"account\" ";
             List<AccountModel> AllAccount = new ArrayList<>();
             ResultSet resultSet = connectionDB.getConnection().prepareStatement(sql).executeQuery();
             while (resultSet.next()){
@@ -26,7 +26,7 @@ import java.util.List;
 
         @Override
         public List<AccountModel> saveAll(List<AccountModel> toSave) {
-            String sql = "INSERT INTO account (name , id_currency) VALUES (?,?)";
+            String sql = "INSERT INTO \"account\" (name , id_currency) VALUES (?,?)";
             List<AccountModel> SaveAccount = new ArrayList<>();
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 for (AccountModel accountModel : toSave){
@@ -47,7 +47,7 @@ import java.util.List;
 
         @Override
         public AccountModel save(AccountModel toSave)  {
-            String sql = "INSERT INTO account (name, id_currency) VALUES (?,?) ";
+            String sql = "INSERT INTO \"account\" (name, id_currency) VALUES (?,?) ";
             try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)) {
                 preparedStatement.setString(1, toSave.getName());
                 preparedStatement.setInt(2, toSave.getId_currency());

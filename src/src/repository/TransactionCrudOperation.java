@@ -11,7 +11,7 @@ import java.util.List;
     public class TransactionCrudOperation implements CrudOperations<TransactionModel>{
         @Override
         public List<TransactionModel> findAll() throws SQLException {
-            String sql = "SELECT * FROM transaction";
+            String sql = "SELECT * FROM \"transaction\"";
             ResultSet resultSet = connectionDB.getConnection().prepareStatement(sql).executeQuery();
             List<TransactionModel> AllTransaction = new ArrayList<>();
 
@@ -30,7 +30,7 @@ import java.util.List;
 
         @Override
         public List<TransactionModel> saveAll(List<TransactionModel> toSave) {
-            String sql = "INSERT INTO transaction (value,description,id_account,transaction_date)";
+            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date)";
             List<TransactionModel> SaveTransaction = new ArrayList<>();
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 for (TransactionModel transactionModel : toSave){
@@ -48,7 +48,7 @@ import java.util.List;
 
         @Override
         public TransactionModel save(TransactionModel toSave)  {
-            String sql = "INSERT INTO transaction (value,description,id_account,transaction_date)";
+            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date)";
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 preparedStatement.setInt(1,toSave.getValue());
                 preparedStatement.setString(2,toSave.getDescription());
