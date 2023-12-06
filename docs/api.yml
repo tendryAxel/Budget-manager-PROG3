@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0.0
+  version: 1.0.1
   title: Budget manager application
 servers:
   - url: http://wallet.com
@@ -68,10 +68,10 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/Transactions_base"
+                - $ref: "#/components/schemas/Transactions_id_other"
                 - type: array
                   items:
-                    $ref: "#/components/schemas/Transactions_base"
+                    $ref: "#/components/schemas/Transactions_id_other"
       responses:
         200:
           description: The list of created or updated currency
@@ -160,7 +160,11 @@ components:
       allOf:
         - $ref: "#/components/schemas/Transactions_base"
       properties:
-        transaction_id:
+        transaction_type_id:
+          type: integer
+        account_debited_id:
+          type: integer
+        account_credited_id:
           type: integer
 
     Accounts_id_other:
@@ -182,6 +186,10 @@ components:
       properties:
         transaction_type:
           type: string
+        account_debited_id:
+          $ref: "#/components/schemas/Accounts_other"
+        account_credited_id:
+          $ref: "#/components/schemas/Accounts_other"
 
     Accounts_other:
       type: object
