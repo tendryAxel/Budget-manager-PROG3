@@ -1,3 +1,5 @@
+package utils;
+
 public class utils {
     public static String createPsqlInsertRequest(String base, int columnCount, int valueRepeat){
         /*
