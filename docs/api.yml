@@ -129,21 +129,23 @@ components:
           type: integer
         name:
           type: string
+        code:
+          type: string
 
     Transactions:
       type: object
       properties:
         id:
           type : string
-        value:
+        label:
           type: string
-        description:
+        datetime:
           type : string
-        id_acount:
+          format: datetime
+        amount:
+          type: number
+        transaction_type:
           type: string
-        transaction_date :
-          type: string
-          format: date
 
 
     Accounts:
@@ -153,5 +155,11 @@ components:
           type: string
         name:
           type: string
-        id_currency:
-          type: string
+        balance:
+          type: number
+        transaction:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transactions"
+        currency:
+          $ref: "#/components/schemas/Currencys"
