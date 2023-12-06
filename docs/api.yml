@@ -119,6 +119,36 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Accounts_other'
+  /account/{id}:
+    post:
+      tags:
+        - Account
+      summary: Get account's balance by id
+      description: The returned the account's balance at one time
+      operationId: getAccountBalance
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id of the account
+          schema:
+            type: integer
+        - in: query
+          name: date
+          required: false
+          description: date to get the balance
+          schema:
+            type: string
+            format: date
+            default: current_date
+      responses:
+        200:
+          description: successfully returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounts_base'
+
 
 components:
   schemas:
@@ -141,7 +171,7 @@ components:
           type: string
         datetime:
           type : string
-          format: datetime
+          format: date
         amount:
           type: number
 
