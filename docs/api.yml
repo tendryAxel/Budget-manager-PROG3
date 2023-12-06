@@ -134,20 +134,32 @@ paths:
           schema:
             type: integer
         - in: query
-          name: date
-          required: false
+          name: datetime
+          required: true
           description: date to get the balance
           schema:
             type: string
             format: date
             default: current_date
+        - in: query
+          name: enddatetime
+          required: false
+          description: |
+            date to get list of transaction of the account
+            **if it's specify** the endpoint return list of transactions between **datetime** and **enddatetime**
+            **if it's not specify** the endpoint return the balance of the account at the **datetime**
+          schema:
+            type: string
+            format: date
       responses:
         200:
           description: successfully returned
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Accounts_base'
+                oneOf:
+                  - $ref: '#/components/schemas/Accounts_base'
+                  - $ref: '#/components/schemas/Accounts_other'
 
 
 components:
