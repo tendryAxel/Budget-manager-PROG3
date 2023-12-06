@@ -30,7 +30,7 @@ import java.util.List;
 
         @Override
         public List<TransactionModel> saveAll(List<TransactionModel> toSave) {
-            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date)";
+            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date) VALUES(?,?,?,?)";
             List<TransactionModel> SaveTransaction = new ArrayList<>();
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 for (TransactionModel transactionModel : toSave){
@@ -48,7 +48,7 @@ import java.util.List;
 
         @Override
         public TransactionModel save(TransactionModel toSave)  {
-            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date)";
+            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date) VALUES(?,?,?,?)";
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 preparedStatement.setInt(1,toSave.getValue());
                 preparedStatement.setString(2,toSave.getDescription());

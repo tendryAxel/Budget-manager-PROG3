@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="feat : create function to create psql insert command">
-      <change beforePath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" afterDir="false" />
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +182,21 @@
       <option name="project" value="LOCAL" />
       <updated>1701864775561</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat : use createInsert function in currency repository">
+      <created>1701865677260</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701865677260</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix : remove utils functionality">
+      <created>1701866005597</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1701866005597</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,6 +231,8 @@
     <MESSAGE value="fix : remove unused importation" />
     <MESSAGE value="fix : put table name between &quot;&quot;" />
     <MESSAGE value="feat : create function to create psql insert command" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : create function to create psql insert command" />
+    <MESSAGE value="feat : use createInsert function in currency repository" />
+    <MESSAGE value="fix : remove utils functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : remove utils functionality" />
   </component>
 </project>
