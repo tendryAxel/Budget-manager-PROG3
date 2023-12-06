@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : api bug">
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : put table name between &quot;&quot;">
+      <change afterPath="$PROJECT_DIR$/src/src/utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,7 +155,28 @@
       <option name="project" value="LOCAL" />
       <updated>1701850975100</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix : don't give ID when save new row in database">
+      <created>1701863045520</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1701863045520</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix : remove unused importation">
+      <created>1701863127875</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1701863127875</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix : put table name between &quot;&quot;">
+      <created>1701863246326</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1701863246326</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +207,9 @@
     <MESSAGE value="feat : create transaction object model" />
     <MESSAGE value="fix : some bug" />
     <MESSAGE value="fix : api bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : api bug" />
+    <MESSAGE value="fix : don't give ID when save new row in database" />
+    <MESSAGE value="fix : remove unused importation" />
+    <MESSAGE value="fix : put table name between &quot;&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : put table name between &quot;&quot;" />
   </component>
 </project>
