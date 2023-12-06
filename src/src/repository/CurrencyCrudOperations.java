@@ -1,7 +1,6 @@
 package repository;
 
 import model.CurrencyModel;
-import utils.utils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,18 +25,16 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel>{
     }
 
     public List<CurrencyModel> saveAll(List<CurrencyModel> toSave)  {
-        String sql = utils.createPsqlInsertRequest(
-                "INSERT INTO \"currency\" (name) VALUES ",
-                1,
-                toSave.size()
-        );
+        String sql = "INSERT INTO \"currency\" (name) VALUES (?)";
         List<CurrencyModel> SaveCurrency = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-            for (int i = 1; i < toSave.size()+1; i++) {
-                preparedStatement.setString(i, toSave.get(i).getName());
-                SaveCurrency.add(toSave.get(i));
+            for (CurrencyModel currencyModel : toSave){
+                preparedStatement.setString(1, currencyModel.getName());
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    SaveCurrency.add(currencyModel);
+                }
             }
-            preparedStatement.executeUpdate();
         }
         catch (SQLException e){
             throw new RuntimeException();
