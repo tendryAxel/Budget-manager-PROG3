@@ -31,15 +31,14 @@ import java.util.List;
 
         @Override
         public List<TransactionModel> saveAll(List<TransactionModel> toSave) {
-            String sql = "INSERT INTO transaction (id,value,description,id_account,transaction_date)";
+            String sql = "INSERT INTO transaction (value,description,id_account,transaction_date)";
             List<TransactionModel> SaveTransaction = new ArrayList<>();
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 for (TransactionModel transactionModel : toSave){
-                    preparedStatement.setInt(1, transactionModel.getId());
-                    preparedStatement.setInt(2,transactionModel.getValue());
-                    preparedStatement.setString(3,transactionModel.getDescription());
-                    preparedStatement.setInt(4,transactionModel.getId_account());
-                    preparedStatement.setTimestamp(5, Timestamp.valueOf(transactionModel.getTransaction_date()));
+                    preparedStatement.setInt(1,transactionModel.getValue());
+                    preparedStatement.setString(2,transactionModel.getDescription());
+                    preparedStatement.setInt(3,transactionModel.getId_account());
+                    preparedStatement.setTimestamp(4, Timestamp.valueOf(transactionModel.getTransaction_date()));
                 }
             }
             catch (SQLException e){
@@ -50,13 +49,12 @@ import java.util.List;
 
         @Override
         public TransactionModel save(TransactionModel toSave)  {
-            String sql = "INSERT INTO transaction (id,value,description,id_account,transaction_date)";
+            String sql = "INSERT INTO transaction (value,description,id_account,transaction_date)";
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-                preparedStatement.setInt(1,toSave.getId());
-                preparedStatement.setInt(2,toSave.getValue());
-                preparedStatement.setString(3,toSave.getDescription());
-                preparedStatement.setInt(4,toSave.getId_account());
-                preparedStatement.setTimestamp(5, Timestamp.valueOf(toSave.getTransaction_date()));
+                preparedStatement.setInt(1,toSave.getValue());
+                preparedStatement.setString(2,toSave.getDescription());
+                preparedStatement.setInt(3,toSave.getId_account());
+                preparedStatement.setTimestamp(4, Timestamp.valueOf(toSave.getTransaction_date()));
                 preparedStatement.executeUpdate();
             }
             catch (SQLException e){

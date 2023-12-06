@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="feat : create transaction object model">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : api bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/budget-manager-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/budget-manager-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/Test/TransactionCrudOperationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/Test/TransactionCrudOperationsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/AccountCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/CurrencyCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/operation/TransactionCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/operation/TransactionCrudOperations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,20 +37,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "axel",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/TENDRY/Downloads/postgresql-42.6.0.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;axel&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/TENDRY/Downloads/postgresql-42.6.0.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="operation" />
@@ -146,7 +140,21 @@
       <option name="project" value="LOCAL" />
       <updated>1701532807104</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix : some bug">
+      <created>1701849688023</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701849688023</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix : api bug">
+      <created>1701850975100</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701850975100</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,7 +162,15 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="69" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="78" />
+                  <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="78" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -167,6 +183,8 @@
     <MESSAGE value="feat : create currency object model" />
     <MESSAGE value="feat : create account object model" />
     <MESSAGE value="feat : create transaction object model" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : create transaction object model" />
+    <MESSAGE value="fix : some bug" />
+    <MESSAGE value="fix : api bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : api bug" />
   </component>
 </project>
