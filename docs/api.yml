@@ -22,7 +22,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Currencys"
+                  $ref: "#/components/schemas/Currencys_base"
     put:
       tags:
         - Currency
@@ -33,14 +33,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Currencys"
+              $ref: "#/components/schemas/Currencys_base"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Currencys"
+                $ref: "#/components/schemas/Currencys_base"
 
   /transaction:
     get:
@@ -57,7 +57,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Transactions'
+                  $ref: '#/components/schemas/Transactions_other'
     put:
       summary: Create or update Transaction
       operationId: crupdateTransaction
@@ -68,10 +68,10 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/Currencys"
+                - $ref: "#/components/schemas/Transactions_base"
                 - type: array
                   items:
-                    $ref: "#/components/schemas/Currencys"
+                    $ref: "#/components/schemas/Transactions_base"
       responses:
         200:
           description: The list of created or updated currency
@@ -79,10 +79,10 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Currencys"
+                  - $ref: "#/components/schemas/Transactions_other"
                   - type: array
                     items:
-                      $ref: "#/components/schemas/Currencys"
+                      $ref: "#/components/schemas/Transactions_other"
   /account:
     get:
       tags:
@@ -96,7 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Accounts'
+                $ref: '#/components/schemas/Accounts_other'
 
     put:
       summary: Create or update accounts
@@ -109,7 +109,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Accounts'
+                $ref: '#/components/schemas/Accounts_id_other'
       responses:
         200:
           description: The list of created or updated accounts
@@ -118,11 +118,11 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Accounts'
+                  $ref: '#/components/schemas/Accounts_other'
 
 components:
   schemas:
-    Currencys:
+    Currencys_base:
       type: object
       properties:
         id:
@@ -132,7 +132,7 @@ components:
         code:
           type: string
 
-    Transactions:
+    Transactions_base:
       type: object
       properties:
         id:
@@ -144,11 +144,8 @@ components:
           format: datetime
         amount:
           type: number
-        transaction_type:
-          type: string
 
-
-    Accounts:
+    Accounts_base:
       type: object
       properties:
         id:
@@ -157,9 +154,43 @@ components:
           type: string
         balance:
           type: number
+
+    Transactions_id_other:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Transactions_base"
+      properties:
+        transaction_id:
+          type: integer
+
+    Accounts_id_other:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Accounts_base'
+      properties:
         transaction:
           type: array
           items:
-            $ref: "#/components/schemas/Transactions"
+            type: integer
         currency:
-          $ref: "#/components/schemas/Currencys"
+          type: integer
+          
+    Transactions_other:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Transactions_base"
+      properties:
+        transaction_type:
+          type: string
+
+    Accounts_other:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Accounts_base'
+      properties:
+        transaction:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transactions_other"
+        currency:
+          $ref: "#/components/schemas/Currencys_base"
