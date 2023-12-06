@@ -1,10 +1,13 @@
 package operation;
 
 import model.TransactionModel;
+import repository.CrudOperations;
+import repository.connectionDB;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +22,7 @@ public class TransactionCrudOperations implements CrudOperations<TransactionMode
                     resultSet.getInt("value"),
                     resultSet.getString("description"),
                     resultSet.getInt("id_account"),
-                    resultSet.getDate("transaction_date")
+                    resultSet.getTimestamp("transaction_date").toLocalDateTime()
             ));
         }
         return result;
@@ -31,7 +34,7 @@ public class TransactionCrudOperations implements CrudOperations<TransactionMode
       state.setInt(1, toSave.getValue());
       state.setString(2, toSave.getDescription());
       state.setInt(3, toSave.getId_account());
-      state.setDate(4, toSave.getTransaction_date());
+      state.setTimestamp(4, Timestamp.valueOf(toSave.getTransaction_date()));
       state.executeUpdate();
       return toSave;
     }
