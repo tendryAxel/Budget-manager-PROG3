@@ -43,7 +43,7 @@ public class TransferCrudOperation implements CrudOperations<TransferModel>{
     }
 
     @Override
-    public TransferModel save(TransferModel toSave)  {
+    public static TransferModel save(TransferModel toSave)  {
         String sql = "INSERT INTO \"transfert\" (id_debtor,id_credit) VALUES(?,?)";
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             preparedStatement.setInt(1,toSave.getTransactionDebtor());

@@ -48,19 +48,21 @@ import java.util.List;
         }
 
         @Override
-        public TransactionModel save(TransactionModel toSave)  {
-            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date) VALUES(?,?,?,?)";
+        public static int save(TransactionModel toSave)  {
+            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date) VALUES(?,?,?,?) RETURNING id";
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 preparedStatement.setInt(1,toSave.getValue());
                 preparedStatement.setString(2,toSave.getDescription());
                 preparedStatement.setInt(3,toSave.getId_account());
                 preparedStatement.setTimestamp(4, Timestamp.valueOf(toSave.getTransaction_date()));
-                preparedStatement.executeUpdate();
+                ResultSet resultSet = preparedStatement.executeQuery();
+                resultSet.next();
+                return resultSet.getInt("id");
             }
             catch (SQLException e){
                 throw new RuntimeException();
             }
-            return toSave;
+            return 0;
         }
 
 
