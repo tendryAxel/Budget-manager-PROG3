@@ -54,4 +54,14 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel>{
         }
         return toSave;
     }
+
+
+    public int getAccountCurrency(int id_account) throws SQLException {
+        String sql = "SELECT id_currency FROM \"account\" WHERE ?";
+        PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, id_account);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return resultSet.getInt("id_currency");
+    }
 }
