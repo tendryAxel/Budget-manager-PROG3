@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0.0
+  version: 1.0.2
   title: Budget manager application
 servers:
   - url: http://wallet.com
@@ -22,7 +22,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Currencys"
+                  $ref: "#/components/schemas/Currencys_base"
     put:
       tags:
         - Currency
@@ -33,14 +33,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Currencys"
+              $ref: "#/components/schemas/Currencys_base"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Currencys"
+                $ref: "#/components/schemas/Currencys_base"
 
   /transaction:
     get:
@@ -57,7 +57,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Transactions'
+                  $ref: '#/components/schemas/Transactions_other'
     put:
       summary: Create or update Transaction
       operationId: crupdateTransaction
@@ -68,10 +68,10 @@ paths:
           application/json:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/Currencys"
+                - $ref: "#/components/schemas/Transactions_id_other"
                 - type: array
                   items:
-                    $ref: "#/components/schemas/Currencys"
+                    $ref: "#/components/schemas/Transactions_id_other"
       responses:
         200:
           description: The list of created or updated currency
@@ -79,10 +79,10 @@ paths:
             application/json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Currencys"
+                  - $ref: "#/components/schemas/Transactions_other"
                   - type: array
                     items:
-                      $ref: "#/components/schemas/Currencys"
+                      $ref: "#/components/schemas/Transactions_other"
   /account:
     get:
       tags:
@@ -96,7 +96,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Accounts'
+                $ref: '#/components/schemas/Accounts_other'
 
     put:
       summary: Create or update accounts
@@ -109,7 +109,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Accounts'
+                $ref: '#/components/schemas/Accounts_id_other'
       responses:
         200:
           description: The list of created or updated accounts
@@ -118,40 +118,192 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Accounts'
+                  $ref: '#/components/schemas/Accounts_other'
+  /account/{id}:
+    post:
+      tags:
+        - Account
+      summary: Get account's balance by id
+      description: The returned the account's balance at one time
+      operationId: getAccountBalance
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id of the account
+          schema:
+            type: integer
+        - in: query
+          name: datetime
+          required: true
+          description: date to get the balance
+          schema:
+            type: string
+            format: date
+            default: current_date
+        - in: query
+          name: enddatetime
+          required: false
+          description: |
+            date to get list of transaction of the account
+            **if it's specify** the endpoint return list of transactions between **datetime** and **enddatetime**
+            **if it's not specify** the endpoint return the balance of the account at the **datetime**
+          schema:
+            type: string
+            format: date
+      responses:
+        200:
+          description: successfully returned
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Accounts_base'
+                  - $ref: '#/components/schemas/Accounts_other'
+  /transfer:
+    get:
+      tags:
+        - Transfer
+      summary: Get all transfer
+      description: The returned transfer are ordered by date.
+      operationId: getTransfer
+      responses:
+        200:
+          description: successfully returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranfertHistory_other'
+    put:
+      summary: Create or update Transfer
+      operationId: crupdateTransfer
+      tags:
+        - Transfer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/TranfertHistory_id_other"
+                - type: array
+                  items:
+                    $ref: "#/components/schemas/TranfertHistory_id_other"
+      responses:
+        200:
+          description: The list of created or updated trasfer
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/TranfertHistory_other"
+                  - type: array
+                    items:
+                      $ref: "#/components/schemas/TranfertHistory_other"
+
 
 components:
   schemas:
-    Currencys:
+    Currencys_base:
       type: object
       properties:
         id:
           type: integer
         name:
           type: string
+        code:
+          type: string
 
-    Transactions:
+    Transactions_base:
       type: object
       properties:
         id:
           type : string
-        value:
+        label:
           type: string
-        description:
+        datetime:
           type : string
-        id_acount:
-          type: string
-        transaction_date :
-          type: string
           format: date
+        amount:
+          type: number
 
-
-    Accounts:
+    Accounts_base:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-        id_currency:
+        balance:
+          type: number
+
+    TranfertHistory_base:
+      type: object
+      properties:
+        id:
+          type: integer
+
+    TranfertHistory_id_other:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/TranfertHistory_base"
+      properties:
+        account_debited_id:
+          type: integer
+        account_credited_id:
+          type: integer
+
+    TranfertHistory_other:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/TranfertHistory_base"
+      properties:
+        account_debited_id:
+          $ref: "#/components/schemas/Accounts_other"
+        account_credited_id:
+          $ref: "#/components/schemas/Accounts_other"
+
+    Transactions_id_other:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Transactions_base"
+      properties:
+        transaction_type_id:
+          type: integer
+        account_id:
+          type: integer
+
+    Accounts_id_other:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Accounts_base'
+      properties:
+        transaction:
+          type: array
+          items:
+            type: integer
+        currency:
+          type: integer
+          
+    Transactions_other:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Transactions_base"
+      properties:
+        transaction_type:
           type: string
+        account_id:
+          $ref: "#/components/schemas/Accounts_other"
+          
+    Accounts_other:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Accounts_base'
+      properties:
+        transaction:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transactions_other"
+        currency:
+          $ref: "#/components/schemas/Currencys_base"

@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" afterDir="false" />
-    </list>
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : test data in transaction test" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,20 +35,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;axel&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/TENDRY/Downloads/postgresql-42.6.0.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "axel",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/TENDRY/Downloads/postgresql-42.6.0.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="operation" />
@@ -196,7 +194,21 @@
       <option name="project" value="LOCAL" />
       <updated>1701866005597</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fix : delete operations package">
+      <created>1701874890908</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1701874890908</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix : test data in transaction test">
+      <created>1701875314949</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1701875314949</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,6 +245,8 @@
     <MESSAGE value="feat : create function to create psql insert command" />
     <MESSAGE value="feat : use createInsert function in currency repository" />
     <MESSAGE value="fix : remove utils functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : remove utils functionality" />
+    <MESSAGE value="fix : delete operations package" />
+    <MESSAGE value="fix : test data in transaction test" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : test data in transaction test" />
   </component>
 </project>

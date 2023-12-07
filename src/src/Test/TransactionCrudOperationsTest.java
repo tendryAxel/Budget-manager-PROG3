@@ -3,6 +3,7 @@ package Test;
 import model.TransactionModel;
 import repository.TransactionCrudOperation;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -26,11 +27,11 @@ public class TransactionCrudOperationsTest {
             System.out.println(t);
         }
 
-        TransactionModel transactionModel = new TransactionModel(1, 500, "Purchase", 2, Timestamp.valueOf("2023-12-04").toLocalDateTime());
+        TransactionModel transactionModel = new TransactionModel(1, 500, "Purchase", 2, Date.valueOf("2023-12-04").toLocalDate().atStartOfDay());
         transactionCrudOperations.save(transactionModel);
 
         List<TransactionModel> transactionsToSave = new ArrayList<>();
-        transactionsToSave.add(new TransactionModel(2, 1000, "Salary", 3, Timestamp.valueOf("2023-12-05").toLocalDateTime()));
+        transactionsToSave.add(new TransactionModel(2, 1000, "Salary", 3, Date.valueOf("2023-12-05").toLocalDate().atStartOfDay()));
 
         List<TransactionModel> savedTransactions = transactionCrudOperations.saveAll(transactionsToSave);
         System.out.println("Transactions enregistrées :");
