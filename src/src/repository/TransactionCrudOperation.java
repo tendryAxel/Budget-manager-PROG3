@@ -68,6 +68,26 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         }
     }
    
+     public static BigDecimal getBalanceAtDateTime(AccountModel accountModel, Timestamp transaction_date) {
+        try {
+            String sql = "SELECT * FROM transaction WHERE id_account = ? AND transaction_date <= ? ORDER BY transaction_date DESC LIMIT 1";
+            PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, accountModel.getId());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(transaction_date.toLocalDateTime()));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                BigDecimal balance = resultSet.getBigDecimal("balance");
+                return balance != null ? balance : BigDecimal.ZERO;
+            } else {
+                return BigDecimal.ZERO;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
     public List<TransactionModel> findAll() {
         String sql = "SELECT * FROM \"transaction\"";
         List<TransactionModel> allTransactions = new ArrayList<>();
