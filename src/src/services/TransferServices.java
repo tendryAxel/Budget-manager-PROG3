@@ -9,8 +9,8 @@ import repository.TransferCrudOperation;
 
 import java.sql.SQLException;
 
-public class TransactionServices {
-    public boolean makeTransaction(TransactionModel tr1, TransactionModel tr2){
+public class TransferServices {
+    public boolean makeTransfer(TransactionModel tr1, TransactionModel tr2){
         if (tr1.getId_account() == tr2.getId_account()){
             return false;
         }
