@@ -1,4 +1,4 @@
-package proccess;
+package services;
 
 
 import model.TransactionModel;
@@ -8,9 +8,8 @@ import repository.TransactionCrudOperation;
 import repository.TransferCrudOperation;
 
 import java.sql.SQLException;
-import java.util.TreeSet;
 
-public class TransactionProccess {
+public class TransactionServices {
     public boolean makeTransaction(TransactionModel tr1, TransactionModel tr2){
         if (tr1.getId_account() == tr2.getId_account()){
             return false;
