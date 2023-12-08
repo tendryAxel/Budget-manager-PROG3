@@ -29,11 +29,11 @@ public class AccountCrudOperationsTest {
         }
 
         LocalDateTime updateDate = LocalDateTime.now();
-        AccountModel accountModel = new AccountModel(1, "Savings", BigDecimal.valueOf(24000), updateDate, 1, AccountType.Banque);
+        AccountModel accountModel = new AccountModel(1, "Savings", BigDecimal.valueOf(24000), Timestamp.valueOf(updateDate), 1, AccountType.Banque);
         accountCrudOperations.save(accountModel);
 
         List<AccountModel> accountsToSave = new ArrayList<>();
-        accountsToSave.add(new AccountModel(1, "Savings", BigDecimal.valueOf(1000.0), updateDate, 2, AccountType.MobileMoney));
+        accountsToSave.add(new AccountModel(1, "Savings", BigDecimal.valueOf(1000.0), Timestamp.valueOf(updateDate), 2, AccountType.Mobile_Money));
 
         List<AccountModel> savedAccounts = accountCrudOperations.saveAll(accountsToSave);
         System.out.println("Accounts enregistrés :");

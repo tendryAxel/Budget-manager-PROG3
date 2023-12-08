@@ -1,11 +1,11 @@
-CREATE type TransactionType AS ENUM ('DEBIT', 'CREDIT')
+CREATE type TransactionType AS ENUM ('DEBIT', 'CREDIT');
 
--- Création de la table
+-- Creation de la table
 CREATE TABLE IF NOT EXISTS "transaction" (
     id SERIAL PRIMARY KEY,
     value INT NOT NULL,
     label VARCHAR(100) NOT NULL,
-    amount BigDecimal NOT NULL,
+    amount double precision NOT NULL,
     transaction_date timestamp NOT NULL DEFAULT current_timestamp,
     type TransactionType NOT NULL,
     id_account INT REFERENCES "account"(id)

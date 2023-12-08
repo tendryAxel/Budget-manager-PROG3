@@ -21,7 +21,7 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
                     resultSet.getBigDecimal("balance"),
-                    resultSet.getTimestamp("updateDate "),
+                    resultSet.getTimestamp("updatedDate"),
                     resultSet.getInt("id_currency"),
                     AccountType.valueOf(resultSet.getString("type"))
             ));
@@ -31,7 +31,7 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
 
     @Override
     public List<AccountModel> saveAll(List<AccountModel> toSave) {
-        String sql = "INSERT INTO \"account\" (name ,balance , updadeDate , id_currency , type) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO \"account\" (name ,balance , updatedDate , id_currency , type) VALUES (?,?,?,?,?)";
         List<AccountModel> SaveAccount = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (AccountModel accountModel : toSave){
@@ -48,14 +48,14 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
             }
         }
         catch (SQLException e){
-            throw new RuntimeException();
+            e.printStackTrace();
         }
         return SaveAccount;
     }
 
     @Override
     public AccountModel save(AccountModel toSave)  {
-        String sql = "INSERT INTO \"account\" (name ,balance , updadeDate , id_currency , type) VALUES (?,?,?,?) ";
+        String sql = "INSERT INTO \"account\" (name ,balance , updatedDate , id_currency , type) VALUES (?,?,?,?,?) ";
         try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, toSave.getName());
             preparedStatement.setBigDecimal(2,toSave.getBalance());
@@ -65,7 +65,7 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException();
+            e.printStackTrace();
         }
         return null;
     }

@@ -150,7 +150,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 preparedStatement.executeUpdate();
             }
             catch (SQLException e){
-                throw new RuntimeException();
+                e.printStackTrace();
             }
             return toSave;
         }
@@ -172,10 +172,11 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
             while (resultSet.next()){
                 transactions.add(new TransactionModel(
                         resultSet.getInt("\"transaction\".id"),
-                        resultSet.getInt("value"),
-                        resultSet.getString("description"),
-                        resultSet.getInt("id_account"),
-                        resultSet.getTimestamp("transaction_date").toLocalDateTime()
+                        resultSet.getString("label"),
+                        resultSet.getBigDecimal("amount"),
+                        resultSet.getTimestamp("transaction_date").toLocalDateTime(),
+                        TransactionType.valueOf(resultSet.getString("type")),
+                        resultSet.getInt("id_account")
                 ));
             }
 

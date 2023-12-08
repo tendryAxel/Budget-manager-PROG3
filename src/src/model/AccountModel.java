@@ -10,7 +10,6 @@ public class AccountModel {
     private Timestamp updateDate;
     private    int id_currency;
     private AccountType type;
-     private List<Transaction> transactions ;
 
     public AccountModel(int id, String name, BigDecimal balance, Timestamp updateDate, int id_currency, AccountType type) {
         this.id = id;

@@ -4,6 +4,8 @@ import model.TransactionModel;
 import model.TransactionType;
 import repository.TransactionCrudOperation;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -30,11 +32,11 @@ public class TransactionCrudOperationsTest {
 
 
         LocalDateTime transaction_date = LocalDateTime.now();
-        TransactionModel transactionModel = new TransactionModel(1, "Cadeau Noel", 23000.0, transaction_date , TransactionType.DEBIT , 1);
+        TransactionModel transactionModel = new TransactionModel(1, "Cadeau Noel", new BigDecimal("23000.0"), transaction_date , TransactionType.DEBIT , 1);
         transactionCrudOperation.save(transactionModel);
 
         List<TransactionModel> transactionsToSave = new ArrayList<>();
-        transactionsToSave.add(new TransactionModel(2, "Salaire", 23000.0 , transaction_date ,TransactionType.CREDIT , 2));
+        transactionsToSave.add(new TransactionModel(2, "Salaire", new BigDecimal("23000.0"), transaction_date ,TransactionType.CREDIT , 2));
 
         List<TransactionModel> savedTransactions = transactionCrudOperation.saveAll(transactionsToSave);
         System.out.println("Transactions enregistrées :");
