@@ -18,18 +18,20 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel>{
         while (resultSet.next()){
             AllCurrency.add(new CurrencyModel(
                     resultSet.getInt("id"),
-                    resultSet.getString("name")
+                    resultSet.getString("name"),
+                    resultSet.getString("code")
             ));
         }
         return AllCurrency;
     }
 
     public List<CurrencyModel> saveAll(List<CurrencyModel> toSave)  {
-        String sql = "INSERT INTO \"currency\" (name) VALUES (?)";
+        String sql = "INSERT INTO \"currency\" (name , code) VALUES (?,?)";
         List<CurrencyModel> SaveCurrency = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (CurrencyModel currencyModel : toSave){
                 preparedStatement.setString(1, currencyModel.getName());
+                preparedStatement.setString(2 , currencyModel.getCode());
                 int rowsAffected = preparedStatement.executeUpdate();
                 if (rowsAffected > 0) {
                     SaveCurrency.add(currencyModel);
@@ -44,9 +46,10 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel>{
 
     @Override
     public CurrencyModel save(CurrencyModel toSave)  {
-        String sql = "INSERT INTO \"currency\" (name) VALUES (?)";
+        String sql = "INSERT INTO \"currency\" (name , code) VALUES (?,?)";
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             preparedStatement.setString(1,toSave.getName());
+            preparedStatement.setString(2 ,toSave.getCode());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e){
