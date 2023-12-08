@@ -9,6 +9,63 @@ import java.util.ArrayList;
 import java.util.List;
 
     public class TransactionCrudOperation implements CrudOperations<TransactionModel>{
+  public static void FunctionTransaction(AccountModel accountModel , TransactionModel transaction){
+        switch (transaction.getType()){
+               case CREDIT :
+                BigDecimal updatedBalance = accountModel.getBalance().add(transaction.getAmount()) ;
+                try{
+                    String sql = "INSERT INTO transaction (label , amount , transaction_date ,type ,id_account) " +
+               
+                           "VALUES (?, ?, ?, ?, ?) " +
+                            "ON CONFLICT (id) " +
+                            "DO UPDATE SET amount = EXCLUDED.amount, label = EXCLUDED.label, " +
+                            "type = EXCLUDED.type, transaction_date = EXCLUDED.transaction_date , id_account = EXCLUDED.id_account";
+                    PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql) ;
+                    preparedStatement.setString(2 , transaction.getLabel());
+                    preparedStatement.setBigDecimal(3,transaction.getAmount());
+                    preparedStatement.setTimestamp(3, Timestamp.valueOf(transaction.getTransaction_date()));
+                    preparedStatement.setObject(4 , transaction.getType() , Types.OTHER);
+                    preparedStatement.setInt(5,transaction.getId_account());
+                    preparedStatement.executeUpdate();
+
+                    String update = "UPDATE account SET balance = ? WHERE id_account = ?" ;
+                    PreparedStatement conn = connectionDB.getConnection().prepareStatement(update); ;
+                    conn.setBigDecimal(1  , updatedBalance);
+                    conn.setInt(2 ,accountModel.getId());
+                    conn.executeUpdate() ;
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                case DEBIT :
+                BigDecimal debitedBalance = accountModel.getBalance().subtract(transaction.getAmount());
+                try {
+                    String sql = "INSERT INTO transaction (label , amount , transaction_date ,type ,id_account) " +
+                            "VALUES (?, ?, ?, ?,?) " +
+                            "ON CONFLICT (id) " +
+                            "DO UPDATE SET amount = EXCLUDED.amount, label = EXCLUDED.label, " +
+                            "type = EXCLUDED.type, transaction_date = EXCLUDED.transaction_date , id_account = EXCLUDED.id_account";
+                    PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+                    preparedStatement.setString(2 , transaction.getLabel());
+                    preparedStatement.setBigDecimal(3,transaction.getAmount());
+                    preparedStatement.setTimestamp(3, Timestamp.valueOf(transaction.getTransaction_date()));
+                    preparedStatement.setObject(4 , transaction.getType() , Types.OTHER);
+                    preparedStatement.setInt(5,transaction.getId_account());
+                    preparedStatement.executeUpdate();
+
+                    String update = "UPDATE account SET balance = ? WHERE id_account = ?" ;
+                    PreparedStatement conn = connectionDB.getConnection().prepareStatement(update) ;
+                    conn.setBigDecimal(1  , debitedBalance);
+                    conn.setInt(2 ,accountModel.getId());
+                    conn.executeUpdate() ;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+        }
+    }
+
+
         @Override
         public List<TransactionModel> findAll() throws SQLException {
             String sql = "SELECT * FROM \"transaction\"";
