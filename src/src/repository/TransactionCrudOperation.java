@@ -1,5 +1,6 @@
 package repository;
 import model.TransactionModel;
+import model.TransferModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,8 +49,9 @@ import java.util.List;
         }
 
         @Override
-        public static int save(TransactionModel toSave)  {
-            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date) VALUES(?,?,?,?) RETURNING id";
+        public TransactionModel save(TransactionModel toSave)  {
+            String sql = "INSERT INTO \"transaction\" (value,description,id_account,transaction_date) VALUES(?,?,?,?) RETURNING *";
+            toSave.setId(0);
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 preparedStatement.setInt(1,toSave.getValue());
                 preparedStatement.setString(2,toSave.getDescription());
@@ -57,12 +59,12 @@ import java.util.List;
                 preparedStatement.setTimestamp(4, Timestamp.valueOf(toSave.getTransaction_date()));
                 ResultSet resultSet = preparedStatement.executeQuery();
                 resultSet.next();
-                return resultSet.getInt("id");
+                toSave.setId(resultSet.getInt("id"));
             }
             catch (SQLException e){
                 throw new RuntimeException();
             }
-            return 0;
+            return toSave;
         }
 
 

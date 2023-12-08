@@ -15,12 +15,16 @@ public class TransferServices {
             return false;
         }
         try {
-            int currency1 = CurrencyCrudOperations.getAccountCurrency(tr1.getId_account());
-            int currency2 = CurrencyCrudOperations.getAccountCurrency(tr2.getId_account());
+            TransferCrudOperation transferCrudOperation = new TransferCrudOperation();
+            TransactionCrudOperation transactionCrudOperation = new TransactionCrudOperation();
+            CurrencyCrudOperations currencyCrudOperations = new CurrencyCrudOperations();
+
+            int currency1 = currencyCrudOperations.getAccountCurrency(tr1.getId_account());
+            int currency2 = currencyCrudOperations.getAccountCurrency(tr2.getId_account());
             TransferModel transferModel = new TransferModel();
-            transferModel.setTransactionDebtor(TransactionCrudOperation.save(tr1));
-            transferModel.setTransactionCredit(TransactionCrudOperation.save(tr2));
-            TransferCrudOperation.save(transferModel);
+            transferModel.setTransactionDebtor(transactionCrudOperation.save(tr1).getId());
+            transferModel.setTransactionCredit(transactionCrudOperation.save(tr2).getId());
+            transferCrudOperation.save(transferModel);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
