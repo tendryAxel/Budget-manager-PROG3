@@ -1,8 +1,5 @@
 package repository;
-import model.AccountModel;
-import model.TransactionModel;
-import model.TransactionType;
-import model.TransferModel;
+import model.*;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -18,23 +15,25 @@ import java.util.List;
 
 public class TransactionCrudOperation implements CrudOperations<TransactionModel>{
 
-     public static BigDecimal getBalanceAtDateTime(AccountModel accountModel, Timestamp transaction_date) {
+     public static BalanceModel getBalanceAtDateTime(AccountModel accountModel, Timestamp transaction_date) {
         try {
-            String sql = "SELECT * FROM transaction WHERE id_account = ? AND transaction_date <= ? ORDER BY transaction_date DESC LIMIT 1";
+            String sql = "SELECT * FROM \"balance\" WHERE id_account = ? AND datetime <= ? ORDER BY datetime DESC LIMIT 1";
             PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, accountModel.getId());
             preparedStatement.setTimestamp(2, Timestamp.valueOf(transaction_date.toLocalDateTime()));
             ResultSet resultSet = preparedStatement.executeQuery();
+            BalanceModel balanceModel = new BalanceModel();
             if (resultSet.next()) {
-                BigDecimal balance = resultSet.getBigDecimal("balance");
-                return balance != null ? balance : BigDecimal.ZERO;
-            } else {
-                return BigDecimal.ZERO;
+                balanceModel.setId_account(resultSet.getInt("id_account"));
+                balanceModel.setValue(resultSet.getBigDecimal("value"));
+                balanceModel.setDatetime(resultSet.getTimestamp("datetime").toLocalDateTime());
+                return balanceModel;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+         return null;
+     }
 
 
 
