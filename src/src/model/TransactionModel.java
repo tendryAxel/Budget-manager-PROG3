@@ -1,22 +1,26 @@
 package model;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class TransactionModel {
-   private int id;
-   private int value;
-  private   String description;
-   private int id_account;
-    private LocalDateTime transaction_date;
+    private int id;
+    private String label ;
 
-    public TransactionModel(int id, int value, String description, int id_account, LocalDateTime transaction_date) {
+    private BigDecimal amount;
+
+    private LocalDateTime transaction_date;
+    private TransactionType type ;
+    private int id_account;
+
+    public TransactionModel(int id, String label, BigDecimal amount, LocalDateTime transaction_date, TransactionType type, int id_account) {
         this.id = id;
-        this.value = value;
-        this.description = description;
-        this.id_account = id_account;
+        this.label = label;
+        this.amount = amount;
         this.transaction_date = transaction_date;
+        this.type = type;
+        this.id_account = id_account;
     }
 
     public int getId() {
@@ -27,28 +31,20 @@ public class TransactionModel {
         this.id = id;
     }
 
-    public int getValue() {
-        return value;
+    public String getLabel() {
+        return label;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
-    public String getDescription() {
-        return description;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getId_account() {
-        return id_account;
-    }
-
-    public void setId_account(int id_account) {
-        this.id_account = id_account;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public LocalDateTime getTransaction_date() {
@@ -59,15 +55,31 @@ public class TransactionModel {
         this.transaction_date = transaction_date;
     }
 
+    public TransactionType getType() {
+        return type;
+    }
+
+    public void setType(TransactionType type) {
+        this.type = type;
+    }
+
+    public int getId_account() {
+        return id_account;
+    }
+
+    public void setId_account(int id_account) {
+        this.id_account = id_account;
+    }
 
     @Override
     public String toString() {
         return "TransactionModel{" +
                 "id=" + id +
-                ", value=" + value +
-                ", description='" + description + '\'' +
-                ", id_account=" + id_account +
+                ", label='" + label + '\'' +
+                ", amount=" + amount +
                 ", transaction_date=" + transaction_date +
+                ", type=" + type +
+                ", id_account=" + id_account +
                 '}';
     }
 }

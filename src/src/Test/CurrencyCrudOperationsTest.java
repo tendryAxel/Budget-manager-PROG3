@@ -25,11 +25,11 @@ public class CurrencyCrudOperationsTest {
             System.out.println(c);
         }
 
-        CurrencyModel currencyModel = new CurrencyModel(12, "zah");
+        CurrencyModel currencyModel = new CurrencyModel(12, "zah" , "USD");
         currencyCrudOperations.save(currencyModel);
 
         List<CurrencyModel> currenciesToSave = new ArrayList<>();
-        currenciesToSave.add(new CurrencyModel(18, "baba"));
+        currenciesToSave.add(new CurrencyModel(18, "baba" , "EUR"));
 
         List<CurrencyModel> savedCurrencies = currencyCrudOperations.saveAll(currenciesToSave);
         System.out.println("Currencies enregistrés :");
