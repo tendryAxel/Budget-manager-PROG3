@@ -98,31 +98,28 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
             return toSave;
         }
 
-        public List<TransactionModel> findAllByIdAccountAndDate(int id, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
-            String sql = "SELECT * FROM \"transaction\" " +
+        public List<BalanceModel> findAllByIdAccountAndDate(int id, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
+            String sql = "SELECT * FROM \"balance\" " +
                     "INNER JOIN \"account\" " +
-                    "ON \"transaction\".id_account = \"account\".id " +
+                    "ON \"balance\".id_account = \"account\".id " +
                     "WHERE \"account\".id = ?" +
-                    "AND \"transaction\".transaction_date BETWEEN ? AND ? " +
-                    "ORDER BY \"transaction\".transaction_date DESC ";
+                    "AND \"balance\".datetime BETWEEN ? AND ? " +
+                    "ORDER BY \"balance\".datetime DESC ";
             PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.setTimestamp(2, Timestamp.valueOf(startDate));
             preparedStatement.setTimestamp(3, Timestamp.valueOf(endDate));
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<TransactionModel> transactions = new ArrayList<>();
+            List<BalanceModel> balances = new ArrayList<>();
 
             while (resultSet.next()){
-                transactions.add(new TransactionModel(
-                        resultSet.getInt("\"transaction\".id"),
-                        resultSet.getString("label"),
-                        resultSet.getBigDecimal("amount"),
-                        resultSet.getTimestamp("transaction_date").toLocalDateTime(),
-                        TransactionType.valueOf(resultSet.getString("type")),
-                        resultSet.getInt("id_account")
-                ));
+                BalanceModel balanceModel = new BalanceModel();
+                balanceModel.setId_account(resultSet.getInt("id_account"));
+                balanceModel.setDatetime(resultSet.getTimestamp("datetime").toLocalDateTime());
+                balanceModel.setValue(resultSet.getBigDecimal("value"));
+                balances.add(balanceModel);
             }
 
-            return transactions;
+            return balances;
         }
 }
