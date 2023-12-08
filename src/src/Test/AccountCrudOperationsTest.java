@@ -1,9 +1,13 @@
 package Test;
 
 import model.AccountModel;
+import model.AccountType;
 import repository.AccountCrudOperations;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +28,12 @@ public class AccountCrudOperationsTest {
             System.out.println(a);
         }
 
-        AccountModel accountModel = new AccountModel(1, "Savings", 2);
+        LocalDateTime updateDate = LocalDateTime.now();
+        AccountModel accountModel = new AccountModel(1, "Savings", BigDecimal.valueOf(24000), updateDate, 1, AccountType.Banque);
         accountCrudOperations.save(accountModel);
 
         List<AccountModel> accountsToSave = new ArrayList<>();
-        accountsToSave.add(new AccountModel(2, "Checking", 1));
+        accountsToSave.add(new AccountModel(1, "Savings", BigDecimal.valueOf(1000.0), updateDate, 2, AccountType.MobileMoney));
 
         List<AccountModel> savedAccounts = accountCrudOperations.saveAll(accountsToSave);
         System.out.println("Accounts enregistrés :");
