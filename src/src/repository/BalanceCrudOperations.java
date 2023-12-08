@@ -68,4 +68,16 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
         }
         return toSave;
     }
+
+    public BalanceModel findLastBalanceOf(int id_account) throws SQLException {
+        String sql = "SELECT * FROM \"balance\" WHERE id_account = ? ORDER BY datetime DESC LIMIT 1 ";
+        PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, id_account);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return new BalanceModel(
+                resultSet.getInt("id_account"),
+                resultSet.getTimestamp("datetime").toLocalDateTime(),
+                resultSet.getBigDecimal("value")
+        );
+    }
 }
