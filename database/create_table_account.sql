@@ -3,7 +3,6 @@ CREATE type AccountType AS ENUM ('Banque', 'Espece' , 'Mobile_Money');
 CREATE TABLE IF NOT EXISTS "account" (
     id SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
-    balance DECIMAL (10 , 2) NOT NULL,
     updatedDate TIMESTAMP NOT NULL,
     id_currency INT REFERENCES "currency"(id),
     type AccountType NOT NULL

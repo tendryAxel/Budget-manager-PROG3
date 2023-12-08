@@ -6,15 +6,13 @@ import java.sql.Timestamp;
 public class AccountModel {
     private   int id;
     private String name;
-    private BigDecimal balance;
     private Timestamp updateDate;
     private    int id_currency;
     private AccountType type;
 
-    public AccountModel(int id, String name, BigDecimal balance, Timestamp updateDate, int id_currency, AccountType type) {
+    public AccountModel(int id, String name, Timestamp updateDate, int id_currency, AccountType type) {
         this.id = id;
         this.name = name;
-        this.balance = balance;
         this.updateDate = updateDate;
         this.id_currency = id_currency;
         this.type = type;
@@ -34,14 +32,6 @@ public class AccountModel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
     }
 
     public Timestamp getUpdateDate() {
@@ -73,7 +63,6 @@ public class AccountModel {
         return "AccountModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", balance=" + balance +
                 ", updateDate=" + updateDate +
                 ", id_currency=" + id_currency +
                 ", type=" + type +

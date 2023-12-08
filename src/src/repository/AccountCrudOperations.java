@@ -20,7 +20,6 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
             AllAccount.add(new AccountModel(
                     resultSet.getInt("id"),
                     resultSet.getString("name"),
-                    resultSet.getBigDecimal("balance"),
                     resultSet.getTimestamp("updatedDate"),
                     resultSet.getInt("id_currency"),
                     AccountType.valueOf(resultSet.getString("type"))
@@ -31,15 +30,14 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
 
     @Override
     public List<AccountModel> saveAll(List<AccountModel> toSave) {
-        String sql = "INSERT INTO \"account\" (name ,balance , updatedDate , id_currency , type) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO \"account\" (name , updatedDate , id_currency , type) VALUES (?,?,?,?)";
         List<AccountModel> SaveAccount = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (AccountModel accountModel : toSave){
                 preparedStatement.setString(1, accountModel.getName());
-                preparedStatement.setBigDecimal(2,accountModel.getBalance());
-                preparedStatement.setTimestamp(3,accountModel.getUpdateDate());
-                preparedStatement.setInt(4,accountModel.getId_currency());
-                preparedStatement.setObject(5 , accountModel.getType() , Types.OTHER);
+                preparedStatement.setTimestamp(2 ,accountModel.getUpdateDate());
+                preparedStatement.setInt(3,accountModel.getId_currency());
+                preparedStatement.setObject(4 , accountModel.getType() , Types.OTHER);
 
                 int rowAffected = preparedStatement.executeUpdate();
                 if (rowAffected > 0){
@@ -55,13 +53,12 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
 
     @Override
     public AccountModel save(AccountModel toSave)  {
-        String sql = "INSERT INTO \"account\" (name ,balance , updatedDate , id_currency , type) VALUES (?,?,?,?,?) ";
+        String sql = "INSERT INTO \"account\" (name , updatedDate , id_currency , type) VALUES (?,?,?,?) ";
         try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, toSave.getName());
-            preparedStatement.setBigDecimal(2,toSave.getBalance());
-            preparedStatement.setTimestamp(3,toSave.getUpdateDate());
-            preparedStatement.setInt(4, toSave.getId_currency());
-            preparedStatement.setObject(5 , toSave.getType() ,Types.OTHER);
+            preparedStatement.setTimestamp(2,toSave.getUpdateDate());
+            preparedStatement.setInt(3, toSave.getId_currency());
+            preparedStatement.setObject(4 , toSave.getType() ,Types.OTHER);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
