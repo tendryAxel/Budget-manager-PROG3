@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : change return of transaction function">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/create_table_balance.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/create_table_balance.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/AccountModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/AccountModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/BalanceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/BalanceModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/CurrencyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/CurrencyModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/TransactionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/TransactionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/TransferModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/TransferModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/AccountCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/BalanceCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/BalanceCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/TransferCrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/TransferCrudOperation.java" afterDir="false" />
-    </list>
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : change return of transaction function" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +39,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "axel",
+    "git-widget-placeholder": "dev",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "C:/Users/TENDRY/Downloads/postgresql-42.6.0.jar",
@@ -116,6 +103,13 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-8336523bb0d9-657b72ed" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
