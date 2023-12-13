@@ -19,14 +19,17 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
 
     @Override
     public List<BalanceModel> findAll() throws SQLException {
-        String sql = "SELECT * FROM \"balance\" ";
+        String sql = String.format(
+                "SELECT * FROM \"%s\"",
+                BalanceModel.TABLE_NAME
+        );
         List<BalanceModel> AllBalances = new ArrayList<>();
         ResultSet resultSet = connectionDB.getConnection().prepareStatement(sql).executeQuery();
         while (resultSet.next()){
             AllBalances.add(new BalanceModel(
-                    resultSet.getInt("id_account"),
-                    resultSet.getTimestamp("datetime").toLocalDateTime(),
-                    resultSet.getBigDecimal("value")
+                    resultSet.getInt(BalanceModel.ID_ACCOUNT),
+                    resultSet.getTimestamp(BalanceModel.DATETIME).toLocalDateTime(),
+                    resultSet.getBigDecimal(BalanceModel.VALUE)
             ));
         }
         return AllBalances;
@@ -34,7 +37,12 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
 
     @Override
     public List<BalanceModel> saveAll(List<BalanceModel> toSave) throws SQLException {
-        String sql = "INSERT INTO \"balance\" (id_account , value) VALUES (?,?)";
+        String sql = String.format(
+                "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
+                BalanceModel.TABLE_NAME,
+                BalanceModel.ID_ACCOUNT,
+                BalanceModel.VALUE
+        );
         List<BalanceModel> SaveBalance = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (BalanceModel balanceModel : toSave){
@@ -55,7 +63,12 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
 
     @Override
     public BalanceModel save(BalanceModel toSave) throws SQLException {
-        String sql = "INSERT INTO \"balance\" (id_account , value) VALUES (?,?)";
+        String sql = String.format(
+                "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
+                BalanceModel.TABLE_NAME,
+                BalanceModel.ID_ACCOUNT,
+                BalanceModel.VALUE
+        );
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             preparedStatement.setInt(1, toSave.getId_account());
             preparedStatement.setDouble(2, Double.parseDouble(String.valueOf(toSave.getValue())));
@@ -70,14 +83,19 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
     }
 
     public BalanceModel findLastBalanceOf(int id_account) throws SQLException {
-        String sql = "SELECT * FROM \"balance\" WHERE id_account = ? ORDER BY datetime DESC LIMIT 1 ";
+        String sql = String.format(
+                "SELECT * FROM \"%s\" WHERE %s = ? ORDER BY %s DESC LIMIT 1 ",
+                BalanceModel.TABLE_NAME,
+                BalanceModel.ID_ACCOUNT,
+                BalanceModel.DATETIME
+        );
         PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, id_account);
         ResultSet resultSet = preparedStatement.executeQuery();
         return new BalanceModel(
-                resultSet.getInt("id_account"),
-                resultSet.getTimestamp("datetime").toLocalDateTime(),
-                resultSet.getBigDecimal("value")
+                resultSet.getInt(BalanceModel.ID_ACCOUNT),
+                resultSet.getTimestamp(BalanceModel.DATETIME).toLocalDateTime(),
+                resultSet.getBigDecimal(BalanceModel.VALUE)
         );
     }
 }

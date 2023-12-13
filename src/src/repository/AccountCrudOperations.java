@@ -13,16 +13,19 @@ import java.util.List;
 public class AccountCrudOperations implements CrudOperations <AccountModel>{
     @Override
     public List<AccountModel> findAll() throws SQLException {
-        String sql = "SELECT * FROM \"account\" ";
+        String sql = String.format(
+                "SELECT * FROM \"%s\"",
+                AccountModel.TABLE_NAME
+        );
         List<AccountModel> AllAccount = new ArrayList<>();
         ResultSet resultSet = connectionDB.getConnection().prepareStatement(sql).executeQuery();
         while (resultSet.next()){
             AllAccount.add(new AccountModel(
-                    resultSet.getInt("id"),
-                    resultSet.getString("name"),
-                    resultSet.getTimestamp("updatedDate"),
-                    resultSet.getInt("id_currency"),
-                    AccountType.valueOf(resultSet.getString("type"))
+                    resultSet.getInt(AccountModel.ID),
+                    resultSet.getString(AccountModel.NAME),
+                    resultSet.getTimestamp(AccountModel.UPDATEDATE),
+                    resultSet.getInt(AccountModel.ID_CURRENCY),
+                    AccountType.valueOf(resultSet.getString(AccountModel.TYPE))
             ));
         }
         return AllAccount;
@@ -30,7 +33,15 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
 
     @Override
     public List<AccountModel> saveAll(List<AccountModel> toSave) {
-        String sql = "INSERT INTO \"account\" (name , updatedDate , id_currency , type) VALUES (?,?,?,?)";
+        String sql = String.format(
+                "INSERT INTO \"%s\" (%s,%s,%s,%s) VALUES (?,?,?,?)",
+                AccountModel.TABLE_NAME,
+                AccountModel.NAME,
+                AccountModel.UPDATEDATE,
+                AccountModel.ID_CURRENCY,
+                AccountModel.TYPE
+        );
+        System.out.println(sql);
         List<AccountModel> SaveAccount = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (AccountModel accountModel : toSave){
@@ -53,7 +64,14 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
 
     @Override
     public AccountModel save(AccountModel toSave)  {
-        String sql = "INSERT INTO \"account\" (name , updatedDate , id_currency , type) VALUES (?,?,?,?) ";
+        String sql = String.format(
+                "INSERT INTO \"%s\" (%s,%s,%s,%s) VALUES (?,?,?,?)",
+                AccountModel.TABLE_NAME,
+                AccountModel.NAME,
+                AccountModel.UPDATEDATE,
+                AccountModel.ID_CURRENCY,
+                AccountModel.TYPE
+        );
         try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, toSave.getName());
             preparedStatement.setTimestamp(2,toSave.getUpdateDate());

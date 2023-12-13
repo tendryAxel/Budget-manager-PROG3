@@ -5,6 +5,11 @@ public class CurrencyModel {
    private String name;
    private String code;
 
+    public static final String TABLE_NAME = "currency";
+    public static final  String ID = "id";
+    public static final  String NAME = "name";
+    public static final  String CODE = "code";
+
     public CurrencyModel(int id, String name , String code) {
         this.id = id;
         this.name = name;

@@ -17,16 +17,22 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
 
      public static BalanceModel getBalanceAtDateTime(AccountModel accountModel, Timestamp transaction_date) {
         try {
-            String sql = "SELECT * FROM \"balance\" WHERE id_account = ? AND datetime <= ? ORDER BY datetime DESC LIMIT 1";
+            String sql = String.format(
+                    "SELECT * FROM \"%s\" WHERE %s = ? AND %s <= ? ORDER BY %s DESC LIMIT 1",
+                    BalanceModel.TABLE_NAME,
+                    BalanceModel.ID_ACCOUNT,
+                    BalanceModel.DATETIME,
+                    BalanceModel.DATETIME
+            );
             PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, accountModel.getId());
             preparedStatement.setTimestamp(2, Timestamp.valueOf(transaction_date.toLocalDateTime()));
             ResultSet resultSet = preparedStatement.executeQuery();
             BalanceModel balanceModel = new BalanceModel();
             if (resultSet.next()) {
-                balanceModel.setId_account(resultSet.getInt("id_account"));
-                balanceModel.setValue(resultSet.getBigDecimal("value"));
-                balanceModel.setDatetime(resultSet.getTimestamp("datetime").toLocalDateTime());
+                balanceModel.setId_account(resultSet.getInt(BalanceModel.ID_ACCOUNT));
+                balanceModel.setValue(resultSet.getBigDecimal(BalanceModel.VALUE));
+                balanceModel.setDatetime(resultSet.getTimestamp(BalanceModel.DATETIME).toLocalDateTime());
                 return balanceModel;
             }
         } catch (SQLException e) {
@@ -38,18 +44,21 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
 
 
     public List<TransactionModel> findAll() {
-        String sql = "SELECT * FROM \"transaction\"";
+        String sql = String.format(
+                "SELECT * FROM \"%s\"",
+                TransactionModel.TABLE_NAME
+        );
         List<TransactionModel> allTransactions = new ArrayList<>();
         try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 allTransactions.add(new TransactionModel(
-                        resultSet.getInt("id"),
-                        resultSet.getString("label"),
-                        resultSet.getBigDecimal("amount"),
-                        resultSet.getTimestamp("transaction_date").toLocalDateTime(),
-                        TransactionType.valueOf(resultSet.getString("type")),
-                        resultSet.getInt("id_account")
+                        resultSet.getInt(TransactionModel.ID),
+                        resultSet.getString(TransactionModel.LABEL),
+                        resultSet.getBigDecimal(TransactionModel.AMOUNT),
+                        resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
+                        TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
+                        resultSet.getInt(TransactionModel.TYPE)
                 ));
             }
         } catch (SQLException e) {
@@ -62,7 +71,15 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
 
     @Override
     public List<TransactionModel> saveAll(List<TransactionModel> toSave) {
-        String sql = "INSERT INTO \"transaction\" (label , amount , transaction_date ,type ,id_account) VALUES(?,?,?,?,?)";
+        String sql = String.format(
+                "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?)",
+                TransactionModel.TABLE_NAME,
+                TransactionModel.LABEL,
+                TransactionModel.AMOUNT,
+                TransactionModel.TRANSACTION_DATE,
+                TransactionModel.TYPE,
+                TransactionModel.ID_ACCOUNT
+        );
         List<TransactionModel> SaveTransaction = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (TransactionModel transactionModel : toSave){
@@ -82,7 +99,15 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
 
         @Override
         public TransactionModel save(TransactionModel toSave)  {
-            String sql = "INSERT INTO \"transaction\" (label , amount , transaction_date ,type ,id_account) VALUES(?,?,?,?,?) ";
+            String sql = String.format(
+                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?)",
+                    TransactionModel.TABLE_NAME,
+                    TransactionModel.LABEL,
+                    TransactionModel.AMOUNT,
+                    TransactionModel.TRANSACTION_DATE,
+                    TransactionModel.TYPE,
+                    TransactionModel.ID_ACCOUNT
+            );
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 preparedStatement.setString(1,toSave.getLabel());
                 preparedStatement.setBigDecimal(2,toSave.getAmount());
@@ -99,12 +124,26 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         }
 
         public List<BalanceModel> findAllByIdAccountAndDate(int id, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
-            String sql = "SELECT * FROM \"balance\" " +
-                    "INNER JOIN \"account\" " +
-                    "ON \"balance\".id_account = \"account\".id " +
-                    "WHERE \"account\".id = ?" +
-                    "AND \"balance\".datetime BETWEEN ? AND ? " +
-                    "ORDER BY \"balance\".datetime DESC ";
+            String sql = String.format(
+                    "SELECT * FROM \"%s\" " +
+                    "INNER JOIN \"%s\" " +
+                    "ON \"%s\".%s = \"%s\".%s " +
+                    "WHERE \"%s\".%s = ?" +
+                    "AND \"%s\".%s BETWEEN ? AND ? " +
+                    "ORDER BY \"%s\".%s DESC ",
+                    BalanceModel.TABLE_NAME,
+                    AccountModel.TABLE_NAME,
+                    BalanceModel.TABLE_NAME,
+                    BalanceModel.ID_ACCOUNT,
+                    AccountModel.TABLE_NAME,
+                    AccountModel.ID,
+                    AccountModel.TABLE_NAME,
+                    AccountModel.ID,
+                    BalanceModel.TABLE_NAME,
+                    BalanceModel.DATETIME,
+                    BalanceModel.TABLE_NAME,
+                    BalanceModel.DATETIME
+            );
             PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.setTimestamp(2, Timestamp.valueOf(startDate));
@@ -114,9 +153,9 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
 
             while (resultSet.next()){
                 BalanceModel balanceModel = new BalanceModel();
-                balanceModel.setId_account(resultSet.getInt("id_account"));
-                balanceModel.setDatetime(resultSet.getTimestamp("datetime").toLocalDateTime());
-                balanceModel.setValue(resultSet.getBigDecimal("value"));
+                balanceModel.setId_account(resultSet.getInt(BalanceModel.ID_ACCOUNT));
+                balanceModel.setDatetime(resultSet.getTimestamp(BalanceModel.DATETIME).toLocalDateTime());
+                balanceModel.setValue(resultSet.getBigDecimal(BalanceModel.VALUE));
                 balances.add(balanceModel);
             }
 

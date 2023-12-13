@@ -8,6 +8,12 @@ public class TransferModel {
     int transactionCredit;
     LocalDateTime datetime;
 
+    public static final String TABLE_NAME = "transfert";
+    public static final String ID = "id";
+    public static final  String ID_DEBIT = "id_debtor";
+    public static final  String ID_CREDIT = "id_credit";
+    public static final  String TRANSFER_DATE = "transfer_date";
+
     public int getId() {
         return id;
     }

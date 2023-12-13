@@ -14,6 +14,14 @@ public class TransactionModel {
     private TransactionType type ;
     private int id_account;
 
+    public static final String TABLE_NAME = "transaction";
+    public static final String ID = "id";
+    public static final  String LABEL = "label";
+    public static final  String AMOUNT = "amount";
+    public static final  String TRANSACTION_DATE = "transaction_date";
+    public static final  String TYPE = "type";
+    public static final  String ID_ACCOUNT = "id_account";
+
     public TransactionModel(int id, String label, BigDecimal amount, LocalDateTime transaction_date, TransactionType type, int id_account) {
         this.id = id;
         this.label = label;

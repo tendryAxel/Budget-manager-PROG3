@@ -10,6 +10,13 @@ public class AccountModel {
     private    int id_currency;
     private AccountType type;
 
+    public static final String TABLE_NAME = "account";
+    public static final String ID = "id";
+    public static final  String NAME = "name";
+    public static final  String UPDATEDATE = "updatedDate";
+    public static final  String ID_CURRENCY = "id_currency";
+    public static final  String TYPE = "type";
+
     public AccountModel(int id, String name, Timestamp updateDate, int id_currency, AccountType type) {
         this.id = id;
         this.name = name;
