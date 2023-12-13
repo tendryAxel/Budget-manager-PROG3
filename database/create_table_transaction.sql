@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS "transaction" (
     amount double precision NOT NULL,
     transaction_date timestamp NOT NULL DEFAULT current_timestamp,
     type TransactionType NOT NULL,
-    id_account INT REFERENCES "account"(id)
+    id_account INT REFERENCES "account"(id_account)
 );
 
 -- Insertion 1
