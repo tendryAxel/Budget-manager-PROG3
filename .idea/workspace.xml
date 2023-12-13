@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : make all function not static">
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : constructor service, new transfer method, service for all repository">
+      <change afterPath="$PROJECT_DIR$/src/src/services/AccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/services/BalanceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/services/CurrencyService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/model/TransactionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/TransactionModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/services/TransactionServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/services/TransactionServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/services/TransferServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/services/TransferServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,10 +65,17 @@
       <recent name="E:\HEI\L2\PROG3\budget-manager-api\database" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="services" />
       <recent name="repository" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main" type="Application" factoryName="Application">
       <envs>
         <env name="PG_URL" value="jdbc:postgresql://localhost/budget_manager" />
@@ -91,6 +104,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -248,7 +266,21 @@
       <option name="project" value="LOCAL" />
       <updated>1702033626252</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fix : intellij project error">
+      <created>1702395029451</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1702395029451</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fix : intellij project error">
+      <created>1702395044425</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1702395044425</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,7 +339,8 @@
     <MESSAGE value="feat : create transfer model and CRUD" />
     <MESSAGE value="feat : create transfer between two account" />
     <MESSAGE value="fix : make all function not static" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : make all function not static" />
+    <MESSAGE value="fix : intellij project error" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : intellij project error" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

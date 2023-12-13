@@ -2,32 +2,71 @@ package services;
 
 
 import model.TransactionModel;
+import model.TransactionType;
 import model.TransferModel;
 import repository.CurrencyCrudOperations;
 import repository.TransactionCrudOperation;
 import repository.TransferCrudOperation;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 
 public class TransferServices {
+    CurrencyCrudOperations currencyCrudOperations;
+    TransactionCrudOperation transactionCrudOperation;
+    TransferCrudOperation transferCrudOperation;
+    public TransferServices() {
+        this.transferCrudOperation = new TransferCrudOperation();
+        this.transactionCrudOperation = new TransactionCrudOperation();
+        this.currencyCrudOperations = new CurrencyCrudOperations();
+    }
+
+    public List<TransferModel> findAll() throws SQLException {
+        return transferCrudOperation.findAll();
+    }
+
     public boolean makeTransfer(TransactionModel tr1, TransactionModel tr2){
         if (tr1.getId_account() == tr2.getId_account()){
             return false;
         }
         try {
-            TransferCrudOperation transferCrudOperation = new TransferCrudOperation();
-            TransactionCrudOperation transactionCrudOperation = new TransactionCrudOperation();
-            CurrencyCrudOperations currencyCrudOperations = new CurrencyCrudOperations();
 
-            int currency1 = currencyCrudOperations.getAccountCurrency(tr1.getId_account());
-            int currency2 = currencyCrudOperations.getAccountCurrency(tr2.getId_account());
+            TransactionServices transactionServices = new TransactionServices();
+            transactionServices.FunctionTransaction(tr1.getId_account(), tr1);
+            transactionServices.FunctionTransaction(tr2.getId_account(), tr2);
+
+            int currency1 = this.currencyCrudOperations.getAccountCurrency(tr1.getId_account());
+            int currency2 = this.currencyCrudOperations.getAccountCurrency(tr2.getId_account());
             TransferModel transferModel = new TransferModel();
-            transferModel.setTransactionDebtor(transactionCrudOperation.save(tr1).getId());
-            transferModel.setTransactionCredit(transactionCrudOperation.save(tr2).getId());
-            transferCrudOperation.save(transferModel);
+            transferModel.setTransactionDebtor(this.transactionCrudOperation.save(tr1).getId());
+            transferModel.setTransactionCredit(this.transactionCrudOperation.save(tr2).getId());
+            this.transferCrudOperation.save(transferModel);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return true;
+    };
+
+    public boolean makeTransfer(int idSender, int idReceive, String label, BigDecimal amount) throws SQLException {
+        TransactionServices transactionServices = new TransactionServices();
+        if (idSender == idReceive){
+            return false;
+        }
+
+        TransactionModel sendTransaction = new TransactionModel();
+        sendTransaction.setAmount(amount);
+        sendTransaction.setLabel(label);
+        sendTransaction.setType(TransactionType.CREDIT);
+
+        TransactionModel receiveTransaction = new TransactionModel();
+        receiveTransaction.setAmount(amount);
+        receiveTransaction.setLabel(label);
+        receiveTransaction.setType(TransactionType.DEBIT);
+
+        transactionServices.FunctionTransaction(idSender, sendTransaction);
+        transactionServices.FunctionTransaction(idReceive, receiveTransaction);
+
         return true;
     };
 }

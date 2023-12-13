@@ -23,6 +23,10 @@ public class TransactionModel {
         this.id_account = id_account;
     }
 
+    public TransactionModel() {
+
+    }
+
     public int getId() {
         return id;
     }
