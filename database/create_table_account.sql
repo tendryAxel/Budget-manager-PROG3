@@ -9,15 +9,15 @@ CREATE TABLE IF NOT EXISTS "account" (
 );
 
 -- Insertion 1
-INSERT INTO "account" (name, balance, updatedDate, id_currency, type)
-VALUES ('Savings Account', 45000.0, CURRENT_TIMESTAMP, 1, 'Banque');
+INSERT INTO "account" (name, updatedDate, id_currency, type)
+VALUES ('Savings Account', CURRENT_TIMESTAMP, 1, 'Banque');
 
 -- Insertion 2
-INSERT INTO "account" (name, balance, updatedDate, id_currency, type)
-VALUES ('Checking Account', 23000.0, CURRENT_TIMESTAMP, 2, 'Espece');
+INSERT INTO "account" (name, updatedDate, id_currency, type)
+VALUES ('Checking Account', CURRENT_TIMESTAMP, 2, 'Espece');
 
 -- Insertion 3
-INSERT INTO "account" (name, balance, updatedDate, id_currency, type)
-VALUES ('Investment Account', 12000.0, CURRENT_TIMESTAMP, 3, 'Mobile_Money');
+INSERT INTO "account" (name, updatedDate, id_currency, type)
+VALUES ('Investment Account', CURRENT_TIMESTAMP, 3, 'Mobile_Money');
 
 
