@@ -1,9 +1,12 @@
+
 CREATE TABLE IF NOT EXISTS "balance" (
-    id_account REFERENCES "account"(id),
-    datetime timestamp default current_timestamp,
-    value double precision,
+    id_account INT REFERENCES "account"(id_account),
+    datetime TIMESTAMP DEFAULT current_timestamp,
+    value DOUBLE PRECISION,
     PRIMARY KEY(id_account, datetime)
 );
+
+
 
 INSERT INTO "balance" (id_account, datetime, value) VALUES
   (1, '2023-01-01 12:00:00', 1000.50),
