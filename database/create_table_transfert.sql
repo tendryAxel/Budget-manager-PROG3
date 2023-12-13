@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS "transfert" (
     id INT NOT NUll,
-    id_debtor INT REFERENCES account(id),
-    id_credit INT REFERENCES account(id),
+    id_debtor INT REFERENCES "account"(id_account),
+    id_credit INT REFERENCES "account"(id_account),
     transfer_date TIMESTAMP NOT NULL
 );
 
