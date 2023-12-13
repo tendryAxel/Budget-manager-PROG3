@@ -37,7 +37,7 @@ public class TransactionServices {
         return transactionCrudOperation.saveAll(toSave);
     }
 
-    public void FunctionTransaction(int id_account , TransactionModel transaction) throws SQLException {
+    public BalanceModel FunctionTransaction(int id_account , TransactionModel transaction) throws SQLException {
         BalanceModel balanceModel = new BalanceModel();
         double amount = 0;
         switch (transaction.getType()){
@@ -64,5 +64,6 @@ public class TransactionServices {
 
                 break;
         }
+        return balanceModel;
     }
 }
