@@ -58,7 +58,9 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                         resultSet.getBigDecimal(TransactionModel.AMOUNT),
                         resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
                         TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
-                        resultSet.getInt(TransactionModel.TYPE)
+                        resultSet.getInt(TransactionModel.TYPE),
+                        resultSet.getInt(TransactionModel.ID_CURRENCY),
+                        resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
                 ));
             }
         } catch (SQLException e) {
@@ -208,4 +210,6 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet.getBigDecimal(table_column);
     }
+
+    public TransactionType getTransactionType(int id_transaction){}
 }
