@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : constructor service, new transfer method, service for all repository" />
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : alter table transaction">
+      <change afterPath="$PROJECT_DIR$/src/src/repository/CurrencyValueCrudOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/model/CurrencyValueModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/CurrencyValueModel.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,10 +46,11 @@
     "Application.main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/postgresql-42.7.1.jar",
+    "last_opened_file_path": "D:/Prog3/Budget-manager-PROG3",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -368,7 +372,39 @@
       <option name="project" value="LOCAL" />
       <updated>1702541228346</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="fix : update table category">
+      <option name="closed" value="true" />
+      <created>1702552841863</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1702552841863</updated>
+    </task>
+    <task id="LOCAL-00035" summary="feat : Add a new model CurrencyValueModel">
+      <option name="closed" value="true" />
+      <created>1702552882020</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1702552882020</updated>
+    </task>
+    <task id="LOCAL-00036" summary="fix : alter table currency value">
+      <option name="closed" value="true" />
+      <created>1702552962814</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1702552962814</updated>
+    </task>
+    <task id="LOCAL-00037" summary="fix : alter table transaction">
+      <option name="closed" value="true" />
+      <created>1702553104644</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1702553104644</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -406,10 +442,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix : some bug" />
-    <MESSAGE value="fix : api bug" />
-    <MESSAGE value="fix : don't give ID when save new row in database" />
-    <MESSAGE value="fix : remove unused importation" />
     <MESSAGE value="fix : put table name between &quot;&quot;" />
     <MESSAGE value="feat : create function to create psql insert command" />
     <MESSAGE value="feat : use createInsert function in currency repository" />
@@ -431,7 +463,11 @@
     <MESSAGE value="fix : Change Culumn name" />
     <MESSAGE value="fix : Change id to id_transaction" />
     <MESSAGE value="fix : intellij" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : intellij" />
+    <MESSAGE value="fix : update table category" />
+    <MESSAGE value="feat : Add a new model CurrencyValueModel" />
+    <MESSAGE value="fix : alter table currency value" />
+    <MESSAGE value="fix : alter table transaction" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : alter table transaction" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
