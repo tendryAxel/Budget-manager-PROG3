@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : change return of transaction function">
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : culumn name">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/create_table_balance.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/create_table_balance.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/model/AccountModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/AccountModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/BalanceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/BalanceModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/model/CurrencyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/CurrencyModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/model/TransactionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/TransactionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/TransferModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/TransferModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/AccountCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/AccountCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/BalanceCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/BalanceCrudOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/TransactionCrudOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/TransferCrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/TransferCrudOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wallet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wallet.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +37,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2YyDmg8e6FiN01Cy2AmUlmcNumt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -50,13 +48,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/TENDRY/Downloads/postgresql-42.6.0.jar",
-    "project.structure.last.edited": "Project",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/postgresql-42.7.1.jar",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel"
@@ -83,9 +83,9 @@
     </configuration>
     <configuration name="main" type="Application" factoryName="Application">
       <envs>
-        <env name="PG_URL" value="jdbc:postgresql://localhost/budget_manager" />
+        <env name="PG_PASSWORD" value="root" />
+        <env name="PG_URL" value="jdbc:postgresql://localhost/maharavo" />
         <env name="PG_USER" value="postgres" />
-        <env name="PG_PASSWORD" value="meme" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="wallet" />
@@ -109,6 +109,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.main" />
+      <item itemvalue="Application.Main" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -317,7 +321,23 @@
       <option name="project" value="LOCAL" />
       <updated>1702494396843</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="fix : change file name">
+      <option name="closed" value="true" />
+      <created>1702540866599</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1702540866599</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix : culumn name">
+      <option name="closed" value="true" />
+      <created>1702540913487</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1702540913487</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -355,7 +375,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat : code to initialise the table in database" />
     <MESSAGE value="feat : main script&#10;feat : connection to database" />
     <MESSAGE value="feat : create generic interface to CRU operations" />
     <MESSAGE value="feat : create currency object model" />
@@ -379,7 +398,9 @@
     <MESSAGE value="fix : intellij project error" />
     <MESSAGE value="fix : constructor service, new transfer method, service for all repository" />
     <MESSAGE value="fix : change return of transaction function" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : change return of transaction function" />
+    <MESSAGE value="fix : change file name" />
+    <MESSAGE value="fix : culumn name" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : culumn name" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
