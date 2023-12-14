@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS "transfert" (
 
 -- Insérer des données dans la table "transfert"
 INSERT INTO transfert (id, id_debtor, id_credit, transfer_date) VALUES
-(1, 1001, 2001, '2023-01-01 12:00:00'),
-(2, 1002, 2002, '2023-02-15 08:30:00'),
-(3, 1003, 2003, '2023-03-20 16:45:00');
+(1, 1, 2, '2023-01-01 12:00:00'),
+(2, 1, 2, '2023-02-15 08:30:00'),
+(3, 3, 1, '2023-03-20 16:45:00');
