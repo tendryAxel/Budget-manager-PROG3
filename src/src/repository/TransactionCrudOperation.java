@@ -161,4 +161,51 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
 
             return balances;
         }
+
+    public BigDecimal getActualBalance(int id_account) throws SQLException {
+         String table_column = "total_amount";
+        String sql = String.format(
+                "SELECT sum(\"%s\".%s * \"%s\".%s) as %s FROM \"%s\" " +
+                "INNER JOIN \"%s\" " +
+                "ON \"%s\".\"%s\" = \"%s\".\"%s\" " +
+                "INNER JOIN \"%s\" " +
+                "ON \"%s\".\"%s\" = \"%s\".\"%s\" " +
+                "AND date(\"%s\".\"%s\") BETWEEN date(\"%s\".\"%s\") AND date(\"%s\".\"%s\")+1 " +
+                "WHERE \"%s\".%s = ?",
+                TransactionModel.TABLE_NAME,
+                TransactionModel.AMOUNT,
+                /*CurrencyValueModel.TABLE_NAME,*/
+                /*CurrencyValueModel.AMOUNT,*/
+
+                table_column,
+
+                TransactionModel.TABLE_NAME,
+                CurrencyModel.TABLE_NAME,
+
+                TransactionModel.TABLE_NAME,
+                TransactionModel.ID_CURRENCY,
+                CurrencyModel.TABLE_NAME,
+                CurrencyModel.ID,
+
+                CurrencyModel.TABLE_NAME,
+
+                CurrencyModel.TABLE_NAME,
+                CurrencyModel.ID,
+                /*CurrencyValueModel.TABLE_NAME,*/
+                /*CurrencyValueModel.ID_CURRENCY_SOURCE,*/
+
+                TransactionModel.TABLE_NAME,
+                TransactionModel.TRANSACTION_DATE,
+                /*CurrencyValueModel.TABLE_NAME,*/
+                /*CurrencyValueModel.DATE_EFFET,*/
+                /*CurrencyValueModel.TABLE_NAME,*/
+                /*CurrencyValueModel.DATE_EFFET,*/
+                TransactionModel.TABLE_NAME,
+                TransactionModel.ID_ACCOUNT
+        );
+        PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, id_account);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet.getBigDecimal(table_column);
+    }
 }

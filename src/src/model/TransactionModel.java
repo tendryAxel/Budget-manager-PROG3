@@ -21,6 +21,7 @@ public class TransactionModel {
     public static final  String TRANSACTION_DATE = "transaction_date";
     public static final  String TYPE = "type";
     public static final  String ID_ACCOUNT = "id_account";
+    public static final  String ID_CURRENCY = "id_currency";
 
     public TransactionModel(int id_transaction, String label, BigDecimal amount, LocalDateTime transaction_date, TransactionType type, int id_account) {
         this.id_transaction = id_transaction;
