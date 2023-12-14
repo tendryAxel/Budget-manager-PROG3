@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class TransactionModel {
-    private int id;
+    private int id_transaction;
     private String label ;
 
     private BigDecimal amount;
@@ -15,15 +15,15 @@ public class TransactionModel {
     private int id_account;
 
     public static final String TABLE_NAME = "transaction";
-    public static final String ID = "id";
+    public static final String ID = "id_transaction";
     public static final  String LABEL = "label";
     public static final  String AMOUNT = "amount";
     public static final  String TRANSACTION_DATE = "transaction_date";
     public static final  String TYPE = "type";
     public static final  String ID_ACCOUNT = "id_account";
 
-    public TransactionModel(int id, String label, BigDecimal amount, LocalDateTime transaction_date, TransactionType type, int id_account) {
-        this.id = id;
+    public TransactionModel(int id_transaction, String label, BigDecimal amount, LocalDateTime transaction_date, TransactionType type, int id_account) {
+        this.id_transaction = id_transaction;
         this.label = label;
         this.amount = amount;
         this.transaction_date = transaction_date;
@@ -36,11 +36,11 @@ public class TransactionModel {
     }
 
     public int getId() {
-        return id;
+        return id_transaction;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_transaction = id;
     }
 
     public String getLabel() {
@@ -86,7 +86,7 @@ public class TransactionModel {
     @Override
     public String toString() {
         return "TransactionModel{" +
-                "id=" + id +
+                "id=" + id_transaction +
                 ", label='" + label + '\'' +
                 ", amount=" + amount +
                 ", transaction_date=" + transaction_date +
