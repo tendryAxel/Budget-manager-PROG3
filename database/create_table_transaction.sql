@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS "transaction" (
     amount double precision NOT NULL,
     transaction_date timestamp NOT NULL DEFAULT current_timestamp,
     type TransactionType NOT NULL,
-    id_account INT REFERENCES "account"(id_account)
+    id_account INT REFERENCES "account"(id_account),
+    id_subcategory INT REFERENCES "subcategory"(id_subcategory)
 );
 
 -- Insertion 1
