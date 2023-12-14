@@ -241,4 +241,33 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         }
         return result;
     }
+
+    public List<TransactionModel> findAllByIdAccount(int id_account) {
+        String sql = String.format(
+                "SELECT * FROM \"%s\" WHERE %s = ?",
+                TransactionModel.TABLE_NAME,
+                TransactionModel.ID_ACCOUNT
+        );
+        List<TransactionModel> allTransactions = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, id_account);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                allTransactions.add(new TransactionModel(
+                        resultSet.getInt(TransactionModel.ID),
+                        resultSet.getString(TransactionModel.LABEL),
+                        resultSet.getBigDecimal(TransactionModel.AMOUNT),
+                        resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
+                        TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
+                        resultSet.getInt(TransactionModel.TYPE),
+                        resultSet.getInt(TransactionModel.ID_CURRENCY),
+                        resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allTransactions;
+    }
 }
