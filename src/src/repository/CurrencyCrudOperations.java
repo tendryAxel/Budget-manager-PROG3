@@ -67,7 +67,7 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel>{
             preparedStatement.executeUpdate();
         }
         catch (SQLException e){
-            throw new RuntimeException();
+          e.printStackTrace();
         }
         return toSave;
     }
