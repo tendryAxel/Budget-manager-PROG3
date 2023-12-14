@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : culumn name">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b47bb04a-f7cb-47ba-8c2f-d20498a05b18" name="Changes" comment="fix : intellij">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/AccountModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/AccountModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/CurrencyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/CurrencyModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/model/TransactionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/model/TransactionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/repository/CurrencyCrudOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wallet.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -337,7 +331,47 @@
       <option name="project" value="LOCAL" />
       <updated>1702540913487</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="fix : change culumn name">
+      <option name="closed" value="true" />
+      <created>1702541041316</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1702541041316</updated>
+    </task>
+    <task id="LOCAL-00030" summary="fix : Update CurrencyCrudOperations">
+      <option name="closed" value="true" />
+      <created>1702541093377</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1702541093378</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix : Change Culumn name">
+      <option name="closed" value="true" />
+      <created>1702541131574</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1702541131574</updated>
+    </task>
+    <task id="LOCAL-00032" summary="fix : Change id to id_transaction">
+      <option name="closed" value="true" />
+      <created>1702541182125</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1702541182125</updated>
+    </task>
+    <task id="LOCAL-00033" summary="fix : intellij">
+      <option name="closed" value="true" />
+      <created>1702541228346</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1702541228346</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -375,11 +409,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat : main script&#10;feat : connection to database" />
-    <MESSAGE value="feat : create generic interface to CRU operations" />
-    <MESSAGE value="feat : create currency object model" />
-    <MESSAGE value="feat : create account object model" />
-    <MESSAGE value="feat : create transaction object model" />
     <MESSAGE value="fix : some bug" />
     <MESSAGE value="fix : api bug" />
     <MESSAGE value="fix : don't give ID when save new row in database" />
@@ -400,7 +429,12 @@
     <MESSAGE value="fix : change return of transaction function" />
     <MESSAGE value="fix : change file name" />
     <MESSAGE value="fix : culumn name" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : culumn name" />
+    <MESSAGE value="fix : change culumn name" />
+    <MESSAGE value="fix : Update CurrencyCrudOperations" />
+    <MESSAGE value="fix : Change Culumn name" />
+    <MESSAGE value="fix : Change id to id_transaction" />
+    <MESSAGE value="fix : intellij" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : intellij" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
