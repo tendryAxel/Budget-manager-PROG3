@@ -2,7 +2,7 @@ CREATE type TransactionType AS ENUM ('DEBIT', 'CREDIT');
 
 -- Creation de la table
 CREATE TABLE IF NOT EXISTS "transaction" (
-    id SERIAL PRIMARY KEY,
+    id_transaction SERIAL PRIMARY KEY,
     label VARCHAR(100) NOT NULL,
     amount double precision NOT NULL,
     transaction_date timestamp NOT NULL DEFAULT current_timestamp,
