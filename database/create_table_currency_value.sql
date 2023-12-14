@@ -7,13 +7,13 @@ CREATE TABLE IF NOT EXISTS "currency-value" (
 );
 
 -- Insertion 1
-INSERT INTO "currency-value" (id_devise_source, id_devise_destination, amount, date_effet)
+INSERT INTO "currency-value" (id_currency_source, id_currency_destination, amount, date_effet)
 VALUES (1, 2, 1000.50, '2023-12-13');
 
 -- Insertion 2
-INSERT INTO "currency-value" (id_devise_source, id_devise_destination, amount, date_effet)
+INSERT INTO "currency-value" (id_currency_source, id_currency_destination, amount, date_effet)
 VALUES (3, 1, 750.25, '2023-12-14');
 
 -- Insertion 3
-INSERT INTO "currency-value" (id_devise_source, id_devise_destination, amount, date_effet)
+INSERT INTO "currency-value" (id_currency_source, id_currency_destination, amount, date_effet)
 VALUES (2, 3, 1200.75, '2023-12-15');

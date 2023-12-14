@@ -1,13 +1,6 @@
 CREATE TABLE IF NOT EXISTS "category"(
     id_category SERIAL PRIMARY KEY,
-    name VARCHAR UNIQUE,
-);
-
-CREATE TABLE IF NOT EXISTS "subcategory"(
-    id_subcategory SERIAL PRIMARY KEY,
-    name VARCHAR UNIQUE,
-    type TransactionType,
-    id_category REFERENCES category(id_category)
+    name VARCHAR UNIQUE
 );
 
 -- Insertions pour la table "category"
@@ -22,6 +15,16 @@ INSERT INTO "category" (name) VALUES
   ('fiscal'),
   ('investment'),
   ('income');
+
+
+
+CREATE TABLE IF NOT EXISTS subcategory (
+    id_subcategory SERIAL PRIMARY KEY,
+    name VARCHAR UNIQUE,
+    type TransactionType,
+    id_category INT REFERENCES category(id_category)
+);
+
 
 -- Insertions pour la table "subcategory"
 INSERT INTO "subcategory" (name, type, id_category) VALUES
