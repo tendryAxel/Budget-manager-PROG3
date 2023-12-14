@@ -4,11 +4,22 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class CurrencyValueModel {
+
+
+    public static final String TABLE_NAME = "currency_value";
+    public static final  String ID = "id";
+    public static final String ID_CURRENCY_SOURCE = "id_currency_source";
+    public static final String ID_CURRENCY_DESTINATION = "id_currency_destination";
+    public static final String AMOUNT = "amount";
+    public static String DATE_EFFET = "date_effet";
+
+
     private int id;
     private int id_currency_source;
     private  int id_currency_destination;
     private BigDecimal amount;
     private Date date_effet;
+
 
 
     public CurrencyValueModel(int id, int id_currency_source, int id_currency_destination, BigDecimal amount, Date date_effet) {
@@ -18,6 +29,7 @@ public class CurrencyValueModel {
         this.amount = amount;
         this.date_effet = date_effet;
     }
+
 
     public int getId() {
         return id;
@@ -51,8 +63,8 @@ public class CurrencyValueModel {
         this.amount = amount;
     }
 
-    public Date getDate_effet() {
-        return date_effet;
+    public java.sql.Date getDate_effet() {
+        return (java.sql.Date) date_effet;
     }
 
     public void setDate_effet(Date date_effet) {
