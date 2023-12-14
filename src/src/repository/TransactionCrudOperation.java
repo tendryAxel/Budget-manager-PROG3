@@ -178,8 +178,8 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 "WHERE \"%s\".%s = ?",
                 TransactionModel.TABLE_NAME,
                 TransactionModel.AMOUNT,
-                /*CurrencyValueModel.TABLE_NAME,*/
-                /*CurrencyValueModel.AMOUNT,*/
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.AMOUNT,
 
                 table_column,
 
@@ -195,15 +195,15 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
 
                 CurrencyModel.TABLE_NAME,
                 CurrencyModel.ID,
-                /*CurrencyValueModel.TABLE_NAME,*/
-                /*CurrencyValueModel.ID_CURRENCY_SOURCE,*/
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.ID_CURRENCY_SOURCE,
 
                 TransactionModel.TABLE_NAME,
                 TransactionModel.TRANSACTION_DATE,
-                /*CurrencyValueModel.TABLE_NAME,*/
-                /*CurrencyValueModel.DATE_EFFET,*/
-                /*CurrencyValueModel.TABLE_NAME,*/
-                /*CurrencyValueModel.DATE_EFFET,*/
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.DATE_EFFET,
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.DATE_EFFET,
                 TransactionModel.TABLE_NAME,
                 TransactionModel.ID_ACCOUNT
         );
