@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS "currency-value" (
     id SERIAL PRIMARY KEY NOT NULL,
-    id_devise_source INT NOT NULL,
-    id_devise_destination INT NOT NULL,
+    id_currency_source INT REFERENCES "currency"(id_currency),
+    id_currency_destination INT REFERENCES "currency"(id_currency),
     amount DECIMAL(18, 2) NOT NULL,
     date_effet DATE NOT NULL
 );
