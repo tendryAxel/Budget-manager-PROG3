@@ -102,7 +102,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         @Override
         public TransactionModel save(TransactionModel toSave)  {
             String sql = String.format(
-                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?)",
+                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?) RETURNING id",
                     TransactionModel.TABLE_NAME,
                     TransactionModel.LABEL,
                     TransactionModel.AMOUNT,
@@ -117,7 +117,9 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 preparedStatement.setObject(4, toSave.getType() ,Types.OTHER);
                 preparedStatement.setInt(5,toSave.getId_account());
 
-                preparedStatement.executeUpdate();
+                ResultSet resultSet = preparedStatement.executeQuery();
+                resultSet.next();
+                toSave.setId(resultSet.getInt(TransactionModel.ID));
             }
             catch (SQLException e){
                 e.printStackTrace();
@@ -211,5 +213,32 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         return resultSet.getBigDecimal(table_column);
     }
 
-    public TransactionType getTransactionType(int id_transaction){}
+    public TransactionType getTransactionType(int id_transaction) throws SQLException {
+         String sql = String.format(
+                 "SELECT %s as def, %s as sec FROM \"%s\" " +
+                 "INNER JOIN \"%s\" ON %s = %s " +
+                 "WHERE %s = ?",
+                 "subcategory.type",
+                 TransactionModel.TABLE_NAME+"."+TransactionModel.TYPE,
+                 TransactionModel.TABLE_NAME,
+                 "subcategory",
+                 TransactionModel.TABLE_NAME+"."+TransactionModel.ID_SUBCATEGORY,
+                 "subcategory.id_subcategory",
+                 TransactionModel.TABLE_NAME+"."+TransactionModel.ID
+         );
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        preparedStatement.setInt(1, id_transaction);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        TransactionType result = TransactionType.valueOf(resultSet.getString("def"));
+        if (result.equals("")){
+            result = TransactionType.valueOf(resultSet.getString("sec"));
+        }
+        return result;
+    }
 }
