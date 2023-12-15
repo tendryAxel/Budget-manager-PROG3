@@ -35,7 +35,7 @@ public class AccountService {
         return accountCrudOperations.saveAll(toSave);
     }
 
-    public Optional<BigDecimal> sumOfTransaction(List<TransactionModel> toAdd, LocalDateTime startDate, LocalDateTime endDate){
+    public BigDecimal sumOfTransaction(List<TransactionModel> toAdd, LocalDateTime startDate, LocalDateTime endDate){
         List<BigDecimal> allTransaction = new ArrayList<>();
 
         for (TransactionModel t : toAdd){
@@ -54,10 +54,10 @@ public class AccountService {
             }
         }
 
-        return allTransaction.stream().reduce(BigDecimal::add);
+        return allTransaction.stream().reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
     }
 
-    public Optional<BigDecimal> getActualBalanceBetween(int id_account, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
+    public BigDecimal getActualBalanceBetween(int id_account, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
         return sumOfTransaction(transactionCrudOperation.findAllByIdAccount(id_account), startDate, endDate);
     }
 
@@ -83,16 +83,16 @@ public class AccountService {
         return allTransaction.stream().reduce(BigDecimal::add);
     }
 
-    public Map<SubCategoryModel, Optional<BigDecimal>> getTransactionByCategory(int id_account, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
+    public Map<SubCategoryModel, BigDecimal> getTransactionByCategory(int id_account, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
         List<SubCategoryModel> subCategoryModelList = subCategoryCrudOperations.findAll();
-        Map<SubCategoryModel, Optional<BigDecimal>> allTransactionByCategory = new HashMap<>();
+        Map<SubCategoryModel, BigDecimal> allTransactionByCategory = new HashMap<>();
         for (SubCategoryModel subCategory : subCategoryModelList){
             List<TransactionModel> transactionList = transactionCrudOperation.findAllByIdAccountAndSubCategory(
                     id_account,
                     subCategory.getId_subcategory()
             );
 
-            Optional<BigDecimal> totalValue = sumOfTransaction(transactionList, startDate, endDate);
+            BigDecimal totalValue = sumOfTransaction(transactionList, startDate, endDate);
 
             allTransactionByCategory.put(subCategory, totalValue);
         }
