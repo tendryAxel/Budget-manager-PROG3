@@ -1,4 +1,5 @@
 import Test.AccountCrudOperationsTest;
+import Test.BalanceCrudOperationsTest;
 import Test.CurrencyCrudOperationsTest;
 import Test.TD2Test;
 import Test.TransactionCrudOperationsTest;
@@ -11,5 +12,8 @@ public class Main {
         CurrencyCrudOperationsTest.currencyTest();
         TransactionCrudOperationsTest.transactionTest();
         TD2Test.test();
+        CurrencyCrudOperationsTest.currencyTest();
+        BalanceCrudOperationsTest.balanceTest();
+        TransactionCrudOperationsTest.transactionTest();
     }
 }

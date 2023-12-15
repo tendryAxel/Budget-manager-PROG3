@@ -6,10 +6,7 @@ import model.AccountType;
 import model.BalanceModel;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,14 +38,15 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
                 "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
                 BalanceModel.TABLE_NAME,
                 BalanceModel.ID_ACCOUNT,
+                BalanceModel.DATETIME,
                 BalanceModel.VALUE
         );
         List<BalanceModel> SaveBalance = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (BalanceModel balanceModel : toSave){
                 preparedStatement.setInt(1, balanceModel.getId_account());
-                preparedStatement.setDouble(2, Double.parseDouble(String.valueOf(balanceModel.getValue())));
-
+                preparedStatement.setTimestamp(2, Timestamp.valueOf(balanceModel.getDatetime()));
+                preparedStatement.setBigDecimal(3,balanceModel.getValue());
                 int rowAffected = preparedStatement.executeUpdate();
                 if (rowAffected > 0){
                     SaveBalance.add(balanceModel);
@@ -67,12 +65,13 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
                 "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
                 BalanceModel.TABLE_NAME,
                 BalanceModel.ID_ACCOUNT,
+                BalanceModel.DATETIME,
                 BalanceModel.VALUE
         );
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             preparedStatement.setInt(1, toSave.getId_account());
-            preparedStatement.setDouble(2, Double.parseDouble(String.valueOf(toSave.getValue())));
-
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(toSave.getDatetime()));
+            preparedStatement.setBigDecimal(3,toSave.getValue());
             preparedStatement.executeUpdate();
 
         }
@@ -87,7 +86,8 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
                 "SELECT * FROM \"%s\" WHERE %s = ? ORDER BY %s DESC LIMIT 1 ",
                 BalanceModel.TABLE_NAME,
                 BalanceModel.ID_ACCOUNT,
-                BalanceModel.DATETIME
+                BalanceModel.DATETIME,
+                BalanceModel.VALUE
         );
         PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, id_account);
