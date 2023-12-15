@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "currency" (
-    id SERIAL PRIMARY KEY,
+    id_currency SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
     code VARCHAR(100) NOT NULL
 );

@@ -8,6 +8,11 @@ public class BalanceModel {
     private LocalDateTime datetime;
     private BigDecimal value;
 
+    public static final String TABLE_NAME = "balance";
+    public static final  String ID_ACCOUNT = "id_account";
+    public static final  String DATETIME = "datetime";
+    public static final  String VALUE = "value";
+
     @Override
     public String toString() {
         return "BalanceModel{" +

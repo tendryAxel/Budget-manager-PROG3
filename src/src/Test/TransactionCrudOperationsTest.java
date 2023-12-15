@@ -32,11 +32,11 @@ public class TransactionCrudOperationsTest {
 
 
         LocalDateTime transaction_date = LocalDateTime.now();
-        TransactionModel transactionModel = new TransactionModel(1, "Cadeau Noel", new BigDecimal("23000.0"), transaction_date , TransactionType.DEBIT , 1);
+        TransactionModel transactionModel = new TransactionModel(1, "Cadeau Noel", new BigDecimal("23000.0"), transaction_date , TransactionType.DEBIT , 1, 1, 1);
         transactionCrudOperation.save(transactionModel);
 
         List<TransactionModel> transactionsToSave = new ArrayList<>();
-        transactionsToSave.add(new TransactionModel(2, "Salaire", new BigDecimal("23000.0"), transaction_date ,TransactionType.CREDIT , 2));
+        transactionsToSave.add(new TransactionModel(2, "Salaire", new BigDecimal("23000.0"), transaction_date ,TransactionType.CREDIT , 2, 1, 1));
 
         List<TransactionModel> savedTransactions = transactionCrudOperation.saveAll(transactionsToSave);
         System.out.println("Transactions enregistrées :");

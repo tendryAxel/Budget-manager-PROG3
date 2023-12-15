@@ -37,25 +37,19 @@ public class TransactionServices {
         return transactionCrudOperation.saveAll(toSave);
     }
 
-    public void FunctionTransaction(int id_account , TransactionModel transaction) throws SQLException {
+    public BalanceModel FunctionTransaction(int id_account , TransactionModel transaction) throws SQLException {
         BalanceModel balanceModel = new BalanceModel();
-        double amount = 0;
-        switch (transaction.getType()){
+        double amount = Double.parseDouble(String.valueOf(this.balanceCrudOperations.findLastBalanceOf(id_account).getValue()));
+        TransactionModel transactionResult = this.transactionCrudOperation.save(transaction);
+        balanceModel.setId_account(id_account);
+        switch (transactionCrudOperation.getTransactionType(transactionResult.getId())){
             case CREDIT :
-                this.transactionCrudOperation.save(transaction);
-                balanceModel.setId_account(id_account);
-
-                amount = Double.parseDouble(String.valueOf(this.balanceCrudOperations.findLastBalanceOf(id_account).getValue()));
                 amount += Double.parseDouble(String.valueOf(transaction.getAmount()));
 
                 balanceModel.setValue(BigDecimal.valueOf(amount));
 
                 this.balanceCrudOperations.save(balanceModel);
             case DEBIT :
-                this.transactionCrudOperation.save(transaction);
-                balanceModel.setId_account(id_account);
-
-                amount = Double.parseDouble(String.valueOf(this.balanceCrudOperations.findLastBalanceOf(id_account).getValue()));
                 amount -= Double.parseDouble(String.valueOf(transaction.getAmount()));
 
                 balanceModel.setValue(BigDecimal.valueOf(amount));
@@ -64,5 +58,6 @@ public class TransactionServices {
 
                 break;
         }
+        return balanceModel;
     }
 }

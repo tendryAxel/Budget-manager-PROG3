@@ -10,16 +10,19 @@ import java.util.List;
 public class TransferCrudOperation implements CrudOperations<TransferModel>{
     @Override
     public List<TransferModel> findAll() throws SQLException {
-        String sql = "SELECT * FROM \"transfert\"";
+        String sql = String.format(
+                "SELECT * FROM \"%s\"",
+                TransferModel.TABLE_NAME
+        );
         ResultSet resultSet = connectionDB.getConnection().prepareStatement(sql).executeQuery();
         List<TransferModel> AllTransaction = new ArrayList<>();
 
         while (resultSet.next()){
             AllTransaction.add(new TransferModel(
-                    resultSet.getInt("id"),
-                    resultSet.getInt("id_debtor"),
-                    resultSet.getInt("id_credit"),
-                    resultSet.getTimestamp("transfer_date").toLocalDateTime()
+                    resultSet.getInt(TransferModel.ID),
+                    resultSet.getInt(TransferModel.ID_DEBIT),
+                    resultSet.getInt(TransferModel.ID_CREDIT),
+                    resultSet.getTimestamp(TransferModel.TRANSFER_DATE).toLocalDateTime()
             ));
         }
 
@@ -28,7 +31,12 @@ public class TransferCrudOperation implements CrudOperations<TransferModel>{
 
     @Override
     public List<TransferModel> saveAll(List<TransferModel> toSave) {
-        String sql = "INSERT INTO \"transfert\" (id_debtor,id_credit) VALUES(?,?)";
+        String sql = String.format(
+                "INSERT INTO \"%s\" (%s,%s) VALUES(?,?)",
+                TransferModel.TABLE_NAME,
+                TransferModel.ID_DEBIT,
+                TransferModel.ID_CREDIT
+        );
         List<TransferModel> SaveTransaction = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (TransferModel transferModel : toSave){
@@ -44,7 +52,12 @@ public class TransferCrudOperation implements CrudOperations<TransferModel>{
 
     @Override
     public TransferModel save(TransferModel toSave)  {
-        String sql = "INSERT INTO \"transfert\" (id_debtor,id_credit) VALUES(?,?)";
+        String sql = String.format(
+                "INSERT INTO \"%s\" (%s,%s) VALUES(?,?)",
+                TransferModel.TABLE_NAME,
+                TransferModel.ID_DEBIT,
+                TransferModel.ID_CREDIT
+        );
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             preparedStatement.setInt(1,toSave.getTransactionDebtor());
             preparedStatement.setInt(2,toSave.getTransactionCredit());
