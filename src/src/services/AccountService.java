@@ -61,28 +61,6 @@ public class AccountService {
         return sumOfTransaction(transactionCrudOperation.findAllByIdAccount(id_account), startDate, endDate);
     }
 
-    public Optional<BigDecimal> getTransactionByCategory(int id_account, LocalDateTime startDate, LocalDateTime endDate, int id_subcategory) throws SQLException {
-        List<BigDecimal> allTransaction = new ArrayList<>();
-
-        for (TransactionModel t : transactionCrudOperation.findAllByIdAccountAndSubCategory(id_account, id_subcategory)){
-            LocalDateTime dateTime = t.getTransaction_date();
-            if (dateTime.isAfter(startDate) || dateTime.isBefore(endDate)){
-                switch (t.getType()){
-                    case CREDIT -> {
-                        allTransaction.add(t.getAmount());
-                        break;
-                    }
-                    case DEBIT -> {
-                        allTransaction.add(t.getAmount().multiply(BigDecimal.valueOf(-1)));
-                        break;
-                    }
-                }
-            }
-        }
-
-        return allTransaction.stream().reduce(BigDecimal::add);
-    }
-
     public Map<SubCategoryModel, BigDecimal> getTransactionByCategory(int id_account, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
         List<SubCategoryModel> subCategoryModelList = subCategoryCrudOperations.findAll();
         Map<SubCategoryModel, BigDecimal> allTransactionByCategory = new HashMap<>();
