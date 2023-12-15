@@ -11,8 +11,8 @@
 BEGIN
   RETURN QUERY
    SELECT
-        COALESCE(SUM(CASE WHEN c.name = 'Restaurant' THEN t.amount ELSE 0 END), 0)  -
-       COALESCE(SUM(CASE WHEN c.name = 'Salaire' THEN t.amount ELSE 0 END), 0)
+        COALESCE(SUM(CASE WHEN c.name = 'Restaurant' THEN t.amount ELSE 0 END), 0)  As restaurant ,
+       COALESCE(SUM(CASE WHEN c.name = 'Salaire' THEN t.amount ELSE 0 END), 0) As salary
     FROM
         "account" a
    LEFT JOIN
