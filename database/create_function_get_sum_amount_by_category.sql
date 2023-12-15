@@ -1,3 +1,5 @@
+ DROP FUNCTION IF EXISTS get_sum_amount_by_category;
+
  CREATE OR REPLACE FUNCTION get_sum_amount_by_category(
    account_id INT,
    start_date TIMESTAMP,
@@ -26,3 +28,6 @@ BEGIN
         t.transaction_date BETWEEN start_date AND end_date;
    END;
  $$ LANGUAGE plpgsql;
+
+ --Select--
+ SELECT * FROM get_sum_amount (1 , '2023-12-02 08:30:00' , '2023-12-03 13:30:00');
