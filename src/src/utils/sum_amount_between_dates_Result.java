@@ -1,11 +1,12 @@
 package utils;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class sum_amount_between_dates_Result {
     private int account_id ;
-    private Timestamp start_date;
-    private Timestamp end_date;
+    private LocalDateTime start_date;
+    private LocalDateTime end_date;
 
     public int getAccount_id() {
         return account_id;
@@ -15,19 +16,19 @@ public class sum_amount_between_dates_Result {
         this.account_id = account_id;
     }
 
-    public Timestamp getStart_date() {
+    public LocalDateTime getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Timestamp start_date) {
+    public void setStart_date(LocalDateTime start_date) {
         this.start_date = start_date;
     }
 
-    public Timestamp getEnd_date() {
+    public LocalDateTime getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Timestamp end_date) {
+    public void setEnd_date(LocalDateTime end_date) {
         this.end_date = end_date;
     }
 
