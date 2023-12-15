@@ -41,7 +41,6 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
                 AccountModel.ID_CURRENCY,
                 AccountModel.TYPE
         );
-        System.out.println(sql);
         List<AccountModel> SaveAccount = new ArrayList<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (AccountModel accountModel : toSave){

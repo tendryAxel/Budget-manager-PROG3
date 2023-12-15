@@ -35,7 +35,7 @@ public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
     @Override
     public List<BalanceModel> saveAll(List<BalanceModel> toSave) throws SQLException {
         String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
+                "INSERT INTO \"%s\" (%s,%s,%s) VALUES (?,?,?)",
                 BalanceModel.TABLE_NAME,
                 BalanceModel.ID_ACCOUNT,
                 BalanceModel.DATETIME,

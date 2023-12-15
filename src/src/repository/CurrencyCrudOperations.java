@@ -61,7 +61,6 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel>{
                 CurrencyModel.NAME,
                 CurrencyModel.CODE
         );
-        System.out.println(sql);
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             preparedStatement.setString(1,toSave.getName());
             preparedStatement.setString(2 ,toSave.getCode());
