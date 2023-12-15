@@ -58,7 +58,9 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                         resultSet.getBigDecimal(TransactionModel.AMOUNT),
                         resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
                         TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
-                        resultSet.getInt(TransactionModel.TYPE)
+                        resultSet.getInt(TransactionModel.TYPE),
+                        resultSet.getInt(TransactionModel.ID_CURRENCY),
+                        resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
                 ));
             }
         } catch (SQLException e) {
@@ -100,7 +102,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         @Override
         public TransactionModel save(TransactionModel toSave)  {
             String sql = String.format(
-                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?)",
+                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?) RETURNING id",
                     TransactionModel.TABLE_NAME,
                     TransactionModel.LABEL,
                     TransactionModel.AMOUNT,
@@ -115,7 +117,9 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 preparedStatement.setObject(4, toSave.getType() ,Types.OTHER);
                 preparedStatement.setInt(5,toSave.getId_account());
 
-                preparedStatement.executeUpdate();
+                ResultSet resultSet = preparedStatement.executeQuery();
+                resultSet.next();
+                toSave.setId(resultSet.getInt(TransactionModel.ID));
             }
             catch (SQLException e){
                 e.printStackTrace();
@@ -174,8 +178,8 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 "WHERE \"%s\".%s = ?",
                 TransactionModel.TABLE_NAME,
                 TransactionModel.AMOUNT,
-                /*CurrencyValueModel.TABLE_NAME,*/
-                /*CurrencyValueModel.AMOUNT,*/
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.AMOUNT,
 
                 table_column,
 
@@ -191,15 +195,15 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
 
                 CurrencyModel.TABLE_NAME,
                 CurrencyModel.ID,
-                /*CurrencyValueModel.TABLE_NAME,*/
-                /*CurrencyValueModel.ID_CURRENCY_SOURCE,*/
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.ID_CURRENCY_SOURCE,
 
                 TransactionModel.TABLE_NAME,
                 TransactionModel.TRANSACTION_DATE,
-                /*CurrencyValueModel.TABLE_NAME,*/
-                /*CurrencyValueModel.DATE_EFFET,*/
-                /*CurrencyValueModel.TABLE_NAME,*/
-                /*CurrencyValueModel.DATE_EFFET,*/
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.DATE_EFFET,
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.DATE_EFFET,
                 TransactionModel.TABLE_NAME,
                 TransactionModel.ID_ACCOUNT
         );
@@ -207,5 +211,63 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         preparedStatement.setInt(1, id_account);
         ResultSet resultSet = preparedStatement.executeQuery();
         return resultSet.getBigDecimal(table_column);
+    }
+
+    public TransactionType getTransactionType(int id_transaction) throws SQLException {
+         String sql = String.format(
+                 "SELECT %s as def, %s as sec FROM \"%s\" " +
+                 "INNER JOIN \"%s\" ON %s = %s " +
+                 "WHERE %s = ?",
+                 "subcategory.type",
+                 TransactionModel.TABLE_NAME+"."+TransactionModel.TYPE,
+                 TransactionModel.TABLE_NAME,
+                 "subcategory",
+                 TransactionModel.TABLE_NAME+"."+TransactionModel.ID_SUBCATEGORY,
+                 "subcategory.id_subcategory",
+                 TransactionModel.TABLE_NAME+"."+TransactionModel.ID
+         );
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        preparedStatement.setInt(1, id_transaction);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        TransactionType result = TransactionType.valueOf(resultSet.getString("def"));
+        if (result.equals("")){
+            result = TransactionType.valueOf(resultSet.getString("sec"));
+        }
+        return result;
+    }
+
+    public List<TransactionModel> findAllByIdAccount(int id_account) {
+        String sql = String.format(
+                "SELECT * FROM \"%s\" WHERE %s = ?",
+                TransactionModel.TABLE_NAME,
+                TransactionModel.ID_ACCOUNT
+        );
+        List<TransactionModel> allTransactions = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, id_account);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                allTransactions.add(new TransactionModel(
+                        resultSet.getInt(TransactionModel.ID),
+                        resultSet.getString(TransactionModel.LABEL),
+                        resultSet.getBigDecimal(TransactionModel.AMOUNT),
+                        resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
+                        TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
+                        resultSet.getInt(TransactionModel.TYPE),
+                        resultSet.getInt(TransactionModel.ID_CURRENCY),
+                        resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allTransactions;
     }
 }
