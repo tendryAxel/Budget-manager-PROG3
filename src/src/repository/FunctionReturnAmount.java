@@ -2,21 +2,32 @@ package repository;
 
 import utils.sum_amount_between_dates_Result;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FunctionReturnAmount {
-    public  static sum_amount_between_dates_Result getSumAmount(int account_id , Timestamp start_date , Timestamp end_date){
+    public  static Map<String, BigDecimal> getSumAmount(int account_id , Timestamp start_date , Timestamp end_date){
         sum_amount_between_dates_Result sumAmount = new sum_amount_between_dates_Result();
         String sql = "SELECT * FROM get_sum_amount(? ,? ,?)";
+        Map<String, BigDecimal> result = new HashMap<>();
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-            preparedStatement.setObject(1, end_date);
-            preparedStatement.setObject(2 , start_date);
-            preparedStatement.setObject(3 , account_id);
+            preparedStatement.setTimestamp(3, end_date);
+            preparedStatement.setTimestamp(2 , start_date);
+            preparedStatement.setInt(1 , account_id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            result.put("total_credit", resultSet.getBigDecimal("total_credit"));
+            result.put("total_debit", resultSet.getBigDecimal("total_debit"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return sumAmount;
+        return result;
     }
 }

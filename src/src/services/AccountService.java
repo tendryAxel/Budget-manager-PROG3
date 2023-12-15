@@ -21,6 +21,7 @@ public class AccountService {
     public AccountService() {
         this.accountCrudOperations = new AccountCrudOperations();
         this.transactionCrudOperation = new TransactionCrudOperation();
+        this.subCategoryCrudOperations = new SubCategoryCrudOperations();
     }
 
     public List<AccountModel> findAll() throws SQLException {

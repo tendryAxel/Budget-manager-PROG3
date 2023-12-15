@@ -30,4 +30,4 @@ BEGIN
  $$ LANGUAGE plpgsql;
 
  --Select--
- SELECT * FROM get_sum_amount (1 , '2023-12-02 08:30:00' , '2023-12-03 13:30:00');
+ SELECT * FROM get_sum_amount_by_category (1 , '2023-12-02 08:30:00' , '2023-12-03 13:30:00');

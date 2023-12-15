@@ -1,3 +1,5 @@
+CREATE type TransactionType AS ENUM ('DEBIT', 'CREDIT');
+
 CREATE TABLE IF NOT EXISTS "category"(
     id_category SERIAL PRIMARY KEY,
     name VARCHAR UNIQUE
@@ -98,7 +100,4 @@ INSERT INTO "subcategory" (name, type, id_category) VALUES
   ('property', 'DEBIT', (SELECT id_category FROM "category" WHERE name = 'investment')),
   ('collections', 'DEBIT', (SELECT id_category FROM "category" WHERE name = 'investment')),
   ('financial_investment', 'DEBIT', (SELECT id_category FROM "category" WHERE name = 'investment')),
-  ('economy', 'DEBIT', (SELECT id_category FROM "category" WHERE name = 'investment')),
-
-  -- Income
-  ('gift', 'CREDIT', (SELECT id_category FROM "category" WHERE name = 'income'));
+  ('economy', 'DEBIT', (SELECT id_category FROM "category" WHERE name = 'investment'));

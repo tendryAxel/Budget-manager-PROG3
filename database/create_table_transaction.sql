@@ -1,5 +1,3 @@
-CREATE type TransactionType AS ENUM ('DEBIT', 'CREDIT');
-
 -- Creation de la table
 CREATE TABLE IF NOT EXISTS "transaction" (
     id_transaction SERIAL PRIMARY KEY,

@@ -56,11 +56,12 @@ public class CurrencyCrudOperations implements CrudOperations<CurrencyModel>{
     @Override
     public CurrencyModel save(CurrencyModel toSave)  {
         String sql = String.format(
-                "INSERT INTO \"%S\" (%s,%s) VALUES (?,?)",
+                "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
                 CurrencyModel.TABLE_NAME,
                 CurrencyModel.NAME,
                 CurrencyModel.CODE
         );
+        System.out.println(sql);
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             preparedStatement.setString(1,toSave.getName());
             preparedStatement.setString(2 ,toSave.getCode());

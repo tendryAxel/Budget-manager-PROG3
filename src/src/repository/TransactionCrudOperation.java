@@ -58,7 +58,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                         resultSet.getBigDecimal(TransactionModel.AMOUNT),
                         resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
                         TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
-                        resultSet.getInt(TransactionModel.TYPE),
+                        resultSet.getInt(TransactionModel.ID_ACCOUNT),
                         resultSet.getInt(TransactionModel.ID_CURRENCY),
                         resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
                 ));
@@ -102,13 +102,14 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         @Override
         public TransactionModel save(TransactionModel toSave)  {
             String sql = String.format(
-                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?) RETURNING id",
+                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?) RETURNING %s",
                     TransactionModel.TABLE_NAME,
                     TransactionModel.LABEL,
                     TransactionModel.AMOUNT,
                     TransactionModel.TRANSACTION_DATE,
                     TransactionModel.TYPE,
-                    TransactionModel.ID_ACCOUNT
+                    TransactionModel.ID_ACCOUNT,
+                    TransactionModel.ID
             );
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
                 preparedStatement.setString(1,toSave.getLabel());
@@ -260,7 +261,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                         resultSet.getBigDecimal(TransactionModel.AMOUNT),
                         resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
                         TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
-                        resultSet.getInt(TransactionModel.TYPE),
+                        resultSet.getInt(TransactionModel.ID_ACCOUNT),
                         resultSet.getInt(TransactionModel.ID_CURRENCY),
                         resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
                 ));
@@ -291,7 +292,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                         resultSet.getBigDecimal(TransactionModel.AMOUNT),
                         resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
                         TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
-                        resultSet.getInt(TransactionModel.TYPE),
+                        resultSet.getInt(TransactionModel.ID_ACCOUNT),
                         resultSet.getInt(TransactionModel.ID_CURRENCY),
                         resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
                 ));
