@@ -270,4 +270,35 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         }
         return allTransactions;
     }
+
+    public List<TransactionModel> findAllByIdAccountAndSubCategory(int id_account, int id_subcategory) {
+        String sql = String.format(
+                "SELECT * FROM \"%s\" WHERE %s = ? AND %s = ?",
+                TransactionModel.TABLE_NAME,
+                TransactionModel.ID_ACCOUNT,
+                TransactionModel.ID_SUBCATEGORY
+        );
+        List<TransactionModel> allTransactions = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, id_account);
+            preparedStatement.setInt(2, id_subcategory);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                allTransactions.add(new TransactionModel(
+                        resultSet.getInt(TransactionModel.ID),
+                        resultSet.getString(TransactionModel.LABEL),
+                        resultSet.getBigDecimal(TransactionModel.AMOUNT),
+                        resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
+                        TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
+                        resultSet.getInt(TransactionModel.TYPE),
+                        resultSet.getInt(TransactionModel.ID_CURRENCY),
+                        resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allTransactions;
+    }
 }

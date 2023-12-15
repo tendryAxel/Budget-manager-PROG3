@@ -1,7 +1,6 @@
 package repository;
 
 import model.SubCategoryModel;
-import model.SubCategoryType;
 import model.TransactionType;
 
 import java.sql.PreparedStatement;
