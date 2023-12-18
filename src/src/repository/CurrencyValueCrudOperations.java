@@ -1,9 +1,9 @@
 package repository;
 import model.CurrencyValueModel;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,5 +78,33 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
         }
 
         return toSave;
+    }
+
+    public List<CurrencyValueModel> findByDate(LocalDate date) throws SQLException {
+        String sql = String.format(
+                "SELECT * FROM \"%s\" WHERE %s BETWEEN ? AND date(?) + interval '1 day'",
+                CurrencyValueModel.TABLE_NAME,
+                CurrencyValueModel.DATE_EFFET
+        );
+        List<CurrencyValueModel> AllCurrencyValue = new ArrayList<>();
+        PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+        preparedStatement.setDate(1, Date.valueOf(date));
+        preparedStatement.setDate(2, Date.valueOf(date));
+        System.out.println(preparedStatement);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            AllCurrencyValue.add(new CurrencyValueModel(
+                    resultSet.getInt(CurrencyValueModel.ID),
+                    resultSet.getInt(CurrencyValueModel.ID_CURRENCY_SOURCE),
+                    resultSet.getInt(CurrencyValueModel.ID_CURRENCY_DESTINATION),
+                    resultSet.getBigDecimal(CurrencyValueModel.AMOUNT),
+                    resultSet.getDate(CurrencyValueModel.DATE_EFFET)
+            ));
+        }
+        return AllCurrencyValue;
+    }
+
+    public List<CurrencyValueModel> findByDate(LocalDateTime date) throws SQLException{
+        return findByDate(LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()));
     }
 }
