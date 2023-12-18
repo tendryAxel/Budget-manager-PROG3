@@ -17,11 +17,14 @@ public class TD2Test {
         }
     }
     public static void test() throws SQLException {
+        System.out.println("TD2 test : ");
         AccountService accountService = new AccountService();
 
-        Timestamp timestamp1 = new Timestamp(2000, 1, 1, 1, 1, 1, 1);
-        Timestamp timestamp2 = new Timestamp(2055, 1, 1, 1, 1, 1, 2);
+        Timestamp timestamp1 = new Timestamp(0, 1, 1, 1, 1, 1, 1);
+        Timestamp timestamp2 = new Timestamp(1000, 1, 1, 1, 1, 1, 2);
 
+        System.out.println(timestamp1);
+        System.out.println(timestamp2);
         System.out.println("Exercise 2-3: use sql function in java");
 
         System.out.println(getSumAmount(
@@ -52,6 +55,8 @@ public class TD2Test {
                 timestamp2.toLocalDateTime()
         ));
 
+        System.out.println("");
+        System.out.println("---------------");
         System.out.println("");
     }
 }

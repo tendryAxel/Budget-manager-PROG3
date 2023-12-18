@@ -11,9 +11,8 @@ public class Main {
         AccountCrudOperationsTest.accountTest();
         CurrencyCrudOperationsTest.currencyTest();
         TransactionCrudOperationsTest.transactionTest();
-        TD2Test.test();
-        CurrencyCrudOperationsTest.currencyTest();
         BalanceCrudOperationsTest.balanceTest();
         TransactionCrudOperationsTest.transactionTest();
+        TD2Test.test();
     }
 }

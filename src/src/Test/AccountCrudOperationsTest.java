@@ -20,6 +20,7 @@ public class AccountCrudOperationsTest {
         }
     }
     public static void accountTest() throws SQLException {
+            System.out.println("Account operation : ");
         AccountCrudOperations accountCrudOperations = new AccountCrudOperations();
 
         List<AccountModel> result = accountCrudOperations.findAll();
@@ -40,5 +41,7 @@ public class AccountCrudOperationsTest {
         for (AccountModel ac : savedAccounts) {
             System.out.println(ac);
         }
+        System.out.println("---------------");
+        System.out.println("");
     }
 }

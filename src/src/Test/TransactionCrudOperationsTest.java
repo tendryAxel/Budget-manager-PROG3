@@ -22,10 +22,11 @@ public class TransactionCrudOperationsTest {
     }
 
     public static void transactionTest() throws SQLException {
+        System.out.println("Transaction operation : ");
+        System.out.println("Toutes les Transactions :");
         TransactionCrudOperation transactionCrudOperation = new TransactionCrudOperation();
 
         List<TransactionModel> result = transactionCrudOperation.findAll();
-        System.out.println("Toutes les Transactions :");
         for (TransactionModel t : result) {
             System.out.println(t);
         }
@@ -43,5 +44,7 @@ public class TransactionCrudOperationsTest {
         for (TransactionModel tr : savedTransactions) {
             System.out.println(tr);
         }
+        System.out.println("---------------");
+        System.out.println("");
     }
 }

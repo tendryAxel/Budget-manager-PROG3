@@ -14,6 +14,7 @@ public class CurrencyValueCrudOperationsTest {
         currencyValueTest();
     }
     public static void currencyValueTest() throws SQLException {
+        System.out.println("Currency value operation : ");
         CurrencyValueCrudOperations  currencyValueCrudOperations = new CurrencyValueCrudOperations();
         List<CurrencyValueModel> result = currencyValueCrudOperations.findAll();
         System.out.println("Tous les CurrencyValues :");
@@ -33,6 +34,8 @@ public class CurrencyValueCrudOperationsTest {
         for (CurrencyValueModel cvv : savedAccounts) {
             System.out.println(cvv);
         }
+        System.out.println("---------------");
+        System.out.println("");
     }
     }
 

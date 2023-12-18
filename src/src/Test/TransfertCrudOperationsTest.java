@@ -18,6 +18,7 @@ public class TransfertCrudOperationsTest {
     }
 
     public static void transferTest() throws SQLException {
+        System.out.println("Transfer operation : ");
         TransferCrudOperation transferCrudOperation = new TransferCrudOperation();
 
         List<TransferModel> allTransfers = transferCrudOperation.findAll();
@@ -39,5 +40,7 @@ public class TransfertCrudOperationsTest {
         for (TransferModel tm : savedTransfers) {
             System.out.println(tm);
         }
+        System.out.println("---------------");
+        System.out.println("");
     }
 }

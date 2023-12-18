@@ -18,6 +18,7 @@ public class BalanceCrudOperationsTest {
         }
     }
     public static void balanceTest() throws SQLException {
+        System.out.println("Balance operation : ");
         BalanceCrudOperations balanceCrudOperations = new BalanceCrudOperations();
         List<BalanceModel> allBalances = balanceCrudOperations.findAll();
         System.out.println("Tous les soldes :");
@@ -36,5 +37,7 @@ public class BalanceCrudOperationsTest {
         for (BalanceModel bl : savedBalances) {
             System.out.println(bl);
         }
+        System.out.println("---------------");
+        System.out.println("");
     }
 }
