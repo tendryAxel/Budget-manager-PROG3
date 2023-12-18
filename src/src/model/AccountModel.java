@@ -2,11 +2,13 @@ package model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class AccountModel {
     private   int id_account;
     private String name;
-    private Timestamp updateDate;
+    private LocalDateTime updateDate;
     private    int id_currency;
     private AccountType type;
 
@@ -17,7 +19,7 @@ public class AccountModel {
     public static final  String ID_CURRENCY = "id_currency";
     public static final  String TYPE = "type";
 
-    public AccountModel(int id_account, String name, Timestamp updateDate, int id_currency, AccountType type) {
+    public AccountModel(int id_account, String name, LocalDateTime updateDate, int id_currency, AccountType type) {
         this.id_account = id_account;
         this.name = name;
         this.updateDate = updateDate;
@@ -41,11 +43,11 @@ public class AccountModel {
         this.name = name;
     }
 
-    public Timestamp getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Timestamp updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 

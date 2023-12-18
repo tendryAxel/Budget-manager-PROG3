@@ -3,10 +3,7 @@ package repository;
 import model.AccountModel;
 import model.AccountType;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
             AllAccount.add(new AccountModel(
                     resultSet.getInt(AccountModel.ID),
                     resultSet.getString(AccountModel.NAME),
-                    resultSet.getTimestamp(AccountModel.UPDATEDATE),
+                    resultSet.getTimestamp(AccountModel.UPDATEDATE).toLocalDateTime(),
                     resultSet.getInt(AccountModel.ID_CURRENCY),
                     AccountType.valueOf(resultSet.getString(AccountModel.TYPE))
             ));
@@ -45,7 +42,7 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
         try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (AccountModel accountModel : toSave){
                 preparedStatement.setString(1, accountModel.getName());
-                preparedStatement.setTimestamp(2 ,accountModel.getUpdateDate());
+                preparedStatement.setTimestamp(2 , Timestamp.valueOf(accountModel.getUpdateDate()));
                 preparedStatement.setInt(3,accountModel.getId_currency());
                 preparedStatement.setObject(4 , accountModel.getType() , Types.OTHER);
 
@@ -73,7 +70,7 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
         );
         try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, toSave.getName());
-            preparedStatement.setTimestamp(2,toSave.getUpdateDate());
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(toSave.getUpdateDate()));
             preparedStatement.setInt(3, toSave.getId_currency());
             preparedStatement.setObject(4 , toSave.getType() ,Types.OTHER);
 
