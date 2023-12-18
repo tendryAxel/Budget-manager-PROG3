@@ -17,3 +17,7 @@ VALUES (3, 1, 750.25, '2023-12-14');
 -- Insertion 3
 INSERT INTO "currency-value" (id_currency_source, id_currency_destination, amount, date_effet)
 VALUES (2, 3, 1200.75, '2023-12-15');
+
+-- Insertion 4
+INSERT INTO "currency-value" (id_currency_source, id_currency_destination, amount, date_effet)
+VALUES (2, 3, 1200.80, '2023-12-02');

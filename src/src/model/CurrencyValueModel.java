@@ -6,7 +6,7 @@ import java.util.Date;
 public class CurrencyValueModel {
 
 
-    public static final String TABLE_NAME = "currency_value";
+    public static final String TABLE_NAME = "currency-value";
     public static final  String ID = "id";
     public static final String ID_CURRENCY_SOURCE = "id_currency_source";
     public static final String ID_CURRENCY_DESTINATION = "id_currency_destination";

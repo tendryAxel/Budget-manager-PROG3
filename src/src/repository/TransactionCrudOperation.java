@@ -175,7 +175,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 "ON \"%s\".\"%s\" = \"%s\".\"%s\" " +
                 "INNER JOIN \"%s\" " +
                 "ON \"%s\".\"%s\" = \"%s\".\"%s\" " +
-                "AND date(\"%s\".\"%s\") BETWEEN date(\"%s\".\"%s\") AND date(\"%s\".\"%s\")+1 " +
+                "AND date(\"%s\".%s) BETWEEN date(\"%s\".%s) AND (date(\"%s\".%s) + interval '1 day') " +
                 "WHERE \"%s\".%s = ?",
                 TransactionModel.TABLE_NAME,
                 TransactionModel.AMOUNT,
@@ -192,7 +192,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 CurrencyModel.TABLE_NAME,
                 CurrencyModel.ID,
 
-                CurrencyModel.TABLE_NAME,
+                CurrencyValueModel.TABLE_NAME,
 
                 CurrencyModel.TABLE_NAME,
                 CurrencyModel.ID,
@@ -205,12 +205,15 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 CurrencyValueModel.DATE_EFFET,
                 CurrencyValueModel.TABLE_NAME,
                 CurrencyValueModel.DATE_EFFET,
+
                 TransactionModel.TABLE_NAME,
                 TransactionModel.ID_ACCOUNT
         );
+        System.out.println(sql);
         PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, id_account);
         ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
         return resultSet.getBigDecimal(table_column);
     }
 

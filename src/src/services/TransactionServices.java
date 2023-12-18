@@ -1,19 +1,13 @@
 package services;
 
-import model.AccountModel;
-import model.BalanceModel;
-import model.CurrencyModel;
-import model.TransactionModel;
+import model.*;
 import repository.BalanceCrudOperations;
 import repository.CurrencyCrudOperations;
 import repository.TransactionCrudOperation;
 import repository.connectionDB;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.sql.Types;
+import java.sql.*;
 import java.util.List;
 
 public class TransactionServices {
@@ -59,5 +53,9 @@ public class TransactionServices {
                 break;
         }
         return balanceModel;
+    }
+
+    public BigDecimal getActualBalance(int id_account) throws SQLException {
+        return transactionCrudOperation.getActualBalance(id_account);
     }
 }
