@@ -43,6 +43,7 @@ public class TransactionServices {
                 balanceModel.setValue(BigDecimal.valueOf(amount));
 
                 this.balanceCrudOperations.save(balanceModel);
+                break;
             case DEBIT :
                 amount -= Double.parseDouble(String.valueOf(transaction.getAmount()));
 

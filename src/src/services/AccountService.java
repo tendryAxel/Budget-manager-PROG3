@@ -1,10 +1,7 @@
 package services;
 
 import model.*;
-import repository.AccountCrudOperations;
-import repository.SubCategoryCrudOperations;
-import repository.TransactionCrudOperation;
-import repository.connectionDB;
+import repository.*;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -18,10 +15,12 @@ public class AccountService {
     AccountCrudOperations accountCrudOperations;
     TransactionCrudOperation transactionCrudOperation;
     SubCategoryCrudOperations subCategoryCrudOperations;
+    CurrencyValueCrudOperations currencyValueCrudOperations;
     public AccountService() {
         this.accountCrudOperations = new AccountCrudOperations();
         this.transactionCrudOperation = new TransactionCrudOperation();
         this.subCategoryCrudOperations = new SubCategoryCrudOperations();
+        this.currencyValueCrudOperations = new CurrencyValueCrudOperations();
     }
 
     public List<AccountModel> findAll() throws SQLException {
@@ -36,7 +35,7 @@ public class AccountService {
         return accountCrudOperations.saveAll(toSave);
     }
 
-    public BigDecimal sumOfTransaction(List<TransactionModel> toAdd, LocalDateTime startDate, LocalDateTime endDate){
+    public BigDecimal sumOfTransaction(List<TransactionModel> toAdd, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
         List<BigDecimal> allTransaction = new ArrayList<>();
 
         for (TransactionModel t : toAdd){
@@ -44,11 +43,23 @@ public class AccountService {
             if (dateTime.isAfter(startDate) || dateTime.isBefore(endDate)){
                 switch (t.getType()){
                     case CREDIT -> {
-                        allTransaction.add(t.getAmount());
+                        allTransaction.add(
+                                t.getAmount().multiply(currencyValueCrudOperations.findByDateAndCurrency(
+                                    dateTime,
+                                    t.getId_currency(),
+                                    accountCrudOperations.findById(t.getId_account()).getId_currency()
+                                ).get(0).getAmount())
+                        );
                         break;
                     }
                     case DEBIT -> {
-                        allTransaction.add(t.getAmount().multiply(BigDecimal.valueOf(-1)));
+                        allTransaction.add(
+                                t.getAmount().multiply(currencyValueCrudOperations.findByDateAndCurrency(
+                                        dateTime,
+                                        accountCrudOperations.findById(t.getId_account()).getId_currency(),
+                                        t.getId_currency()
+                                ).get(0).getAmount())
+                        );
                         break;
                     }
                 }

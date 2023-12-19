@@ -1,6 +1,7 @@
 package repository;
 import model.CurrencyValueModel;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -80,20 +81,26 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
         return toSave;
     }
 
-    public List<CurrencyValueModel> findByDate(LocalDate date) throws SQLException {
+    public List<CurrencyValueModel> findByDateAndCurrency(LocalDate date, int id_source, int id_destination) throws SQLException {
         String sql = String.format(
-                "SELECT * FROM \"%s\" WHERE %s BETWEEN ? AND date(?) + interval '1 day'",
+                "SELECT * FROM \"%s\"" +
+                        " WHERE %s BETWEEN ? AND date(?) + interval '1 day' " +
+                        "AND %s = ? AND %s = ?",
                 CurrencyValueModel.TABLE_NAME,
-                CurrencyValueModel.DATE_EFFET
+                CurrencyValueModel.DATE_EFFET,
+                CurrencyValueModel.ID_CURRENCY_SOURCE,
+                CurrencyValueModel.ID_CURRENCY_DESTINATION
         );
-        List<CurrencyValueModel> AllCurrencyValue = new ArrayList<>();
+        List<CurrencyValueModel> allCurrencyValue = new ArrayList<>();
         PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
         preparedStatement.setDate(1, Date.valueOf(date));
         preparedStatement.setDate(2, Date.valueOf(date));
+        preparedStatement.setInt(3, id_source);
+        preparedStatement.setInt(4, id_destination);
         System.out.println(preparedStatement);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()){
-            AllCurrencyValue.add(new CurrencyValueModel(
+            allCurrencyValue.add(new CurrencyValueModel(
                     resultSet.getInt(CurrencyValueModel.ID),
                     resultSet.getInt(CurrencyValueModel.ID_CURRENCY_SOURCE),
                     resultSet.getInt(CurrencyValueModel.ID_CURRENCY_DESTINATION),
@@ -101,10 +108,24 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
                     resultSet.getDate(CurrencyValueModel.DATE_EFFET)
             ));
         }
-        return AllCurrencyValue;
+
+        if (allCurrencyValue.size() == 0){
+            throw new Error(String.format(
+                    "They are not value of currency at %s between currency with index %s to %s",
+                    date,
+                    id_source,
+                    id_destination
+            ));
+        }
+
+        return allCurrencyValue;
     }
 
-    public List<CurrencyValueModel> findByDate(LocalDateTime date) throws SQLException{
-        return findByDate(LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()));
+    public List<CurrencyValueModel> findByDateAndCurrency(LocalDateTime date, int id_source, int id_destination) throws SQLException{
+        return findByDateAndCurrency(
+                LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth()),
+                id_source,
+                id_destination
+        );
     }
 }
