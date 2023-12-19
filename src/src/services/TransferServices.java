@@ -10,6 +10,7 @@ import repository.TransferCrudOperation;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TransferServices {
@@ -48,7 +49,7 @@ public class TransferServices {
         return true;
     };
 
-    public boolean makeTransfer(int idSender, int idReceive, String label, BigDecimal amount) throws SQLException {
+    public boolean makeTransfer(int idSender, int idReceive, String label, BigDecimal amount, LocalDateTime datetime) throws SQLException {
         TransactionServices transactionServices = new TransactionServices();
         if (idSender == idReceive){
             return false;
@@ -57,12 +58,16 @@ public class TransferServices {
         TransactionModel sendTransaction = new TransactionModel();
         sendTransaction.setAmount(amount);
         sendTransaction.setLabel(label);
-        sendTransaction.setType(TransactionType.CREDIT);
+        sendTransaction.setType(TransactionType.DEBIT);
+        sendTransaction.setTransaction_date(datetime);
+        sendTransaction.setId_account(idSender);
 
         TransactionModel receiveTransaction = new TransactionModel();
         receiveTransaction.setAmount(amount);
         receiveTransaction.setLabel(label);
-        receiveTransaction.setType(TransactionType.DEBIT);
+        receiveTransaction.setType(TransactionType.CREDIT);
+        receiveTransaction.setTransaction_date(datetime);
+        sendTransaction.setId_account(idReceive);
 
         transactionServices.FunctionTransaction(idSender, sendTransaction);
         transactionServices.FunctionTransaction(idReceive, receiveTransaction);

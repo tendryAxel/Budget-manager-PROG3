@@ -81,4 +81,22 @@ public class AccountCrudOperations implements CrudOperations <AccountModel>{
         return null;
     }
 
+    public AccountModel findById(int id) throws SQLException {
+        String sql = String.format(
+                "SELECT * FROM \"%s\" WHERE %s = ?",
+                AccountModel.TABLE_NAME,
+                AccountModel.ID
+        );
+        PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        return new AccountModel(
+                resultSet.getInt(AccountModel.ID),
+                resultSet.getString(AccountModel.NAME),
+                resultSet.getTimestamp(AccountModel.UPDATEDATE).toLocalDateTime(),
+                resultSet.getInt(AccountModel.ID_CURRENCY),
+                AccountType.valueOf(resultSet.getString(AccountModel.TYPE))
+        );
+    }
 }

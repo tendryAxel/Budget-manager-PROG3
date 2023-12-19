@@ -20,4 +20,12 @@ public class connectionDB {
         }
         return connection;
     };
+
+    public void close(){
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
