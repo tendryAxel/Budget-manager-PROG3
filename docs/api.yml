@@ -10,6 +10,7 @@ tags:
   - name: Account
   - name: Balance
   - name: Category
+  - name: CurrencyValue
 paths:
   /currency:
     get:
@@ -275,6 +276,39 @@ paths:
               schema:
                 $ref: "#/components/schemas/Category"
 
+  /currencyvalue:
+    get:
+      tags:
+        - CurrencyValue
+      summary: Get all currency values
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CurrencyValue"
+    put:
+      tags:
+        - CurrencyValue
+      description: Create or update CurrencyValue
+      operationId: createOrUpdateCurrencyValue
+      summary: Create or update currency value
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CurrencyValue"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CurrencyValue"
+
 components:
   schemas:
     Currencys_base:
@@ -404,3 +438,23 @@ components:
       required:
         - id_category
         - name
+
+    CurrencyValue:
+      type: object
+      properties:
+        id:
+          type: integer
+        id_currency_source:
+          type: integer
+        id_currency_destination:
+          type: integer
+        amount:
+          type: number
+        date_effet:
+          type: string
+          format: date
+      required:
+        - id_currency_source
+        - id_currency_destination
+        - amount
+        - date_effet
