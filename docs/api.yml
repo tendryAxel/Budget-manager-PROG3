@@ -8,6 +8,9 @@ tags:
   - name: Currency
   - name: Transaction
   - name: Account
+  - name: Balance
+  - name: Category
+  - name: CurrencyValue
 paths:
   /currency:
     get:
@@ -201,7 +204,110 @@ paths:
                   - type: array
                     items:
                       $ref: "#/components/schemas/TranfertHistory_other"
+  /balance:
+    get:
+      tags:
+        - Balance
+      summary: Get All Balance
+      description: Returns the balance history for a specific account.
+      operationId: getBalanceHistory
+      parameters:
+        - in: query
+          name: id_account
+          required: true
+          description: ID of the account
+          schema:
+            type: integer
+        - in: query
+          name: start_date
+          required: true
+          description: Start date for the balance history
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: end_date
+          required: true
+          description: End date for the balance history
+          schema:
+            type: string
+            format: date
+      responses:
+        200:
+          description: Successfully returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Balance'
 
+  /category:
+    get:
+      tags:
+        - Category
+      summary: Get all categories
+      description: Returns a list of all categories.
+      operationId: getCategories
+      responses:
+        200:
+          description: Successfully returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+    put:
+      summary: Create or update category
+      operationId: crupdateCategory
+      tags:
+        - Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+
+  /currencyvalue:
+    get:
+      tags:
+        - CurrencyValue
+      summary: Get all currency values
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CurrencyValue"
+    put:
+      tags:
+        - CurrencyValue
+      description: Create or update CurrencyValue
+      operationId: createOrUpdateCurrencyValue
+      summary: Create or update currency value
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CurrencyValue"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CurrencyValue"
 
 components:
   schemas:
@@ -285,7 +391,7 @@ components:
             type: integer
         currency:
           type: integer
-          
+
     Transactions_other:
       type: object
       allOf:
@@ -295,7 +401,7 @@ components:
           type: string
         account_id:
           $ref: "#/components/schemas/Accounts_other"
-          
+
     Accounts_other:
       type: object
       allOf:
@@ -307,3 +413,48 @@ components:
             $ref: "#/components/schemas/Transactions_other"
         currency:
           $ref: "#/components/schemas/Currencys_base"
+
+    Balance:
+      type: object
+      properties:
+        id_account:
+          type: integer
+        datetime:
+          type: string
+          format: date-time
+        value:
+          type: number
+      required:
+        - id_account
+        - datetime
+        - value
+    Category:
+      type: object
+      properties:
+        id_category:
+          type: integer
+        name:
+          type: string
+      required:
+        - id_category
+        - name
+
+    CurrencyValue:
+      type: object
+      properties:
+        id:
+          type: integer
+        id_currency_source:
+          type: integer
+        id_currency_destination:
+          type: integer
+        amount:
+          type: number
+        date_effet:
+          type: string
+          format: date
+      required:
+        - id_currency_source
+        - id_currency_destination
+        - amount
+        - date_effet
