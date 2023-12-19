@@ -4,6 +4,7 @@ import services.AccountService;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import static repository.FunctionReturnAmount.getSumAmount;
 import static repository.FunctionReturnAmountByCategory.getCategorySum;
@@ -20,25 +21,25 @@ public class TD2Test {
         System.out.println("TD2 test : ");
         AccountService accountService = new AccountService();
 
-        Timestamp timestamp1 = new Timestamp(0, 1, 1, 1, 1, 1, 1);
-        Timestamp timestamp2 = new Timestamp(1000, 1, 1, 1, 1, 1, 2);
+        LocalDateTime localDateTime1 = LocalDateTime.of(2000, 1,1,1,1,1,1);
+        LocalDateTime localDatetime2 = LocalDateTime.of(3000, 1, 1, 1, 1, 1, 2);
 
-        System.out.println(timestamp1);
-        System.out.println(timestamp2);
+        System.out.println(localDateTime1);
+        System.out.println(localDatetime2);
         System.out.println("Exercise 2-3: use sql function in java");
 
         System.out.println(getSumAmount(
                 1,
-                timestamp1,
-                timestamp2
+                localDateTime1,
+                localDatetime2
         ));
 
         System.out.println("");
 
         System.out.println(getCategorySum(
                 1,
-                timestamp1,
-                timestamp2
+                localDateTime1,
+                localDatetime2
         ));
 
         System.out.println("");
@@ -46,13 +47,13 @@ public class TD2Test {
 
         System.out.println(accountService.getActualBalanceBetween(
                 1,
-                timestamp1.toLocalDateTime(),
-                timestamp2.toLocalDateTime()
+                localDateTime1,
+                localDatetime2
         ));
         System.out.println(accountService.getTransactionByCategory(
                 1,
-                timestamp1.toLocalDateTime(),
-                timestamp2.toLocalDateTime()
+                localDateTime1,
+                localDatetime2
         ));
 
         System.out.println("");
