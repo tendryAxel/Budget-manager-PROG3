@@ -209,7 +209,6 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 TransactionModel.TABLE_NAME,
                 TransactionModel.ID_ACCOUNT
         );
-        System.out.println(sql);
         PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, id_account);
         ResultSet resultSet = preparedStatement.executeQuery();

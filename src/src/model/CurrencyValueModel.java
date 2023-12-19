@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CurrencyValueModel {
@@ -18,11 +19,11 @@ public class CurrencyValueModel {
     private int id_currency_source;
     private  int id_currency_destination;
     private BigDecimal amount;
-    private Date date_effet;
+    private LocalDate date_effet;
 
 
 
-    public CurrencyValueModel(int id, int id_currency_source, int id_currency_destination, BigDecimal amount, Date date_effet) {
+    public CurrencyValueModel(int id, int id_currency_source, int id_currency_destination, BigDecimal amount, LocalDate date_effet) {
         this.id = id;
         this.id_currency_source = id_currency_source;
         this.id_currency_destination = id_currency_destination;
@@ -63,11 +64,11 @@ public class CurrencyValueModel {
         this.amount = amount;
     }
 
-    public java.sql.Date getDate_effet() {
-        return (java.sql.Date) date_effet;
+    public LocalDate getDate_effet() {
+        return date_effet;
     }
 
-    public void setDate_effet(Date date_effet) {
+    public void setDate_effet(LocalDate date_effet) {
         this.date_effet = date_effet;
     }
 

@@ -5,6 +5,7 @@ import repository.CurrencyValueCrudOperations;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,12 +22,13 @@ public class CurrencyValueCrudOperationsTest {
         for (CurrencyValueModel cv : result){
             System.out.println(cv);
         }
-        Date date = new Date();
+        LocalDate date = LocalDate.of(2023,12,02);
         CurrencyValueModel currencyValueModel = new CurrencyValueModel(4 , 2 ,3 , BigDecimal.valueOf(2300.00) , date);
         currencyValueCrudOperations.save(currencyValueModel);
 
         List<CurrencyValueModel>  CurrencyValueToSave = new ArrayList<>();
         CurrencyValueToSave.add(new CurrencyValueModel(5 , 2 , 3 ,BigDecimal.valueOf(1100.00) , date));
+        CurrencyValueToSave.add(new CurrencyValueModel(4 , 2 ,1 , BigDecimal.valueOf(1300.00) , date));
 
 
         List<CurrencyValueModel> savedAccounts  = currencyValueCrudOperations.saveAll(CurrencyValueToSave);

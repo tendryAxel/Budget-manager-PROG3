@@ -23,7 +23,7 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
                     resultSet.getInt(CurrencyValueModel.ID_CURRENCY_SOURCE),
                     resultSet.getInt(CurrencyValueModel.ID_CURRENCY_DESTINATION),
                     resultSet.getBigDecimal(CurrencyValueModel.AMOUNT),
-                    resultSet.getDate(CurrencyValueModel.DATE_EFFET)
+                    resultSet.getDate(CurrencyValueModel.DATE_EFFET).toLocalDate()
             ));
         }
         return AllCurrencyValue;
@@ -32,9 +32,8 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
     @Override
     public List<CurrencyValueModel> saveAll(List<CurrencyValueModel> toSave) throws SQLException {
         String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s,%s,%s) VALUES (?,?,?,?,?)",
+                "INSERT INTO \"%s\" (%s,%s,%s,%s) VALUES (?,?,?,?)",
                 CurrencyValueModel.TABLE_NAME,
-                CurrencyValueModel.ID,
                 CurrencyValueModel.ID_CURRENCY_SOURCE,
                 CurrencyValueModel.ID_CURRENCY_DESTINATION,
                 CurrencyValueModel.AMOUNT,
@@ -44,11 +43,10 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
         List<CurrencyValueModel> SaveCurrencyValue = new ArrayList<>();
         try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
             for (CurrencyValueModel currencyValueModel : toSave){
-                preparedStatement.setInt(1,currencyValueModel.getId());
-                preparedStatement.setInt(2, currencyValueModel.getId_currency_source());
-                preparedStatement.setInt(3, currencyValueModel.getId_currency_destination());
-                preparedStatement.setBigDecimal(4, currencyValueModel.getAmount());
-                preparedStatement.setDate(5, currencyValueModel.getDate_effet());
+                preparedStatement.setInt(1, currencyValueModel.getId_currency_source());
+                preparedStatement.setInt(2, currencyValueModel.getId_currency_destination());
+                preparedStatement.setBigDecimal(3, currencyValueModel.getAmount());
+                preparedStatement.setDate(4, Date.valueOf(currencyValueModel.getDate_effet()));
                 int rowAffected = preparedStatement.executeUpdate();
                 if (rowAffected > 0){
                     SaveCurrencyValue.add(currencyValueModel);
@@ -75,7 +73,7 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
             preparedStatement.setInt(2, toSave.getId_currency_source());
             preparedStatement.setInt(3, toSave.getId_currency_destination());
             preparedStatement.setBigDecimal(4 , toSave.getAmount());
-            preparedStatement.setDate(5, toSave.getDate_effet());
+            preparedStatement.setDate(5, Date.valueOf(toSave.getDate_effet()));
         }
 
         return toSave;
@@ -105,7 +103,7 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
                     resultSet.getInt(CurrencyValueModel.ID_CURRENCY_SOURCE),
                     resultSet.getInt(CurrencyValueModel.ID_CURRENCY_DESTINATION),
                     resultSet.getBigDecimal(CurrencyValueModel.AMOUNT),
-                    resultSet.getDate(CurrencyValueModel.DATE_EFFET)
+                    resultSet.getDate(CurrencyValueModel.DATE_EFFET).toLocalDate()
             ));
         }
 
