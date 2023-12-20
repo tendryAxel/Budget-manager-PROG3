@@ -125,12 +125,14 @@ public class TransactionModel {
     @Override
     public String toString() {
         return "TransactionModel{" +
-                "id=" + id_transaction +
+                "id_transaction=" + id_transaction +
                 ", label='" + label + '\'' +
                 ", amount=" + amount +
                 ", transaction_date=" + transaction_date +
                 ", type=" + type +
                 ", id_account=" + id_account +
+                ", id_currency=" + id_currency +
+                ", id_subcategory=" + id_subcategory +
                 '}';
     }
 }
