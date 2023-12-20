@@ -31,6 +31,8 @@ public class CurrencyValueModel {
         this.date_effet = date_effet;
     }
 
+    public CurrencyValueModel() {}
+
 
     public int getId() {
         return id;
