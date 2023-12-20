@@ -4,8 +4,6 @@ import model.*;
 import repository.*;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -69,7 +67,7 @@ public class AccountService {
         return allTransaction.stream().reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
     }
 
-    public BigDecimal getActualBalanceBetween(int id_account, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
+    public BigDecimal getBalanceBetween(int id_account, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
         return sumOfTransaction(transactionCrudOperation.findAllByIdAccount(id_account), startDate, endDate);
     }
 

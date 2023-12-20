@@ -102,13 +102,15 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         @Override
         public TransactionModel save(TransactionModel toSave)  {
             String sql = String.format(
-                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?) RETURNING %s",
+                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s,%s) VALUES(?,?,?,?,?,?) RETURNING %s",
                     TransactionModel.TABLE_NAME,
                     TransactionModel.LABEL,
                     TransactionModel.AMOUNT,
                     TransactionModel.TRANSACTION_DATE,
                     TransactionModel.TYPE,
                     TransactionModel.ID_ACCOUNT,
+                    TransactionModel.ID_SUBCATEGORY,
+                    TransactionModel.ID_CURRENCY,
                     TransactionModel.ID
             );
             try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
@@ -117,6 +119,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
                 preparedStatement.setTimestamp(3, Timestamp.valueOf(toSave.getTransaction_date()));
                 preparedStatement.setObject(4, toSave.getType() ,Types.OTHER);
                 preparedStatement.setInt(5,toSave.getId_account());
+                preparedStatement.setInt(6, toSave.getId_currency());
 
                 ResultSet resultSet = preparedStatement.executeQuery();
                 resultSet.next();
@@ -271,6 +274,7 @@ public class TransactionCrudOperation implements CrudOperations<TransactionModel
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println(allTransactions);
         return allTransactions;
     }
 
