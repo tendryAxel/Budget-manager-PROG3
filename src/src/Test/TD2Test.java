@@ -3,7 +3,6 @@ package Test;
 import services.AccountService;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import static repository.FunctionReturnAmount.getSumAmount;
@@ -45,7 +44,7 @@ public class TD2Test {
         System.out.println("");
         System.out.println("Exercise 4: use java function like the last sql function");
 
-        System.out.println(accountService.getActualBalanceBetween(
+        System.out.println(accountService.getBalanceBetween(
                 1,
                 localDateTime1,
                 localDatetime2
