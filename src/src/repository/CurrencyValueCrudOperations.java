@@ -59,7 +59,7 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
     @Override
     public CurrencyValueModel save(CurrencyValueModel toSave) throws SQLException {
         String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s,%s,%s) VALUES (?,?,?,?,?)",
+                "INSERT INTO \"%s\" (%s,%s,%s,%s) VALUES (?,?,?,?,?) RETURNING id",
                 CurrencyValueModel.TABLE_NAME,
                 CurrencyValueModel.ID,
                 CurrencyValueModel.ID_CURRENCY_SOURCE,
@@ -68,12 +68,19 @@ public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValue
                 CurrencyValueModel.DATE_EFFET
         );
 
-        try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
+        try {
+            PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
             preparedStatement.setInt(1,toSave.getId());
             preparedStatement.setInt(2, toSave.getId_currency_source());
             preparedStatement.setInt(3, toSave.getId_currency_destination());
             preparedStatement.setBigDecimal(4 , toSave.getAmount());
             preparedStatement.setDate(5, Date.valueOf(toSave.getDate_effet()));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            toSave.setId(resultSet.getInt("id"));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return toSave;
