@@ -1,6 +1,6 @@
 package model;
 
-public class CurrencyModel {
+public class CurrencyModel extends DefaultModel {
   private   int id_currency;
    private String name;
    private String code;

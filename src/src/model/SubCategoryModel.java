@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Timestamp;
 
-public class SubCategoryModel {
+public class SubCategoryModel extends DefaultModel {
     private   int id_subcategory;
     private String name;
     private TransactionType type;

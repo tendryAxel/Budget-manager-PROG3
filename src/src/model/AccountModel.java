@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class AccountModel {
+public class AccountModel extends DefaultModel {
     private   int id_account;
     private String name;
     private LocalDateTime updateDate;

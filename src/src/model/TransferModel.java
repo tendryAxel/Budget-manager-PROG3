@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 
-public class TransferModel {
+public class TransferModel extends DefaultModel {
     int id;
     int transactionDebtor;
     int transactionCredit;

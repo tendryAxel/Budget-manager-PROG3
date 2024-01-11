@@ -4,7 +4,7 @@ package model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class TransactionModel {
+public class TransactionModel extends DefaultModel {
     public int getId_transaction() {
         return id_transaction;
     }

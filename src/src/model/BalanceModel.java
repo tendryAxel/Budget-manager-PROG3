@@ -3,7 +3,7 @@ package model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class BalanceModel {
+public class BalanceModel extends DefaultModel{
     private int id_account;
     private LocalDateTime datetime;
     private BigDecimal value;

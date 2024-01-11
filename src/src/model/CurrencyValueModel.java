@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class CurrencyValueModel {
+public class CurrencyValueModel extends DefaultModel {
 
 
     public static final String TABLE_NAME = "currency-value";

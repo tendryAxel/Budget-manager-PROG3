@@ -1,6 +1,6 @@
 package model;
 
-public class CategoryModel {
+public class CategoryModel extends DefaultModel {
     private int id_category;
     private String name;
 
