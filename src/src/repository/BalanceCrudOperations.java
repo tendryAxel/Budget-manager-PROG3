@@ -1,84 +1,29 @@
 package repository;
 
-
-import model.AccountModel;
-import model.AccountType;
 import model.BalanceModel;
+import utils.PreparedStatementStep;
 
-import java.math.BigDecimal;
+import java.lang.reflect.InvocationTargetException;
+
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.lang.String.*;
 
 public class BalanceCrudOperations extends CrudOperationsImpl<BalanceModel> {
-
     @Override
-    public List<BalanceModel> findAll() throws SQLException {
-        String sql = String.format(
-                "SELECT * FROM \"%s\"",
-                BalanceModel.TABLE_NAME
-        );
-        List<BalanceModel> AllBalances = new ArrayList<>();
-        ResultSet resultSet = connectionDB.getConnection().prepareStatement(sql).executeQuery();
-        while (resultSet.next()){
-            AllBalances.add(new BalanceModel(
-                    resultSet.getInt(BalanceModel.ID_ACCOUNT),
-                    resultSet.getTimestamp(BalanceModel.DATETIME).toLocalDateTime(),
-                    resultSet.getBigDecimal(BalanceModel.VALUE)
-            ));
-        }
-        return AllBalances;
+    public BalanceModel createT(ResultSet resultSet) throws SQLException {
+     return new BalanceModel(
+             resultSet.getInt(BalanceModel.ID_ACCOUNT),
+             resultSet.getTimestamp(BalanceModel.DATETIME).toLocalDateTime(),
+             resultSet.getBigDecimal(BalanceModel.VALUE)
+     );
     }
 
     @Override
-    public List<BalanceModel> saveAll(List<BalanceModel> toSave) throws SQLException {
-        String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s,%s) VALUES (?,?,?)",
-                BalanceModel.TABLE_NAME,
-                BalanceModel.ID_ACCOUNT,
-                BalanceModel.DATETIME,
-                BalanceModel.VALUE
-        );
-        List<BalanceModel> SaveBalance = new ArrayList<>();
-        try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-            for (BalanceModel balanceModel : toSave){
-                preparedStatement.setInt(1, balanceModel.getId_account());
-                preparedStatement.setTimestamp(2, Timestamp.valueOf(balanceModel.getDatetime()));
-                preparedStatement.setBigDecimal(3,balanceModel.getValue());
-                int rowAffected = preparedStatement.executeUpdate();
-                if (rowAffected > 0){
-                    SaveBalance.add(balanceModel);
-                }
-            }
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        return SaveBalance;
-    }
-
-    @Override
-    public BalanceModel save(BalanceModel toSave) throws SQLException {
-        String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
-                BalanceModel.TABLE_NAME,
-                BalanceModel.ID_ACCOUNT,
-                BalanceModel.DATETIME,
-                BalanceModel.VALUE
-        );
-        try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-            preparedStatement.setInt(1, toSave.getId_account());
-            preparedStatement.setTimestamp(2, Timestamp.valueOf(toSave.getDatetime()));
-            preparedStatement.setBigDecimal(3,toSave.getValue());
-            preparedStatement.executeUpdate();
-
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        return toSave;
+    public PreparedStatement createT(PreparedStatementStep pr, BalanceModel model) throws SQLException, InvocationTargetException, IllegalAccessException {
+        PreparedStatement preparedStatement = pr.getPreparedStatement();
+        preparedStatement.setInt(1, model.getId_account());
+        preparedStatement.setTimestamp(2, Timestamp.valueOf(model.getDatetime()));
+        preparedStatement.setBigDecimal(3,model.getValue());
+        return preparedStatement;
     }
 
     public BalanceModel findLastBalanceOf(int id_account) throws SQLException {
@@ -97,5 +42,15 @@ public class BalanceCrudOperations extends CrudOperationsImpl<BalanceModel> {
                 resultSet.getTimestamp(BalanceModel.DATETIME).toLocalDateTime(),
                 resultSet.getBigDecimal(BalanceModel.VALUE)
         );
+    }
+
+    @Override
+    public BalanceModel findById(Integer id) {
+        return super.findById(id);
+    }
+
+    @Override
+    public BalanceModel delete(Integer id){
+        return super.delete(id);
     }
 }
