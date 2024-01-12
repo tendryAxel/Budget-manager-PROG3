@@ -1,77 +1,29 @@
 package repository;
-
-import model.AccountModel;
 import model.CurrencyModel;
+import utils.PreparedStatementStep;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.*;
+;
 
 public class CurrencyCrudOperations extends CrudOperationsImpl<CurrencyModel> {
+
     @Override
-    public List<CurrencyModel> findAll() throws SQLException {
-        String sql = String.format(
-                "SELECT * FROM \"%s\"",
-                CurrencyModel.TABLE_NAME
+    public CurrencyModel createT(ResultSet resultSet) throws SQLException {
+        return  new CurrencyModel(
+                resultSet.getInt(CurrencyModel.ID),
+                resultSet.getString(CurrencyModel.NAME),
+                resultSet.getString(CurrencyModel.CODE)
         );
-        List<CurrencyModel> AllCurrency = new ArrayList<>();
-
-        ResultSet resultSet = connectionDB.getConnection().prepareStatement(sql).executeQuery();
-        while (resultSet.next()){
-            AllCurrency.add(new CurrencyModel(
-                    resultSet.getInt(CurrencyModel.ID),
-                    resultSet.getString(CurrencyModel.NAME),
-                    resultSet.getString(CurrencyModel.CODE)
-            ));
-        }
-        return AllCurrency;
-    }
-
-    public List<CurrencyModel> saveAll(List<CurrencyModel> toSave)  {
-        String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
-                CurrencyModel.TABLE_NAME,
-                CurrencyModel.NAME,
-                CurrencyModel.CODE
-        );
-        List<CurrencyModel> SaveCurrency = new ArrayList<>();
-        try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-            for (CurrencyModel currencyModel : toSave){
-                preparedStatement.setString(1, currencyModel.getName());
-                preparedStatement.setString(2 , currencyModel.getCode());
-                int rowsAffected = preparedStatement.executeUpdate();
-                if (rowsAffected > 0) {
-                    SaveCurrency.add(currencyModel);
-                }
-            }
-        }
-        catch (SQLException e){
-            throw new RuntimeException();
-        }
-        return SaveCurrency;
     }
 
     @Override
-    public CurrencyModel save(CurrencyModel toSave)  {
-        String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s) VALUES (?,?)",
-                CurrencyModel.TABLE_NAME,
-                CurrencyModel.NAME,
-                CurrencyModel.CODE
-        );
-        try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-            preparedStatement.setString(1,toSave.getName());
-            preparedStatement.setString(2 ,toSave.getCode());
-            preparedStatement.executeUpdate();
-        }
-        catch (SQLException e){
-          e.printStackTrace();
-        }
-        return toSave;
+    public PreparedStatement createT(PreparedStatementStep pr, CurrencyModel model) throws SQLException, InvocationTargetException, IllegalAccessException {
+        PreparedStatement preparedStatement = pr.getPreparedStatement();
+        preparedStatement.setString(1, model.getName());
+        preparedStatement.setString(2 , model.getCode());
+        return preparedStatement;
     }
-
 
     public int getAccountCurrency(int id_account) throws SQLException {
         String sql = String.format(
@@ -84,5 +36,16 @@ public class CurrencyCrudOperations extends CrudOperationsImpl<CurrencyModel> {
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         return resultSet.getInt("id_currency");
+    }
+
+
+    @Override
+    public CurrencyModel findById(Integer id) {
+        return super.findById(id);
+    }
+
+    @Override
+    public CurrencyModel delete(Integer id){
+        return super.delete(id);
     }
 }
