@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TransactionCrudOperation implements CrudOperations<TransactionModel>{
+public class TransactionCrudOperation extends CrudOperationsImpl<TransactionModel> {
 
      public static BalanceModel getBalanceAtDateTime(AccountModel accountModel, Timestamp transaction_date) {
         try {

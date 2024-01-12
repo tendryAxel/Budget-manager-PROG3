@@ -12,7 +12,7 @@ import java.util.List;
 
 import static java.lang.String.*;
 
-public class BalanceCrudOperations implements CrudOperations <BalanceModel>{
+public class BalanceCrudOperations extends CrudOperationsImpl<BalanceModel> {
 
     @Override
     public List<BalanceModel> findAll() throws SQLException {

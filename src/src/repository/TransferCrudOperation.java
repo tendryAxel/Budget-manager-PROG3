@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransferCrudOperation implements CrudOperations<TransferModel>{
+public class TransferCrudOperation extends CrudOperationsImpl<TransferModel> {
     @Override
     public List<TransferModel> findAll() throws SQLException {
         String sql = String.format(

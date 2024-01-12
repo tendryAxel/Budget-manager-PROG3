@@ -5,8 +5,10 @@ import model.DefaultModel;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CrudOperations<T extends DefaultModel> {
-    List<T> findAll() throws SQLException;
-    List<T> saveAll(List<T> toSave) throws SQLException;
-    T save(T toSave) throws SQLException;
+public interface CrudOperations<T extends DefaultModel, ID> {
+    List<T> findAll();
+    List<T> saveAll(List<T> toSave);
+    T save(T toSave);
+    T findById(ID id);
+    T delete(ID id);
 }

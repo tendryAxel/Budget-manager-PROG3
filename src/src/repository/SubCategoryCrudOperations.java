@@ -10,7 +10,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubCategoryCrudOperations implements CrudOperations <SubCategoryModel>{
+public class SubCategoryCrudOperations extends CrudOperationsImpl<SubCategoryModel> {
     @Override
     public List<SubCategoryModel> findAll() throws SQLException {
         String sql = String.format(
