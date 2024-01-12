@@ -12,13 +12,8 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
     public T createT(ResultSet resultSet){
         return null;
     };
-    public PreparedStatement createT(PreparedStatementStep pr){
-        /**
-         * To add another column value :
-         *      pr.addValue()
-         * For every column
-         */
-        return pr.getPreparedStatement();
+    public PreparedStatement createT(PreparedStatement pr){
+        return pr;
     };
     public String createInsertQuery(List<String> columns){
         String result = String.format(
@@ -64,7 +59,7 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
     public T save(T toSave) throws SQLException {
         String sql = createInsertQuery(new ArrayList<>());
         try {
-            PreparedStatementStep pr = new PreparedStatementStep(connectionDB.getConnection().prepareStatement(sql));
+            PreparedStatement pr = connectionDB.getConnection().prepareStatement(sql);
 
             createT(pr).executeUpdate();
 
