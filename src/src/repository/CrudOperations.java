@@ -10,4 +10,5 @@ public interface CrudOperations<T extends DefaultModel> {
     List<T> saveAll(List<T> toSave) throws SQLException;
     T save(T toSave) throws SQLException;
     T findById(int id) throws SQLException;
+    T delete(int id) throws SQLException;
 }

@@ -95,4 +95,22 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
         }
         return null;
     }
+
+    @Override
+    public T delete(int id) throws SQLException {
+        T toDelete = findById(id);
+        String sql = String.format(
+                "DELETE FROM \"%s\" WHERE \"%s\".\"%s\" = ? ",
+                T.TABLE_NAME,
+                T.TABLE_NAME,
+                T.ID
+        );
+        PreparedStatementStep pr = new PreparedStatementStep(connectionDB.getConnection().prepareStatement(sql));
+        pr.addValue(id);
+        int result = pr.getPreparedStatement().executeUpdate();
+        if (result == 1) {
+            return toDelete;
+        }
+        return null;
+    }
 }
