@@ -21,16 +21,19 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
         return pr.getPreparedStatement();
     };
     public String createInsertQuery(List<String> columns){
+        return createInsertQuery(columns.size());
+    }
+    public String createInsertQuery(int columnsCount){
         String result = String.format(
                 "INSERT INTO \"%s\" (",
                 T.TABLE_NAME
         );
-        for (String element : columns){
+        for (int i = 0; i<columnsCount; i++){
             result += "%s,";
         }
         result = result.substring(0, result.length()-1);
         result += ") VALUES (";
-        for (String element : columns){
+        for (int i = 0; i<columnsCount; i++){
             result += "?,";
         }
         result = result.substring(0, result.length()-1);
