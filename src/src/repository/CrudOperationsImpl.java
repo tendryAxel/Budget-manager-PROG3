@@ -41,6 +41,7 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
         return result;
     }
 
+
     @Override
     public List<T> findAll() throws SQLException {
         String sql = String.format(
@@ -74,6 +75,23 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
             return toSave;
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public T findById(int id) throws SQLException {
+        String sql = String.format(
+                "SELECT * FROM \"%s\" WHERE \"%s\".\"%s\" = ? ",
+                T.TABLE_NAME,
+                T.TABLE_NAME,
+                T.ID
+        );
+        PreparedStatementStep pr = new PreparedStatementStep(connectionDB.getConnection().prepareStatement(sql));
+        pr.addValue(id);
+        ResultSet resultSet = pr.getPreparedStatement().executeQuery();
+        while (resultSet.next()){
+            return createT(resultSet);
         }
         return null;
     }
