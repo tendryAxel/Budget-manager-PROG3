@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrencyValueCrudOperations implements CrudOperations<CurrencyValueModel>{
+public class CurrencyValueCrudOperations extends CrudOperationsImpl<CurrencyValueModel> {
     @Override
     public List<CurrencyValueModel> findAll() throws SQLException {
         String sql = String.format(

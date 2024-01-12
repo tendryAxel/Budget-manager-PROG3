@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrencyCrudOperations implements CrudOperations<CurrencyModel>{
+public class CurrencyCrudOperations extends CrudOperationsImpl<CurrencyModel> {
     @Override
     public List<CurrencyModel> findAll() throws SQLException {
         String sql = String.format(

@@ -1,15 +1,26 @@
 package model;
 
+import utils.ColumnType;
+import utils.annotations.Column;
+import utils.annotations.GetColumn;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import static utils.ColumnType.*;
+
 public class AccountModel extends DefaultModel {
+    @Column
     private   int id_account;
+    @Column
     private String name;
+    @Column
     private LocalDateTime updateDate;
+    @Column
     private    int id_currency;
+    @Column
     private AccountType type;
 
     public static final String TABLE_NAME = "account";
@@ -27,6 +38,7 @@ public class AccountModel extends DefaultModel {
         this.type = type;
     }
 
+    @GetColumn(type = INT)
     public int getId() {
         return id_account;
     }
@@ -35,6 +47,7 @@ public class AccountModel extends DefaultModel {
         this.id_account = id;
     }
 
+    @GetColumn(type = STRING)
     public String getName() {
         return name;
     }
@@ -43,6 +56,7 @@ public class AccountModel extends DefaultModel {
         this.name = name;
     }
 
+    @GetColumn(type = LOCAL_DATETIME)
     public LocalDateTime getUpdateDate() {
         return updateDate;
     }
@@ -51,6 +65,7 @@ public class AccountModel extends DefaultModel {
         this.updateDate = updateDate;
     }
 
+    @GetColumn(type = INT)
     public int getId_currency() {
         return id_currency;
     }
@@ -59,6 +74,7 @@ public class AccountModel extends DefaultModel {
         this.id_currency = id_currency;
     }
 
+    @GetColumn(type = ACCOUNT_TYPE)
     public AccountType getType() {
         return type;
     }

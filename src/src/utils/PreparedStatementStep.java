@@ -2,10 +2,8 @@ package utils;
 
 import model.AccountType;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.sql.Types;
+import java.lang.reflect.Type;
+import java.sql.*;
 import java.time.LocalDateTime;
 
 public class PreparedStatementStep {
@@ -19,6 +17,23 @@ public class PreparedStatementStep {
     public PreparedStatement getPreparedStatement() {
         return preparedStatement;
     }
+    public PreparedStatementStep addValues(Object value, ColumnType type) throws SQLException {
+        switch (type){
+            case INT -> {
+                return addValue((int) value);
+            }
+            case STRING -> {
+                return addValue((String) value);
+            }
+            case LOCAL_DATETIME -> {
+                return addValue((LocalDateTime) value);
+            }
+            case ACCOUNT_TYPE -> {
+                return addValue((AccountType) value);
+            }
+        }
+        return null;
+    };
 
     public PreparedStatementStep addValue(int value) throws SQLException {
         preparedStatement.setInt(index, value);
