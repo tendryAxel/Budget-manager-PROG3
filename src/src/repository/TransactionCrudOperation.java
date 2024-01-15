@@ -1,6 +1,8 @@
 package repository;
 import model.*;
+import utils.PreparedStatementStep;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.sql.PreparedStatement;
@@ -14,8 +16,43 @@ import java.util.List;
 
 
 public class TransactionCrudOperation extends CrudOperationsImpl<TransactionModel> {
+    @Override
+    public TransactionModel findById(Integer id) {
+        return super.findById(id);
+    }
 
-     public static BalanceModel getBalanceAtDateTime(AccountModel accountModel, Timestamp transaction_date) {
+    @Override
+    public TransactionModel delete(Integer id) {
+        return super.delete(id);
+    }
+
+    @Override
+    public TransactionModel createT(ResultSet resultSet) throws SQLException {
+        return new TransactionModel(
+                resultSet.getInt(TransactionModel.ID),
+                resultSet.getString(TransactionModel.LABEL),
+                resultSet.getBigDecimal(TransactionModel.AMOUNT),
+                resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
+                TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
+                resultSet.getInt(TransactionModel.ID_ACCOUNT),
+                resultSet.getInt(TransactionModel.ID_CURRENCY),
+                resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
+        );
+    }
+
+    @Override
+    public PreparedStatement createT(PreparedStatementStep pr, TransactionModel model) throws SQLException, InvocationTargetException, IllegalAccessException {
+        PreparedStatement preparedStatement = pr.getPreparedStatement();
+        preparedStatement.setString(1,model.getLabel());
+        preparedStatement.setBigDecimal(2,model.getAmount());
+        preparedStatement.setTimestamp(3, Timestamp.valueOf(model.getTransaction_date()));
+        preparedStatement.setObject(4, model.getType() ,Types.OTHER);
+        preparedStatement.setInt(5,model.getId_account());
+        preparedStatement.setInt(6, model.getId_currency());
+        return preparedStatement;
+    }
+
+    public static BalanceModel getBalanceAtDateTime(AccountModel accountModel, Timestamp transaction_date) {
         try {
             String sql = String.format(
                     "SELECT * FROM \"%s\" WHERE %s = ? AND %s <= ? ORDER BY %s DESC LIMIT 1",
@@ -40,96 +77,6 @@ public class TransactionCrudOperation extends CrudOperationsImpl<TransactionMode
         }
          return null;
      }
-
-
-
-    public List<TransactionModel> findAll() {
-        String sql = String.format(
-                "SELECT * FROM \"%s\"",
-                TransactionModel.TABLE_NAME
-        );
-        List<TransactionModel> allTransactions = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                allTransactions.add(new TransactionModel(
-                        resultSet.getInt(TransactionModel.ID),
-                        resultSet.getString(TransactionModel.LABEL),
-                        resultSet.getBigDecimal(TransactionModel.AMOUNT),
-                        resultSet.getTimestamp(TransactionModel.TRANSACTION_DATE).toLocalDateTime(),
-                        TransactionType.valueOf(resultSet.getString(TransactionModel.TYPE)),
-                        resultSet.getInt(TransactionModel.ID_ACCOUNT),
-                        resultSet.getInt(TransactionModel.ID_CURRENCY),
-                        resultSet.getInt(TransactionModel.ID_SUBCATEGORY)
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return allTransactions;
-    }
-
-
-
-    @Override
-    public List<TransactionModel> saveAll(List<TransactionModel> toSave) {
-        String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s,%s,%s,%s) VALUES(?,?,?,?,?)",
-                TransactionModel.TABLE_NAME,
-                TransactionModel.LABEL,
-                TransactionModel.AMOUNT,
-                TransactionModel.TRANSACTION_DATE,
-                TransactionModel.TYPE,
-                TransactionModel.ID_ACCOUNT
-        );
-        List<TransactionModel> SaveTransaction = new ArrayList<>();
-        try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-            for (TransactionModel transactionModel : toSave){
-                preparedStatement.setString(1, transactionModel.getLabel());
-                preparedStatement.setBigDecimal(2,transactionModel.getAmount());
-                preparedStatement.setTimestamp(3, Timestamp.valueOf(transactionModel.getTransaction_date()));
-                preparedStatement.setObject(4 , transactionModel.getType() , Types.OTHER);
-                preparedStatement.setInt(5,transactionModel.getId_account());
-
-            }
-        }
-        catch (SQLException e){
-            throw new RuntimeException();
-        }
-        return SaveTransaction;
-    }
-
-        @Override
-        public TransactionModel save(TransactionModel toSave)  {
-            String sql = String.format(
-                    "INSERT INTO \"%s\" (%s,%s,%s,%s,%s,%s) VALUES(?,?,?,?,?,?) RETURNING %s",
-                    TransactionModel.TABLE_NAME,
-                    TransactionModel.LABEL,
-                    TransactionModel.AMOUNT,
-                    TransactionModel.TRANSACTION_DATE,
-                    TransactionModel.TYPE,
-                    TransactionModel.ID_ACCOUNT,
-                    TransactionModel.ID_SUBCATEGORY,
-                    TransactionModel.ID_CURRENCY,
-                    TransactionModel.ID
-            );
-            try(PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-                preparedStatement.setString(1,toSave.getLabel());
-                preparedStatement.setBigDecimal(2,toSave.getAmount());
-                preparedStatement.setTimestamp(3, Timestamp.valueOf(toSave.getTransaction_date()));
-                preparedStatement.setObject(4, toSave.getType() ,Types.OTHER);
-                preparedStatement.setInt(5,toSave.getId_account());
-                preparedStatement.setInt(6, toSave.getId_currency());
-
-                ResultSet resultSet = preparedStatement.executeQuery();
-                resultSet.next();
-                toSave.setId(resultSet.getInt(TransactionModel.ID));
-            }
-            catch (SQLException e){
-                e.printStackTrace();
-            }
-            return toSave;
-        }
 
         public List<BalanceModel> findAllByIdAccountAndDate(int id, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
             String sql = String.format(
