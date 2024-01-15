@@ -25,6 +25,11 @@ public class CurrencyCrudOperations extends CrudOperationsImpl<CurrencyModel> {
         return preparedStatement;
     }
 
+    @Override
+    public Class<CurrencyModel> getClassT() {
+        return CurrencyModel.class;
+    }
+
     public int getAccountCurrency(int id_account) throws SQLException {
         String sql = String.format(
                 "SELECT %s FROM \"%s\" WHERE ?",

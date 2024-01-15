@@ -1,8 +1,14 @@
 package model;
 
+import utils.annotations.Column;
+import utils.annotations.Table;
+
+@Table(table_name = CurrencyModel.TABLE_NAME, id = CurrencyModel.ID)
 public class CurrencyModel extends DefaultModel {
   private   int id_currency;
+  @Column(name = CurrencyModel.NAME)
    private String name;
+  @Column(name = CurrencyModel.CODE)
    private String code;
 
     public static final String TABLE_NAME = "currency";

@@ -30,6 +30,11 @@ public class AccountCrudOperations extends CrudOperationsImpl <AccountModel>{
     }
 
     @Override
+    public Class<AccountModel> getClassT() {
+        return AccountModel.class;
+    }
+
+    @Override
     public AccountModel findById(Integer id) {
         return super.findById(id);
     }

@@ -1,11 +1,18 @@
 package model;
 
+import utils.annotations.Column;
+import utils.annotations.Table;
+
 import java.sql.Timestamp;
 
+@Table(table_name = SubCategoryModel.TABLE_NAME, id = SubCategoryModel.ID)
 public class SubCategoryModel extends DefaultModel {
     private   int id_subcategory;
+    @Column(name = SubCategoryModel.NAME)
     private String name;
+    @Column(name = SubCategoryModel.TYPE)
     private TransactionType type;
+    @Column(name = SubCategoryModel.ID_CATEGORY)
     private int id_category;
 
     public static final String TABLE_NAME = "subcategory";

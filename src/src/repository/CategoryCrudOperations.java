@@ -22,6 +22,11 @@ public class CategoryCrudOperations extends  CrudOperationsImpl <CategoryModel>{
     }
 
     @Override
+    public Class<CategoryModel> getClassT() {
+        return CategoryModel.class;
+    }
+
+    @Override
     public CategoryModel findById(Integer id) {
         return super.findById(id);
     }

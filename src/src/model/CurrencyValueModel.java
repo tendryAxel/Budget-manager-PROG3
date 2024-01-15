@@ -1,9 +1,13 @@
 package model;
 
+import utils.annotations.Column;
+import utils.annotations.Table;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
+@Table(table_name = CurrencyValueModel.TABLE_NAME, id = CurrencyValueModel.ID)
 public class CurrencyValueModel extends DefaultModel {
 
 
@@ -12,13 +16,17 @@ public class CurrencyValueModel extends DefaultModel {
     public static final String ID_CURRENCY_SOURCE = "id_currency_source";
     public static final String ID_CURRENCY_DESTINATION = "id_currency_destination";
     public static final String AMOUNT = "amount";
-    public static String DATE_EFFET = "date_effet";
+    public static final String DATE_EFFET = "date_effet";
 
 
     private int id;
+    @Column(name = CurrencyValueModel.ID_CURRENCY_DESTINATION)
     private int id_currency_source;
+    @Column(name = CurrencyValueModel.ID_CURRENCY_DESTINATION)
     private  int id_currency_destination;
+    @Column(name = CurrencyValueModel.AMOUNT)
     private BigDecimal amount;
+    @Column(name = CurrencyValueModel.DATE_EFFET)
     private LocalDate date_effet;
 
 

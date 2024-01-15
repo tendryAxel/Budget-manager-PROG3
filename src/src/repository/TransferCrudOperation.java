@@ -24,6 +24,11 @@ public TransferModel createT(ResultSet resultSet) throws SQLException {
     }
 
     @Override
+    public Class<TransferModel> getClassT() {
+        return TransferModel.class;
+    }
+
+    @Override
     public TransferModel findById(Integer id) {
         return super.findById(id);
     }

@@ -1,11 +1,17 @@
 package model;
 
+import utils.annotations.Column;
+import utils.annotations.Table;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Table(table_name = BalanceModel.TABLE_NAME, id = BalanceModel.ID)
 public class BalanceModel extends DefaultModel{
     private int id_account;
+    @Column(name = BalanceModel.DATETIME)
     private LocalDateTime datetime;
+    @Column(name = BalanceModel.VALUE)
     private BigDecimal value;
 
     public static final String TABLE_NAME = "balance";

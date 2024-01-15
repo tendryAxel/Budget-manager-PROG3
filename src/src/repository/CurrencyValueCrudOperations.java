@@ -34,6 +34,11 @@ public class CurrencyValueCrudOperations extends CrudOperationsImpl<CurrencyValu
     }
 
     @Override
+    public Class<CurrencyValueModel> getClassT() {
+        return CurrencyValueModel.class;
+    }
+
+    @Override
     public CurrencyValueModel findById(Integer id) {
         return super.findById(id);
     }

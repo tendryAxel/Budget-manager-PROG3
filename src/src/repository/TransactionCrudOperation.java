@@ -52,6 +52,11 @@ public class TransactionCrudOperation extends CrudOperationsImpl<TransactionMode
         return preparedStatement;
     }
 
+    @Override
+    public Class<TransactionModel> getClassT() {
+        return TransactionModel.class;
+    }
+
     public static BalanceModel getBalanceAtDateTime(AccountModel accountModel, Timestamp transaction_date) {
         try {
             String sql = String.format(

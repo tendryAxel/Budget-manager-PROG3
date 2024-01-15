@@ -1,5 +1,8 @@
 package model;
 
+import utils.annotations.Table;
+
+@Table(table_name = CategoryModel.TABLE_NAME, id = CategoryModel.ID)
 public class CategoryModel extends DefaultModel {
     private int id_category;
     private String name;

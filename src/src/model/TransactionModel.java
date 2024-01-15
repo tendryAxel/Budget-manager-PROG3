@@ -1,9 +1,13 @@
 package model;
 
 
+import utils.annotations.Column;
+import utils.annotations.Table;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Table(table_name = TransactionModel.TABLE_NAME, id = TransactionModel.ID)
 public class TransactionModel extends DefaultModel {
     public int getId_transaction() {
         return id_transaction;
@@ -30,14 +34,19 @@ public class TransactionModel extends DefaultModel {
     }
 
     private int id_transaction;
+    @Column(name = TransactionModel.LABEL)
     private String label ;
-
+    @Column(name = TransactionModel.AMOUNT)
     private BigDecimal amount;
-
+    @Column(name = TransactionModel.TRANSACTION_DATE)
     private LocalDateTime transaction_date;
+    @Column(name = TransactionModel.TYPE)
     private TransactionType type ;
+    @Column(name = TransactionModel.ID_ACCOUNT)
     private int id_account;
+    @Column(name = TransactionModel.ID_CURRENCY)
     private int id_currency;
+    @Column(name = TransactionModel.ID_SUBCATEGORY)
     private int id_subcategory;
 
     public static final String TABLE_NAME = "transaction";

@@ -3,6 +3,7 @@ package model;
 import utils.ColumnType;
 import utils.annotations.Column;
 import utils.annotations.GetColumn;
+import utils.annotations.Table;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -11,16 +12,16 @@ import java.time.LocalDateTime;
 
 import static utils.ColumnType.*;
 
+@Table(table_name = AccountModel.TABLE_NAME, id = AccountModel.ID)
 public class AccountModel extends DefaultModel {
-    @Column
     private   int id_account;
-    @Column
+    @Column(name = AccountModel.NAME)
     private String name;
-    @Column
+    @Column(name = AccountModel.UPDATEDATE)
     private LocalDateTime updateDate;
-    @Column
+    @Column(name = AccountModel.ID_CURRENCY)
     private    int id_currency;
-    @Column
+    @Column(name = AccountModel.TYPE)
     private AccountType type;
 
     public static final String TABLE_NAME = "account";

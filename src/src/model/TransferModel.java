@@ -1,11 +1,18 @@
 package model;
 
+import utils.annotations.Column;
+import utils.annotations.Table;
+
 import java.time.LocalDateTime;
 
+@Table(table_name = TransferModel.TABLE_NAME, id = TransferModel.ID)
 public class TransferModel extends DefaultModel {
     int id;
+    @Column(name = TransferModel.ID_DEBIT)
     int transactionDebtor;
+    @Column(name = TransferModel.ID_CREDIT)
     int transactionCredit;
+    @Column(name = TransferModel.TRANSFER_DATE)
     LocalDateTime datetime;
 
     public static final String TABLE_NAME = "transfert";

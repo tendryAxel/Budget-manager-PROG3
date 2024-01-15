@@ -33,6 +33,11 @@ public class SubCategoryCrudOperations extends CrudOperationsImpl<SubCategoryMod
     }
 
     @Override
+    public Class<SubCategoryModel> getClassT() {
+        return SubCategoryModel.class;
+    }
+
+    @Override
     public SubCategoryModel findById(Integer id) {
         return super.findById(id);
     }

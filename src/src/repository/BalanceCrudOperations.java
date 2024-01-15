@@ -26,6 +26,11 @@ public class BalanceCrudOperations extends CrudOperationsImpl<BalanceModel> {
         return preparedStatement;
     }
 
+    @Override
+    public Class<BalanceModel> getClassT() {
+        return BalanceModel.class;
+    }
+
     public BalanceModel findLastBalanceOf(int id_account) throws SQLException {
         String sql = String.format(
                 "SELECT * FROM \"%s\" WHERE %s = ? ORDER BY %s DESC LIMIT 1 ",

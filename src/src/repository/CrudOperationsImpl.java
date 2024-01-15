@@ -4,12 +4,15 @@ import model.DefaultModel;
 import utils.PreparedStatementStep;
 import utils.annotations.Column;
 import utils.annotations.GetColumn;
+import utils.annotations.Table;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperations<T, Integer> {
@@ -29,34 +32,40 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
         }
         return pr.getPreparedStatement();
     };
-    public String createInsertQuery(List<String> columns){
-        return createInsertQuery(columns.size());
-    }
     public String createInsertQuery(){
-        return createInsertQuery(getListColumn().size());
+        return createInsertQuery(getListColumn());
     }
-    public String createInsertQuery(int columnsCount){
+    protected String getTableName(){
+        Table a = getClassT().getAnnotation(Table.class);
+        return a.table_name();
+    };
+    protected String getId(){
+        Table a = getClassT().getAnnotation(Table.class);
+        return a.id();
+    };
+    public String createInsertQuery(List<String> columns){
         String result = String.format(
                 "INSERT INTO \"%s\" (",
-                T.TABLE_NAME
+                getTableName()
         );
-        for (int i = 0; i<columnsCount; i++){
-            result += "%s,";
+        for (String column : columns){
+            result += column + ",";
         }
         result = result.substring(0, result.length()-1);
         result += ") VALUES (";
-        for (int i = 0; i<columnsCount; i++){
+        for (String column : columns){
             result += "?,";
         }
         result = result.substring(0, result.length()-1);
         result += ")";
         return result;
     }
-    public List<Field> getListColumn(){
-        List<Field> result = new ArrayList<>();
-        for (Field f : getClassT().getFields()){
+    public List<String> getListColumn(){
+        List<String> result = new ArrayList<>();
+        for (Field f : getClassT().getDeclaredFields()){
             if (f.isAnnotationPresent(Column.class)){
-                result.add(f);
+                String cName = f.getAnnotation(Column.class).name();
+                result.add(cName);
             }
         }
         return result;
@@ -67,7 +76,7 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
     public List<T> findAll(){
         String sql = String.format(
                 "SELECT * FROM \"%s\"",
-                T.TABLE_NAME
+                getTableName()
         );
         List<T> AllData = new ArrayList<>();
         ResultSet resultSet = null;
@@ -101,7 +110,7 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
 
     @Override
     public T save(T toSave){
-        String sql = createInsertQuery(0);
+        String sql = createInsertQuery();
         try {
             PreparedStatementStep pr = new PreparedStatementStep(connectionDB.getConnection().prepareStatement(sql));
 
@@ -120,9 +129,9 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
     public T findById(Integer id){
         String sql = String.format(
                 "SELECT * FROM \"%s\" WHERE \"%s\".\"%s\" = ? ",
-                T.TABLE_NAME,
-                T.TABLE_NAME,
-                T.ID
+                getTableName(),
+                getTableName(),
+                getId()
         );
         PreparedStatementStep pr = null;
         try {
@@ -162,9 +171,9 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
             T toDelete = findById(id);
             String sql = String.format(
                     "DELETE FROM \"%s\" WHERE \"%s\".\"%s\" = ? ",
-                    T.TABLE_NAME,
-                    T.TABLE_NAME,
-                    T.ID
+                    getTableName(),
+                    getTableName(),
+                    getId()
             );
             PreparedStatementStep pr = new PreparedStatementStep(connectionDB.getConnection().prepareStatement(sql));
             pr.addValue(id);
