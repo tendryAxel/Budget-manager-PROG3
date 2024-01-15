@@ -1,6 +1,8 @@
 package repository;
 import model.CurrencyValueModel;
+import utils.PreparedStatementStep;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,80 +12,35 @@ import java.util.List;
 
 public class CurrencyValueCrudOperations extends CrudOperationsImpl<CurrencyValueModel> {
     @Override
-    public List<CurrencyValueModel> findAll() throws SQLException {
-        String sql = String.format(
-                "SELECT * FROM \"%s\"",
-                CurrencyValueModel.TABLE_NAME
+    public CurrencyValueModel createT(ResultSet resultSet) throws SQLException {
+        return new CurrencyValueModel(
+                resultSet.getInt(CurrencyValueModel.ID),
+                resultSet.getInt(CurrencyValueModel.ID_CURRENCY_SOURCE),
+                resultSet.getInt(CurrencyValueModel.ID_CURRENCY_DESTINATION),
+                resultSet.getBigDecimal(CurrencyValueModel.AMOUNT),
+                resultSet.getDate(CurrencyValueModel.DATE_EFFET).toLocalDate()
         );
-        List<CurrencyValueModel> AllCurrencyValue = new ArrayList<>();
-        ResultSet resultSet = connectionDB.getConnection().prepareStatement(sql).executeQuery();
-        while (resultSet.next()){
-            AllCurrencyValue.add(new CurrencyValueModel(
-                   resultSet.getInt(CurrencyValueModel.ID),
-                    resultSet.getInt(CurrencyValueModel.ID_CURRENCY_SOURCE),
-                    resultSet.getInt(CurrencyValueModel.ID_CURRENCY_DESTINATION),
-                    resultSet.getBigDecimal(CurrencyValueModel.AMOUNT),
-                    resultSet.getDate(CurrencyValueModel.DATE_EFFET).toLocalDate()
-            ));
-        }
-        return AllCurrencyValue;
     }
 
     @Override
-    public List<CurrencyValueModel> saveAll(List<CurrencyValueModel> toSave) throws SQLException {
-        String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s,%s,%s) VALUES (?,?,?,?)",
-                CurrencyValueModel.TABLE_NAME,
-                CurrencyValueModel.ID_CURRENCY_SOURCE,
-                CurrencyValueModel.ID_CURRENCY_DESTINATION,
-                CurrencyValueModel.AMOUNT,
-                CurrencyValueModel.DATE_EFFET
-        );
-        System.out.println(sql);
-        List<CurrencyValueModel> SaveCurrencyValue = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql)){
-            for (CurrencyValueModel currencyValueModel : toSave){
-                preparedStatement.setInt(1, currencyValueModel.getId_currency_source());
-                preparedStatement.setInt(2, currencyValueModel.getId_currency_destination());
-                preparedStatement.setBigDecimal(3, currencyValueModel.getAmount());
-                preparedStatement.setDate(4, Date.valueOf(currencyValueModel.getDate_effet()));
-                int rowAffected = preparedStatement.executeUpdate();
-                if (rowAffected > 0){
-                    SaveCurrencyValue.add(currencyValueModel);
-                }
-            }
-        }
-        return SaveCurrencyValue;
+    public PreparedStatement createT(PreparedStatementStep pr, CurrencyValueModel model) throws SQLException, InvocationTargetException, IllegalAccessException {
+        PreparedStatement preparedStatement = pr.getPreparedStatement();
+        preparedStatement.setInt(1,model.getId());
+        preparedStatement.setInt(2, model.getId_currency_source());
+        preparedStatement.setInt(3, model.getId_currency_destination());
+        preparedStatement.setBigDecimal(4 , model.getAmount());
+        preparedStatement.setDate(5, Date.valueOf(model.getDate_effet()));
+        return preparedStatement;
     }
 
     @Override
-    public CurrencyValueModel save(CurrencyValueModel toSave) throws SQLException {
-        String sql = String.format(
-                "INSERT INTO \"%s\" (%s,%s,%s,%s) VALUES (?,?,?,?,?) RETURNING id",
-                CurrencyValueModel.TABLE_NAME,
-                CurrencyValueModel.ID,
-                CurrencyValueModel.ID_CURRENCY_SOURCE,
-                CurrencyValueModel.ID_CURRENCY_DESTINATION,
-                CurrencyValueModel.AMOUNT,
-                CurrencyValueModel.DATE_EFFET
-        );
+    public CurrencyValueModel findById(Integer id) {
+        return super.findById(id);
+    }
 
-        try {
-            PreparedStatement preparedStatement = connectionDB.getConnection().prepareStatement(sql);
-            preparedStatement.setInt(1,toSave.getId());
-            preparedStatement.setInt(2, toSave.getId_currency_source());
-            preparedStatement.setInt(3, toSave.getId_currency_destination());
-            preparedStatement.setBigDecimal(4 , toSave.getAmount());
-            preparedStatement.setDate(5, Date.valueOf(toSave.getDate_effet()));
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            toSave.setId(resultSet.getInt("id"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return toSave;
+    @Override
+    public CurrencyValueModel delete(Integer id) {
+        return super.delete(id);
     }
 
     public List<CurrencyValueModel> findByDateAndCurrency(LocalDate date, int id_source, int id_destination) throws SQLException {
