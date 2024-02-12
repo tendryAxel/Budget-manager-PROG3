@@ -1,5 +1,6 @@
 package model;
 
+import jdk.jfr.Description;
 import utils.ColumnType;
 import utils.annotations.Column;
 import utils.annotations.GetColumn;

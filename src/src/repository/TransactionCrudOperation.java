@@ -49,6 +49,7 @@ public class TransactionCrudOperation extends CrudOperationsImpl<TransactionMode
         preparedStatement.setObject(4, model.getType() ,Types.OTHER);
         preparedStatement.setInt(5,model.getId_account());
         preparedStatement.setInt(6, model.getId_currency());
+        preparedStatement.setInt(7, model.getId_subcategory());
         return preparedStatement;
     }
 

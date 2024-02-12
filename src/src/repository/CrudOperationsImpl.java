@@ -111,6 +111,7 @@ public class CrudOperationsImpl<T extends DefaultModel> implements CrudOperation
     @Override
     public T save(T toSave){
         String sql = createInsertQuery();
+        System.out.println(sql);
         try {
             PreparedStatementStep pr = new PreparedStatementStep(connectionDB.getConnection().prepareStatement(sql));
 

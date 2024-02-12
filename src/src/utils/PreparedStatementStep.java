@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class PreparedStatementStep {
     PreparedStatement preparedStatement;
-    private int index = 0;
+    private int index = 1;
 
     public PreparedStatementStep(PreparedStatement preparedStatement) {
         this.preparedStatement = preparedStatement;

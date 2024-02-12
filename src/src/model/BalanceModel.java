@@ -8,6 +8,22 @@ import java.time.LocalDateTime;
 
 @Table(table_name = BalanceModel.TABLE_NAME, id = BalanceModel.ID)
 public class BalanceModel extends DefaultModel{
+    @Override
+    public String toString() {
+        return "BalanceModel{" +
+                "id_account=" + id_account +
+                ", datetime=" + datetime +
+                ", value=" + value +
+                '}';
+    }
+
+    public BalanceModel(int id_account, LocalDateTime datetime, BigDecimal value) {
+        this.id_account = id_account;
+        this.datetime = datetime;
+        this.value = value;
+    }
+    private int id;
+    @Column(name = BalanceModel.ID_ACCOUNT)
     private int id_account;
     @Column(name = BalanceModel.DATETIME)
     private LocalDateTime datetime;
@@ -18,15 +34,6 @@ public class BalanceModel extends DefaultModel{
     public static final  String ID_ACCOUNT = "id_account";
     public static final  String DATETIME = "datetime";
     public static final  String VALUE = "value";
-
-    @Override
-    public String toString() {
-        return "BalanceModel{" +
-                "id_account=" + id_account +
-                ", datetime=" + datetime +
-                ", value=" + value +
-                '}';
-    }
 
     public int getId_account() {
         return id_account;
@@ -55,9 +62,4 @@ public class BalanceModel extends DefaultModel{
     public BalanceModel() {
     }
 
-    public BalanceModel(int id_account, LocalDateTime datetime, BigDecimal value) {
-        this.id_account = id_account;
-        this.datetime = datetime;
-        this.value = value;
-    }
 }
